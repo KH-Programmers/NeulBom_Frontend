@@ -3,7 +3,7 @@ export default function Index() {
     <div className="flex items-center h-screen">
       <div className="px-10 md:px-40 2xl:px-52">
         <h1
-          className="font-black text-4xl md:text-5xl 2xl:text-6xl text-left md:w-1/2 2xl:w-[55%] bg-gradient-to-br text-transparent bg-clip-text from-[#008171] to-[#0070C1]"
+          className="font-black text-4xl md:text-5xl 2xl:text-6xl text-left w-5/6 sm:w-1/2 md:w-[80%] xl:w-[55%] 2xl:w-[55%] bg-gradient-to-br text-transparent bg-clip-text from-[#008171] to-[#0070C1]"
           style={{ lineHeight: "1.1" }}
         >
           Always Look at My own school,
