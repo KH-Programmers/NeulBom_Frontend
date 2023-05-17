@@ -2,7 +2,8 @@ import { Routes, Route } from "react-router-dom";
 
 import Index from "./pages";
 import Login from "./pages/login";
-import React from "react";
+import SignUp from "./pages/signup";
+
 import Layout from "./components/layout";
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
         <Route path="/">
           <Route index element={<Index />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
         </Route>
       </Routes>
     </Layout>
