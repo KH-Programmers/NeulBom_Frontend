@@ -1,0 +1,5 @@
+build
+coverage
+.next
+.idea
+node_modules
