@@ -32,6 +32,7 @@ const SignIn = () => {
                 required
                 icon={TbUserCircle}
                 placeholder="아이디"
+                autoComplete="username"
                 type="text"
               />
               <LoginInputField
