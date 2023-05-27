@@ -7,7 +7,12 @@ export const Checkbox: React.FC<
 > = ({ ...props }) => {
   return (
     <>
-      <CheckboxInput type="checkbox" {...props} />
+      <CheckboxInput
+        style={{ display: "none" }}
+        defaultChecked
+        type="checkbox"
+        {...props}
+      />
       <CheckboxDisplay>
         <div className="check w-full h-full flex justify-center items-center">
           <TbCheck size={21} color="#fff" />
@@ -37,7 +42,7 @@ const CheckboxDisplay = styled.span`
     opacity: 0;
   }
 
-  input[type="checkbox"]:checked + & {
+  ${CheckboxInput}:checked + & {
     background: #000;
 
     .check {

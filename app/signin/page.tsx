@@ -15,7 +15,7 @@ const SignIn = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(false);
-  console.log(GoogleLogo);
+
   return (
     <div className="min-h-screen py-16 px-4 md:px-8 lg:px-16 flex justify-center items-center">
       <div className="border-4 rounded-2xl p-8 max-w-[480px] border-primary bg-white flex flex-col items-center w-full">
@@ -23,17 +23,19 @@ const SignIn = () => {
           <Image width={64} src={lion} alt="logo" />
           <form
             className="mt-8 w-full"
-            onChange={(e) => {
+            onSubmit={(e) => {
               e.preventDefault();
             }}
           >
             <div className="divide-y-2 border-2 rounded-xl">
               <LoginInputField
+                required
                 icon={TbUserCircle}
                 placeholder="아이디"
                 type="text"
               />
               <LoginInputField
+                required
                 icon={TbLock}
                 placeholder="비밀번호"
                 type="password"
@@ -45,7 +47,10 @@ const SignIn = () => {
                 <span className="font-bold">로그인 상태 유지</span>
               </label>
             </div>
-            <button className="mt-6 w-full text-center py-2 text-white bg-primary rounded-lg font-bold hover:brightness-90 active:brightness-75 transition-all">
+            <button
+              type="submit"
+              className="mt-6 w-full text-center py-2 text-white bg-primary rounded-lg font-bold hover:brightness-90 active:brightness-75 transition-all"
+            >
               로그인
             </button>
           </form>
