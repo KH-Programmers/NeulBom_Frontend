@@ -18,9 +18,9 @@ const SignIn = () => {
   const [isLogin, setIsLogin] = useState(false);
   return (
     <div className="h-screen flex items-center justify-center">
-      <div className="border-4 border-[#9E1915] rounded-lg w-4/5 h-5/6 bg-white block">
+      <div className="border-4 border-[#9E1915] rounded-lg bg-white block px-20 py-16">
         <div className="flex justify-center items-center w-1/2 mx-auto">
-          <div className="w-1/6 h-1/6 my-6">
+          <div className="w-1/6 h-1/6 my-8">
             <Image src={lion} alt="" className="w-full h-full" />
           </div>
         </div>
@@ -31,25 +31,25 @@ const SignIn = () => {
           }}
         >
           <div className="mb-6">
-            <div className="border-t-2 border-r-2 border-l-2 border-[#959595] rounded-t-2xl gap-2 w-full p-3">
+            <div className="border-t-2 border-r-2 border-l-2 border-[#959595] rounded-t-2xl gap-2 w-full px-6 py-4">
               <div className="w-full flex gap-4">
                 <AiOutlineUser className="w-[12%] h-[12%]" />
                 <input
                   type="text"
                   placeholder="아이디"
-                  className="text-[#B9B8B8] font-black text-2xl w-full outline-none rounded-full"
+                  className="text-[#B9B8B8] font-black text-2xl w-full outline-none rounded-xl"
                   value={id}
                   onChange={(e) => setId(e.target.value)}
                 />
               </div>
             </div>
-            <div className="border-2 border-[#959595] rounded-b-2xl gap-2 w-full p-3">
+            <div className="border-2 border-[#959595] rounded-b-2xl gap-2 w-full px-6 py-4">
               <div className="w-full flex gap-4">
                 <RiLockPasswordFill className="w-[12%] h-[12%]" />
                 <input
                   type="text"
                   placeholder="비밀번호"
-                  className="text-[#B9B8B8] font-black text-2xl w-full outline-none rounded-full"
+                  className="text-[#B9B8B8] font-black text-2xl w-full outline-none rounded-xl"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -58,11 +58,16 @@ const SignIn = () => {
             <div className="flex items-center gap-2.5 my-2">
               <input
                 type="checkbox"
-                className="outline-none"
+                className="outline-none w-4 h-4"
                 checked={isLogin}
                 onChange={(e) => setIsLogin(e.target.checked)}
               />
-              <h1 className="text-lg font-extrabold">로그인 상태 유지</h1>
+              <button onClick={(e) => {
+                e.preventDefault();
+                setIsLogin(!isLogin);
+              }}>
+                <h1 className="text-lg 2xl:text-xl font-extrabold">로그인 상태 유지</h1>
+              </button>
             </div>
           </div>
           <button
