@@ -6,10 +6,11 @@ export const Checkbox: React.FC<
   Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">
 > = ({ ...props }) => {
   return (
-    <>
-      <CheckboxInput
-        style={{ display: "none" }}
-        defaultChecked
+    <CheckboxContainer>
+      <input
+        role="checkbox"
+        tabIndex={0}
+        style={{ position: "absolute", left: 0, top: 0, opacity: 0 }}
         type="checkbox"
         {...props}
       />
@@ -18,36 +19,47 @@ export const Checkbox: React.FC<
           <TbCheck size={21} color="#fff" />
         </div>
       </CheckboxDisplay>
-    </>
+    </CheckboxContainer>
   );
 };
 
 //#region components
 
-const CheckboxInput = styled.input`
-  display: none;
-`;
-
-const CheckboxDisplay = styled.span`
-  width: 21px;
-  height: 21px;
+const CheckboxContainer = styled.div`
+  width: 20px;
+  height: 20px;
+  position: relative;
   border: 2px solid #000;
   border-radius: 6px;
-  display: inline-block;
+`;
+
+const CheckboxDisplay = styled.div`
   transition: background-color ease 0.2s;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
 
   .check {
     transition: opacity ease 0.2s;
     opacity: 0;
   }
 
-  ${CheckboxInput}:checked + & {
+  input[type="checkbox"]:checked + & {
     background: #000;
 
     .check {
       opacity: 1;
     }
+  }
+
+  input:focus + &::after {
+    content: "";
+    position: absolute;
+    left: -6px;
+    top: -6px;
+    width: 28px;
+    height: 28px;
+    border: 2px solid #000;
+    border-radius: 9px;
   }
 `;
 
