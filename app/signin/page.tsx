@@ -1,18 +1,101 @@
-import React from "react";
-import Image from "next/image";
+"use client";
 
-import Lion from '../../public/assets/lion.svg';
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+
+import lion from "../../public/assets/lion.png";
+import naver from "../../public/assets/naver.png";
+import google from "../../public/assets/google.png";
+import kakao from "../../public/assets/kakao.png";
+
+import { AiOutlineUser } from "react-icons/ai";
+import { RiLockPasswordFill } from "react-icons/ri";
 
 const SignIn = () => {
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <div className="h-screen flex items-center justify-center">
-      <div className="border-4 border-[#9E1915] rounded-lg w-1/2 h-1/2 flex justify-center items-center bg-white">
-        <div className='flex items-center gap-12'>
-          <h1 className='text-transparent font-black bg-clip-text 2xl:text-7xl bg-gradient-to-br from-[#FAE8FF] to-[#FFFCED] textStroke'>NeulBom</h1>
-          <h1 className='2xl:text-6xl font-semibold'>X</h1>
-          <div className='w-1/2 h-1/2'>
-            <Image src={Lion} alt='' className='w-full h-full' />
+      <div className="border-4 border-[#9E1915] rounded-lg w-4/5 h-4/5 bg-white block">
+        <div className="flex justify-center items-center w-1/2 mx-auto">
+          <div className="w-1/6 h-1/6 my-6">
+            <Image src={lion} alt="" className="w-full h-full" />
           </div>
+        </div>
+        <form
+          className="w-2/5 mx-auto"
+          onChange={(e) => {
+            e.preventDefault();
+          }}
+        >
+          <div className="mb-6">
+            <div className="border-t-2 border-r-2 border-l-2 border-[#959595] rounded-t-2xl gap-2 w-fit p-3">
+              <div className="w-full flex gap-4">
+                <AiOutlineUser className="w-[12%] h-[12%]" />
+                <input
+                  type="text"
+                  placeholder="아이디"
+                  className="text-[#B9B8B8] font-black text-2xl w-full outline-none rounded-full"
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="border-2 border-[#959595] rounded-b-2xl gap-2 w-fit p-3">
+              <div className="w-full flex gap-4">
+                <RiLockPasswordFill className="w-[12%] h-[12%]" />
+                <input
+                  type="text"
+                  placeholder="비밀번호"
+                  className="text-[#B9B8B8] font-black text-2xl w-full outline-none rounded-full"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="flex items-center gap-2.5 my-2">
+              <input
+                type="checkbox"
+                className="outline-none"
+                checked={isLogin}
+                onChange={(e) => setIsLogin(e.target.checked)}
+              />
+              <h1 className="text-lg font-extrabold">로그인 상태 유지</h1>
+            </div>
+          </div>
+          <button
+            type="submit"
+            className="bg-[#9E1915] text-white text-2xl font-black w-full rounded-2xl py-4"
+          >
+            로그인
+          </button>
+        </form>
+        <div className="w-2/5 mx-auto flex justify-around my-4">
+          <Link href="/" className="w-[10%] h-[10%]">
+            <Image src={naver} alt="" className="w-full h-full" />
+          </Link>
+          <Link href="/" className="w-[10%] h-[10%]">
+            <Image src={google} alt="" className="w-full h-full" />
+          </Link>
+          <Link href="/" className="w-[10%] h-[10%]">
+            <Image src={kakao} alt="" className="w-full h-full" />
+          </Link>
+        </div>
+        <div className="w-2/5 mx-auto flex justify-around">
+          <Link
+            href="/signup"
+            className="font-black text-lg underline underline-offset-2"
+          >
+            아직 계정이 없나요?
+          </Link>
+          <Link
+            href="/forgotPassword"
+            className="font-black text-lg underline underline-offset-2"
+          >
+            비밀번호를 잊으셨나요?
+          </Link>
         </div>
       </div>
     </div>
