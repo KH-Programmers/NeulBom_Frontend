@@ -18,7 +18,7 @@ const SignIn = () => {
   const [isLogin, setIsLogin] = useState(false);
   return (
     <div className="h-screen flex items-center justify-center">
-      <div className="border-4 border-[#9E1915] rounded-lg w-4/5 h-4/5 bg-white block">
+      <div className="border-4 border-[#9E1915] rounded-lg w-4/5 h-5/6 bg-white block">
         <div className="flex justify-center items-center w-1/2 mx-auto">
           <div className="w-1/6 h-1/6 my-6">
             <Image src={lion} alt="" className="w-full h-full" />
@@ -31,7 +31,7 @@ const SignIn = () => {
           }}
         >
           <div className="mb-6">
-            <div className="border-t-2 border-r-2 border-l-2 border-[#959595] rounded-t-2xl gap-2 w-fit p-3">
+            <div className="border-t-2 border-r-2 border-l-2 border-[#959595] rounded-t-2xl gap-2 w-full p-3">
               <div className="w-full flex gap-4">
                 <AiOutlineUser className="w-[12%] h-[12%]" />
                 <input
@@ -43,7 +43,7 @@ const SignIn = () => {
                 />
               </div>
             </div>
-            <div className="border-2 border-[#959595] rounded-b-2xl gap-2 w-fit p-3">
+            <div className="border-2 border-[#959595] rounded-b-2xl gap-2 w-full p-3">
               <div className="w-full flex gap-4">
                 <RiLockPasswordFill className="w-[12%] h-[12%]" />
                 <input
