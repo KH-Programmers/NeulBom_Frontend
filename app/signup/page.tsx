@@ -6,11 +6,10 @@ import Link from "next/link";
 
 import { SignupTaskList } from "@/app/signup/components/SignupTaskList";
 import { SignupAgreementView } from "@/app/signup/views/SignupAgreementView";
+import { SignupStep } from "@/app/signup/types";
 
-const SignIn = () => {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLogin, setIsLogin] = useState(false);
+const SignUp = () => {
+  const [currentStep, setCurrentStep] = React.useState(SignupStep.Agreement);
 
   return (
     <div className="min-h-screen py-16 px-4 md:px-8 lg:px-16 flex justify-center items-center">
@@ -18,11 +17,15 @@ const SignIn = () => {
         <div className="w-full flex flex-col items-center">
           <h1 className="font-black text-3xl">회원가입</h1>
         </div>
-        <SignupTaskList />
-        <SignupAgreementView />
+        <SignupTaskList currentStep={currentStep} />
+        {currentStep === SignupStep.Agreement && (
+          <SignupAgreementView
+            next={() => setCurrentStep(SignupStep.Information)}
+          />
+        )}
       </div>
     </div>
   );
 };
 
-export default SignIn;
+export default SignUp;

@@ -2,35 +2,41 @@ import React from "react";
 import { TbCheck } from "react-icons/tb";
 import styled from "styled-components";
 
-export const Checkbox: React.FC<
-  Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">
-> = ({ ...props }) => {
-  return (
-    <CheckboxContainer>
-      <input
-        className="peer"
-        role="checkbox"
-        tabIndex={0}
-        style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
-          opacity: 0,
-          width: 0,
-          height: 0,
-        }}
-        type="checkbox"
-        {...props}
-      />
+export const Checkbox = React.forwardRef<HTMLInputElement>(
+  (
+    { ...props }: Omit<React.InputHTMLAttributes<HTMLInputElement>, "type">,
+    ref
+  ) => {
+    return (
+      <CheckboxContainer>
+        <input
+          ref={ref}
+          className="peer"
+          role="checkbox"
+          tabIndex={0}
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            opacity: 0,
+            width: 0,
+            height: 0,
+          }}
+          type="checkbox"
+          {...props}
+        />
 
-      <CheckboxDisplay className="peer-focus:ring-2 ring-black ring-offset-2">
-        <div className="check w-full h-full flex justify-center items-center">
-          <TbCheck size={21} color="#fff" />
-        </div>
-      </CheckboxDisplay>
-    </CheckboxContainer>
-  );
-};
+        <CheckboxDisplay className="peer-focus:ring-2 ring-black ring-offset-2">
+          <div className="check w-full h-full flex justify-center items-center">
+            <TbCheck size={21} color="#fff" />
+          </div>
+        </CheckboxDisplay>
+      </CheckboxContainer>
+    );
+  }
+);
+
+Checkbox.displayName = "Checkbox";
 
 //#region components
 
