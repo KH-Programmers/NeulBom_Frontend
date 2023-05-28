@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "autoReloadInstall": "yarn install",
+    "autoUpdateBuild": "yarn build"
   },
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
