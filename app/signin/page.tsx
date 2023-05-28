@@ -104,6 +104,15 @@ const SignIn = () => {
               </a>
             </div>
           </div>
+          <h1 className="text-center font-extralight mt-4">
+            Powered By{" "}
+            <Link
+              href="https://kyungheeboys.hs.kr/"
+              className="font-bold text-primary"
+            >
+              KyungHee
+            </Link>
+          </h1>
         </div>
       </div>
     </div>
