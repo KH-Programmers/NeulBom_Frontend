@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { SignUpTaskList } from "@/app/signup/components/SignUpTaskList";
+import { SignupTaskList } from "@/app/signup/components/SignupTaskList";
 
 const SignIn = () => {
   const [id, setId] = useState("");
@@ -17,7 +17,7 @@ const SignIn = () => {
         <div className="w-full flex flex-col items-center">
           <h1 className="font-black text-3xl">회원가입</h1>
         </div>
-        <SignUpTaskList />
+        <SignupTaskList />
       </div>
     </div>
   );

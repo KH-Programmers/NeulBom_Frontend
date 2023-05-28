@@ -1,7 +1,7 @@
 import React from "react";
 import { TbCheck, TbChecklist, TbPencil } from "react-icons/tb";
 
-export const SignUpTaskList = () => {
+export const SignupTaskList = () => {
   return (
     <div className="flex mt-4 w-full">
       <div className="relative flex flex-col items-center gap-2 flex-grow w-0">
