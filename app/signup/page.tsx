@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { SignupTaskList } from "@/app/signup/components/SignupTaskList";
+import { SignupAgreementView } from "@/app/signup/views/SignupAgreementView";
 
 const SignIn = () => {
   const [id, setId] = useState("");
@@ -18,6 +19,7 @@ const SignIn = () => {
           <h1 className="font-black text-3xl">회원가입</h1>
         </div>
         <SignupTaskList />
+        <SignupAgreementView />
       </div>
     </div>
   );

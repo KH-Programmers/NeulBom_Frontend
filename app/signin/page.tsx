@@ -11,6 +11,7 @@ import GoogleLogo from "@/assets/google.svg";
 import { SiKakao, SiNaver } from "react-icons/si";
 import { LoginInputField } from "@/components/LoginInputField";
 import { Checkbox } from "@/components/Checkbox";
+import { Button } from "@/components/Button";
 
 const SignIn = () => {
   const [id, setId] = useState("");
@@ -51,12 +52,9 @@ const SignIn = () => {
                 로그인 상태 유지
               </label>
             </div>
-            <button
-              type="submit"
-              className="mt-6 w-full text-center py-2 text-white bg-primary rounded-lg font-bold hover:brightness-90 active:brightness-75 transition-all"
-            >
+            <Button className="mt-6" type="submit">
               로그인
-            </button>
+            </Button>
           </form>
           <div className="flex w-full items-center gap-4 mt-2">
             <div className="flex-grow border-b border-black/20" />
