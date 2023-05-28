@@ -1,13 +1,16 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
+import clsx from "clsx";
 
 export const FormLabel: React.FC<
   React.PropsWithChildren<{
     control: React.ReactNode;
     name: string;
+    horizontal?: boolean;
+    className?: string;
   }>
-> = ({ control, children, name }) => {
+> = ({ control, children, name, horizontal, className }) => {
   const {
     formState: { errors },
   } = useFormContext();
@@ -16,9 +19,18 @@ export const FormLabel: React.FC<
 
   return (
     <div>
-      <label className="flex gap-2 font-bold items-center mt-2">
+      <label
+        className={clsx(
+          "flex font-bold mt-2",
+          {
+            "flex-col items-start": !horizontal,
+            "flex-row-reverse items-center": horizontal,
+          },
+          className
+        )}
+      >
+        <div>{children}</div>
         {control}
-        {children}
       </label>
       <AnimatePresence>
         {error && (

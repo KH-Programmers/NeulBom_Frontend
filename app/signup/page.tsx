@@ -5,9 +5,10 @@ import React from "react";
 import { SignupTaskList } from "@/app/signup/components/SignupTaskList";
 import { SignupAgreementView } from "@/app/signup/views/SignupAgreementView";
 import { SignupStep } from "@/app/signup/types";
+import { SignupInformationView } from "@/app/signup/views/SignupInformationView";
 
 const SignUp = () => {
-  const [currentStep, setCurrentStep] = React.useState(SignupStep.Agreement);
+  const [currentStep, setCurrentStep] = React.useState(SignupStep.Information);
 
   return (
     <div className="min-h-screen py-16 px-4 md:px-8 lg:px-16 flex justify-center items-center">
@@ -16,10 +17,14 @@ const SignUp = () => {
           <h1 className="font-black text-3xl">회원가입</h1>
         </div>
         <SignupTaskList currentStep={currentStep} />
-        {currentStep === SignupStep.Agreement && (
+        {currentStep === SignupStep.Agreement ? (
           <SignupAgreementView
             next={() => setCurrentStep(SignupStep.Information)}
           />
+        ) : currentStep === SignupStep.Information ? (
+          <SignupInformationView />
+        ) : (
+          <div>wip</div>
         )}
       </div>
     </div>
