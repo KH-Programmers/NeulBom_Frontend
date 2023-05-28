@@ -1,8 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import React from "react";
 
 import { SignupTaskList } from "@/app/signup/components/SignupTaskList";
 import { SignupAgreementView } from "@/app/signup/views/SignupAgreementView";
