@@ -107,7 +107,7 @@ const SignIn = () => {
           <h1 className="text-center font-extralight mt-4">
             Powered By{" "}
             <Link
-              href="https://kyungheeboys.hs.kr/"
+              href="https://kyungheeboy.hs.kr/"
               className="font-bold text-primary"
             >
               KyungHee
