@@ -176,17 +176,7 @@ export const SignupAgreementView: React.FC<{ next: () => void }> = ({
         </FormLabel>
         <div className="mt-4 border-2 rounded-xl border-black overflow-hidden">
           <div className="p-4 max-h-[240px] overflow-y-auto">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Accusantium assumenda consequuntur deserunt dignissimos, eius est ex
-            excepturi fugit libero modi nesciunt, nostrum officia possimus quia
-            recusandae reiciendis tempore ut, voluptatibus. Lorem ipsum dolor
-            sit amet, consectetur adipisicing elit. Aliquid consectetur deleniti
-            distinctio doloribus earum enim ex expedita iure laboriosam magni
-            minima non perspiciatis praesentium quae, repudiandae totam vero,
-            voluptas? Nulla? Lorem ipsum dolor sit amet, consectetur adipisicing
-            elit. Expedita maiores neque quis. Asperiores beatae est expedita
-            nihil nisi qui sequi tempore ullam. Accusamus at error explicabo
-            natus qui quia voluptatem.
+            <pre className="text-sm whitespace-pre-line">{privacyContent}</pre>
           </div>
         </div>
         <FormLabel
