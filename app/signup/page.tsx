@@ -6,9 +6,10 @@ import { SignupTaskList } from "@/app/signup/components/SignupTaskList";
 import { SignupAgreementView } from "@/app/signup/views/SignupAgreementView";
 import { SignupStep } from "@/app/signup/types";
 import { SignupInformationView } from "@/app/signup/views/SignupInformationView";
+import { SignupComplete } from "@/app/signup/views/SignupComplete";
 
 const SignUp = () => {
-  const [currentStep, setCurrentStep] = React.useState(SignupStep.Information);
+  const [currentStep, setCurrentStep] = React.useState(SignupStep.Agreement);
 
   return (
     <div className="min-h-screen py-16 px-4 md:px-8 lg:px-16 flex justify-center items-center">
@@ -24,7 +25,7 @@ const SignUp = () => {
         ) : currentStep === SignupStep.Information ? (
           <SignupInformationView />
         ) : (
-          <div>wip</div>
+          <SignupComplete />
         )}
       </div>
     </div>
