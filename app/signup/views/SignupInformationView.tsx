@@ -20,7 +20,9 @@ const schema = yup
   .required();
 type FormData = yup.InferType<typeof schema>;
 
-export const SignupInformationView: React.FC = () => {
+export const SignupInformationView: React.FC<{ next: () => void }> = ({
+  next,
+}) => {
   const form = useForm<FormData>({ resolver: yupResolver(schema) });
   const { register, handleSubmit } = form;
 
@@ -29,7 +31,7 @@ export const SignupInformationView: React.FC = () => {
       <form
         className="mt-4 w-full max-w-[420px] mx-auto flex flex-col gap-4"
         onSubmit={handleSubmit((data) => {
-          console.log(data);
+          next();
         })}
       >
         <FormLabel
@@ -84,20 +86,20 @@ export const SignupInformationView: React.FC = () => {
   );
 };
 
-export async function getServerSideProps(data: FormData) {
-  const response = await fetch("http://127.0.0.1:8000/user/register/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json, text/plain, /",
-    },
-    body: JSON.stringify({
-      username: data.name,
-      email: data.email,
-      password: data.password,
-    }),
-  });
-  return {
-    props: response,
-  };
-}
+// export async function getServerSideProps(data: FormData) {
+//   const response = await fetch(`${process.env.API_URI}/user/register/`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Accept: "application/json, text/plain, /",
+//     },
+//     body: JSON.stringify({
+//       username: data.name,
+//       email: data.email,
+//       password: data.password,
+//     }),
+//   });
+//   return {
+//     props: response,
+//   };
+// }

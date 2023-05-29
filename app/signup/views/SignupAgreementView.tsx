@@ -4,8 +4,7 @@ import { Button } from "@/components/Button";
 import { FormProvider, useForm } from "react-hook-form";
 import { FormLabel } from "@/components/FormLabel";
 
-const termsContent = `
-이용 약관
+const termsContent = `이용 약관
 
 본 이용약관("본 약관")은 Neulbom 서비스("서비스")에 대한 귀하의 액세스 및 이용을 규정합니다. 본 서비스를 이용함으로써 귀하는 본 계약의 구속을 받는 것에 동의합니다. 본 계약의 어떤 부분에도 동의하지 않는 경우, 본 서비스에 액세스하거나 서비스를 사용할 수 없습니다.
 

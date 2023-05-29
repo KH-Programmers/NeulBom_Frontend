@@ -23,7 +23,7 @@ const SignUp = () => {
             next={() => setCurrentStep(SignupStep.Information)}
           />
         ) : currentStep === SignupStep.Information ? (
-          <SignupInformationView />
+          <SignupInformationView next={() => setCurrentStep(SignupStep.Done)} />
         ) : (
           <SignupComplete />
         )}
