@@ -3,46 +3,37 @@ import { FormProvider, useForm } from "react-hook-form";
 import { FormLabel } from "@/components/FormLabel";
 import { FormInput } from "@/components/FormInput";
 import { Button } from "@/components/Button";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-type FormType = {
-  name: string;
-  studentId: string;
-  phone: string;
-
-  password: string;
-  passwordConfirm: string;
-};
+const schema = yup
+  .object({
+    name: yup.string().min(2).max(4).required(),
+    studentId: yup.string().length(5).required(),
+    email: yup.string().email().required(),
+    password: yup.string().required(),
+    passwordConfirm: yup
+      .string()
+      .oneOf([yup.ref("password")], "비밀번호 재확인이 일치하지 않습니다.")
+      .required(),
+  })
+  .required();
+type FormData = yup.InferType<typeof schema>;
 
 export const SignupInformationView: React.FC = () => {
-  const form = useForm<FormType>();
-
-  const onSubmit = React.useCallback((data: FormType) => {
-    console.log(data);
-  }, []);
+  const form = useForm<FormData>({ resolver: yupResolver(schema) });
+  const { register, handleSubmit } = form;
 
   return (
     <FormProvider {...form}>
       <form
         className="mt-4 w-full max-w-[420px] mx-auto flex flex-col gap-4"
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={handleSubmit((data) => {
+          console.log(data);
+        })}
       >
         <FormLabel
-          control={
-            <FormInput
-              type="text"
-              {...form.register("name", {
-                required: "이름은 필수입니다",
-                minLength: {
-                  value: 2,
-                  message: "asdf",
-                },
-                maxLength: {
-                  value: 4,
-                  message: "asdf",
-                },
-              })}
-            />
-          }
+          control={<FormInput type="text" {...register("name")} />}
           name="name"
         >
           이름
@@ -53,11 +44,7 @@ export const SignupInformationView: React.FC = () => {
               type="text"
               minLength={5}
               maxLength={5}
-              {...form.register("studentId", {
-                required: "학번은 필수입니다",
-                minLength: 5,
-                maxLength: 5,
-              })}
+              {...register("studentId")}
             />
           }
           name="studentId"
@@ -65,27 +52,13 @@ export const SignupInformationView: React.FC = () => {
           학번
         </FormLabel>
         <FormLabel
-          control={
-            <FormInput
-              type="text"
-              {...form.register("phone", {
-                required: "전화번호는 필수입니다",
-              })}
-            />
-          }
-          name="phone"
+          control={<FormInput type="text" {...register("email")} />}
+          name="email"
         >
-          전화번호
+          이메일
         </FormLabel>
         <FormLabel
-          control={
-            <FormInput
-              type="text"
-              {...form.register("password", {
-                required: "비밀번호는 필수입니다",
-              })}
-            />
-          }
+          control={<FormInput type="password" {...register("password")} />}
           name="password"
         >
           비밀번호
@@ -93,7 +66,7 @@ export const SignupInformationView: React.FC = () => {
         <FormLabel
           control={
             <FormInput
-              type="text"
+              type="password"
               {...form.register("passwordConfirm", {
                 required: "비밀번호 확인은 필수입니다",
               })}
@@ -110,3 +83,21 @@ export const SignupInformationView: React.FC = () => {
     </FormProvider>
   );
 };
+
+export async function getServerSideProps(data: FormData) {
+  const response = await fetch("http://127.0.0.1:8000/user/register/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json, text/plain, /",
+    },
+    body: JSON.stringify({
+      username: data.name,
+      email: data.email,
+      password: data.password,
+    }),
+  });
+  return {
+    props: response,
+  };
+}
