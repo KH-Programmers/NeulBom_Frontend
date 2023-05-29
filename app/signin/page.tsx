@@ -12,6 +12,13 @@ import { SiKakao, SiNaver } from "react-icons/si";
 import { LoginInputField } from "@/components/LoginInputField";
 import { Checkbox } from "@/components/Checkbox";
 import { Button } from "@/components/Button";
+import { type } from 'os';
+import { Form } from 'react-hook-form';
+
+type FormType = {
+  username : string;
+  password : string;
+}
 
 const SignIn = () => {
   const [id, setId] = useState("");
@@ -27,6 +34,10 @@ const SignIn = () => {
             className="mt-8 w-full"
             onSubmit={(e) => {
               e.preventDefault();
+              getServerSideProps({
+                username:"연현중",
+                password:"1234"
+              })
             }}
           >
             <div className="divide-y-2 border-2 rounded-xl">
@@ -118,3 +129,16 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+export async function getServerSideProps(data:FormType) {
+  console.log(JSON.stringify(data))
+  const response =await fetch("http://127.0.0.1:8000/user/login/", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          'Accept': 'application/json, text/plain, */*',
+        },
+        body: JSON.stringify(data),
+        })
+  console.log(response)
+}

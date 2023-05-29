@@ -7,7 +7,7 @@ import { Button } from "@/components/Button";
 type FormType = {
   name: string;
   studentId: string;
-  phone: string;
+  email: string;
 
   password: string;
   passwordConfirm: string;
@@ -17,7 +17,7 @@ export const SignupInformationView: React.FC = () => {
   const form = useForm<FormType>();
 
   const onSubmit = React.useCallback((data: FormType) => {
-    console.log(data);
+    getServerSideProps(data)
   }, []);
 
   return (
@@ -68,14 +68,14 @@ export const SignupInformationView: React.FC = () => {
           control={
             <FormInput
               type="text"
-              {...form.register("phone", {
-                required: "전화번호는 필수입니다",
+              {...form.register("email", {
+                required: "이메일은 필수입니다",
               })}
             />
           }
-          name="phone"
+          name="email"
         >
-          전화번호
+          이메일
         </FormLabel>
         <FormLabel
           control={
@@ -110,3 +110,20 @@ export const SignupInformationView: React.FC = () => {
     </FormProvider>
   );
 };
+
+export async function getServerSideProps(data:FormType) {
+  const JSONdata = {
+    "username" : data.name,
+    "email" : data.email,
+    "password" : data.password
+  }
+  console.log(JSON.stringify(JSONdata))
+  fetch("http://127.0.0.1:8000/user/register/", {
+      method: "POST",
+      headers: { 
+        "Content-Type": "application/json",
+        'Accept': 'application/json, text/plain, */*',
+      },
+      body: JSON.stringify(JSONdata),
+    })
+}
