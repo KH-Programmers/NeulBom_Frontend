@@ -1,32 +1,32 @@
 {
-    "theme_color": "#9E1915",
-    "background_color": "#9E1915",
-    "display": "standalone",
-    "scope": "/",
-    "start_url": "/",
-    "name": "NeulBom",
-    "short_name": "NeulBom",
-    "description": "\ub2f9\uc2e0 \uc190 \uc548\uc758 \uc791\uc740 \ud559\uad50, \ub298\ubd04",
-    "icons": [
-        {
-            "src": "/icon-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "/icon-256x256.png",
-            "sizes": "256x256",
-            "type": "image/png"
-        },
-        {
-            "src": "/icon-384x384.png",
-            "sizes": "384x384",
-            "type": "image/png"
-        },
-        {
-            "src": "/icon-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ]
+  "theme_color": "#9E1915",
+  "background_color": "#9E1915",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": ".",
+  "name": "NeulBom",
+  "short_name": "NeulBom",
+  "description": "당신 손 안의 작은 학교, 늘봄",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }

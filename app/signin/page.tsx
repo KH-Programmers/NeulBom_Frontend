@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import lion from "@/assets/lion.png";
+import logo from "@/assets/NeulBom.svg";
 
 import { TbLock, TbUserCircle } from "react-icons/tb";
 import GoogleLogo from "@/assets/google.svg";
@@ -22,7 +22,7 @@ const SignIn = () => {
     <div className="min-h-screen py-16 px-4 md:px-8 lg:px-16 flex justify-center items-center">
       <div className="border-4 rounded-2xl p-8 max-w-[600px] border-primary bg-white flex flex-col items-center w-full">
         <div className="max-w-[360px] w-full flex flex-col items-center">
-          <Image width={64} src={lion} alt="logo" />
+          <Image width={64} src={logo} alt="logo" />
           <form
             className="mt-8 w-full"
             onSubmit={(e) => {
