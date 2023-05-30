@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Page = () => {
@@ -13,13 +14,13 @@ const Page = () => {
         <h1 className="mt-1 font-black text-5xl md:text-6xl 2xl:text-7xl text-left bg-gradient-to-br text-transparent bg-clip-text from-[#E074A4] to-[#BE123C]">
           늘봄
         </h1>
-        <a href="/signin">
+        <Link href="/signin">
           <div className="mt-6 bg-[#30304B] w-min md:text-xl 2xl:text-2xl rounded-2xl drop-shadow-md">
             <h1 className="whitespace-nowrap text-white font-black px-14 md:px-20 py-3 md:py-4">
               바로가기
             </h1>
           </div>
-        </a>
+        </Link>
       </div>
     </div>
   );

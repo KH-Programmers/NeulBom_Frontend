@@ -6,5 +6,7 @@ const withPWA = require("next-pwa")({
 });
 
 module.exports = withPWA({
-  // next.js config
+  experimental: {
+    typedRoutes: true,
+  },
 });
