@@ -85,21 +85,3 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
     </FormProvider>
   );
 };
-
-// export async function getServerSideProps(data: FormData) {
-//   const response = await fetch(`${process.env.API_URI}/user/register/`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Accept: "application/json, text/plain, /",
-//     },
-//     body: JSON.stringify({
-//       username: data.name,
-//       email: data.email,
-//       password: data.password,
-//     }),
-//   });
-//   return {
-//     props: response,
-//   };
-// }

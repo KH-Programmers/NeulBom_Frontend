@@ -4,11 +4,12 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import logo from "@/assets/NeulBom.svg";
-
 import { TbLock, TbUserCircle } from "react-icons/tb";
-import GoogleLogo from "@/assets/google.svg";
 import { SiKakao, SiNaver } from "react-icons/si";
+import { Turnstile } from "@marsidev/react-turnstile";
+
+import logo from "@/assets/NeulBom.svg";
+import GoogleLogo from "@/assets/google.svg";
 import { LoginInputField } from "@/components/LoginInputField";
 import { Checkbox } from "@/components/Checkbox";
 import { Button } from "@/components/Button";
@@ -17,6 +18,7 @@ const SignIn = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(false);
+  const [captcha, setCaptcha] = useState(false);
 
   return (
     <div className="min-h-screen py-16 px-4 md:px-8 lg:px-16 flex justify-center items-center">
@@ -27,6 +29,7 @@ const SignIn = () => {
             className="mt-8 w-full"
             onSubmit={(e) => {
               e.preventDefault();
+              if (!captcha) return;
             }}
           >
             <div className="divide-y-2 border-2 rounded-xl">
@@ -52,6 +55,11 @@ const SignIn = () => {
                 로그인 상태 유지
               </label>
             </div>
+            <Turnstile
+              siteKey={process.env.NEXT_PUBLIC_TURNSTLIE_SITE_KEY!}
+              className="mt-4 mx-auto"
+              onSuccess={() => setCaptcha(true)}
+            />
             <Button className="mt-6" type="submit">
               로그인
             </Button>

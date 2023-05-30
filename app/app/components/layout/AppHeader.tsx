@@ -9,7 +9,7 @@ import { TbNotification, TbSearch, TbUserCircle } from "react-icons/tb";
 
 export const AppHeader: React.FC = () => {
   return (
-    <div className="sticky top-0 w-full h-[54px] bg-white shadow flex items-center px-2 gap-4">
+    <div className="sticky top-0 w-full h-[54px] bg-white shadow flex items-center px-2 gap-4 z-50">
       <Link href="/app">
         <Image src={NeulBom} alt="logo" width={40} height={40} />
       </Link>
