@@ -1,7 +1,12 @@
 import React from "react";
+import { MainBanner } from "./components/MainBanner";
 
 const AppMain: React.FC = () => {
-  return <div>asdf</div>;
+  return (
+    <div className="p-4">
+      <MainBanner />
+    </div>
+  );
 };
 
 export default AppMain;

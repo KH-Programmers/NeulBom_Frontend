@@ -19,3 +19,7 @@ html {
   -webkit-text-fill-color: transparent;
   text-fill-color: transparent;
 }
+
+:root {
+  --swiper-pagination-color: #9e1915;
+}
