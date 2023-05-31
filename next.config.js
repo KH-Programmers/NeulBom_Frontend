@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    typedRoutes: true,
-  },
-};
+const nextConfig = {};
 
 if (process.env.NODE_ENV === "production") {
   const withPWA = require("next-pwa")({
