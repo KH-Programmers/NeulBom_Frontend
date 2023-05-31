@@ -4,7 +4,7 @@ import { MainCard } from "./components/MainCard";
 
 const AppMain: React.FC = () => {
   return (
-    <div className="p-4 flex flex-col w-full h-full gap-4">
+    <div className="p-4 flex flex-col w-full h-full gap-4 flex-grow">
       <MainBanner />
       <div className="flex-grow gap-4 lg:flex-row flex-col grid md:grid-cols-2 lg:grid-cols-3">
         <MainCard title="인기글">asdf</MainCard>
