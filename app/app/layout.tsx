@@ -3,9 +3,11 @@ import { AppHeader } from "./components/layout/AppHeader";
 
 const AppLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="w-full min-h-screen flex flex-col">
       <AppHeader />
-      {children}
+      <div className="flex flex-col pt-[54px] w-full h-full flex-grow">
+        <div className="w-full h-full flex flex-col flex-grow">{children}</div>
+      </div>
     </div>
   );
 };

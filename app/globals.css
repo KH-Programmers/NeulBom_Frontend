@@ -13,6 +13,10 @@ html {
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
 
+body {
+  min-height: 100vh;
+}
+
 .textStroke {
   -webkit-text-stroke: 3px #000;
   text-stroke: 3px #000;

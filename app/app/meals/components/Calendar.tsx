@@ -113,7 +113,7 @@ export const MealsCalendar: React.FC = () => {
   }, [monthDate]);
 
   return (
-    <div className="bg-white rounded-xl shadow flex flex-col overflow-hidden w-full h-full">
+    <div className="bg-white rounded-xl shadow flex-grow flex flex-col overflow-hidden w-full h-full">
       <div className="flex items-center p-8 pb-0 relative">
         <div>asdf</div>
         <div className="flex-grow"></div>
