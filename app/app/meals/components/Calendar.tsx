@@ -23,9 +23,9 @@ import {
   TbRefresh,
 } from "react-icons/tb";
 
-import { Meal } from "../type";
+import { Meal, MealOfDate } from "../type";
 
-const TodayMeal: { date: Date; lunch: Meal[]; dinner: Meal[] } = {
+const TodayMeal: MealOfDate = {
   date: new Date(),
   lunch: [
     {
