@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
 import {
@@ -82,7 +84,16 @@ const PostViewPage: React.FC = () => {
               <div className="text-sm">100</div>
             </button>
             <div className="flex-grow w-0" />
-            <button className="border-2 p-2 border-blue-500 text-blue-500 rounded-lg flex gap-2 items-center hover:bg-blue-500 hover:text-white transition-all">
+            <button
+              className="border-2 p-2 border-blue-500 text-blue-500 rounded-lg flex gap-2 items-center hover:bg-blue-500 hover:text-white transition-all disabled:border-black/20 disabled:text-black/20 disabled:hover:border-black/20 disabled:hover:text-black/20 disabled:hover:bg-transparent"
+              disabled={!navigator.share}
+              onClick={() => {
+                navigator.share({
+                  title: document.title,
+                  url: window.location.href,
+                });
+              }}
+            >
               <TbShare size={20} />
             </button>
           </div>
