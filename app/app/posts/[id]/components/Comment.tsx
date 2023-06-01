@@ -9,6 +9,7 @@ import {
   TbHeartFilled,
 } from "react-icons/tb";
 import { CommentInput } from "./CommentInput";
+import { AnimatePresence, motion } from "framer-motion";
 
 export const Comment: React.FC<{ nested?: boolean }> = ({ nested }) => {
   const [like, setLike] = React.useState(false);
@@ -66,18 +67,25 @@ export const Comment: React.FC<{ nested?: boolean }> = ({ nested }) => {
             10
           </button>
         </div>
-        {!nested && repliesOpen && (
-          <>
-            <div className="mt-2">
-              <CommentInput nested />
-            </div>
-            <div className="bg-black/5 rounded-xl mt-2 divide-y">
-              <Comment nested />
-              <Comment nested />
-              <Comment nested />
-            </div>
-          </>
-        )}
+        <AnimatePresence>
+          {!nested && repliesOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="overflow-hidden"
+            >
+              <div className="mt-2">
+                <CommentInput nested />
+              </div>
+              <div className="bg-black/5 rounded-xl mt-2 divide-y">
+                <Comment nested />
+                <Comment nested />
+                <Comment nested />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
