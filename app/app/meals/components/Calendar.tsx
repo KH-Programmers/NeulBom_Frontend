@@ -24,6 +24,7 @@ import {
 } from "react-icons/tb";
 
 import { Meal, MealOfDate } from "../type";
+import { MealType, MealTypeSelect } from "./MealTypeSelect";
 
 const TodayMeal: MealOfDate = {
   date: new Date(),
@@ -85,6 +86,7 @@ export const MealsCalendar: React.FC = () => {
   const [monthDate, setMonthDate] = React.useState(() =>
     startOfMonth(new Date())
   );
+  const [mealType, setMealType] = React.useState(MealType.Lunch);
 
   const weeksToDisplay = React.useMemo(() => {
     const monthStart = startOfMonth(monthDate);
@@ -115,7 +117,9 @@ export const MealsCalendar: React.FC = () => {
   return (
     <div className="bg-white rounded-xl shadow flex-grow flex flex-col overflow-hidden w-full h-full">
       <div className="flex items-center p-8 pb-0 relative">
-        <div>asdf</div>
+        <div>
+          <MealTypeSelect value={mealType} onChange={(v) => setMealType(v)} />
+        </div>
         <div className="flex-grow"></div>
         <div className="flex gap-4">
           <button
@@ -175,7 +179,10 @@ export const MealsCalendar: React.FC = () => {
                         </div>
                         {/* &nbsp; */}
                         <span>
-                          {TodayMeal.lunch.map((meal, k) => (
+                          {(mealType === MealType.Lunch
+                            ? TodayMeal.lunch
+                            : TodayMeal.dinner
+                          ).map((meal, k) => (
                             <p key={k}>
                               {meal.name} ({meal.allergy})
                             </p>
