@@ -58,7 +58,10 @@ const SignIn = () => {
             <Turnstile
               siteKey={process.env.NEXT_PUBLIC_TURNSTLIE_SITE_KEY!}
               className="mt-4 mx-auto"
-              onSuccess={() => setCaptcha(true)}
+              onSuccess={(token) => {
+                setCaptcha(true);
+                console.log(token);
+              }}
             />
             <Button className="mt-6" type="submit">
               로그인

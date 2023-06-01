@@ -17,6 +17,7 @@ export default function RootLayout({
       <head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
+        <link rel="icon" href="/public/favicon.ico" />
         <link rel="manifest" href="../assets/manifest.json" />
         <link
           rel="apple-touch-icon-precomposed"
