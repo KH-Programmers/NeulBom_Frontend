@@ -47,7 +47,7 @@ const categories: BoardCategory[] = [
 
 const BoardLayout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className="flex gap-4 p-8">
+    <div className="flex flex-col md:flex-row gap-4 p-8">
       <BoardListSidebar categories={categories} />
       <div className="flex-grow">{children}</div>
     </div>
