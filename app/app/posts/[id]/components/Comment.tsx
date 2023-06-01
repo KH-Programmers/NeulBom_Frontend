@@ -8,6 +8,7 @@ import {
   TbHeart,
   TbHeartFilled,
 } from "react-icons/tb";
+import { CommentInput } from "./CommentInput";
 
 export const Comment: React.FC<{ nested?: boolean }> = ({ nested }) => {
   const [like, setLike] = React.useState(false);
@@ -66,11 +67,16 @@ export const Comment: React.FC<{ nested?: boolean }> = ({ nested }) => {
           </button>
         </div>
         {!nested && repliesOpen && (
-          <div className="bg-black/5 rounded-xl mt-2 divide-y">
-            <Comment nested />
-            <Comment nested />
-            <Comment nested />
-          </div>
+          <>
+            <div className="mt-2">
+              <CommentInput nested />
+            </div>
+            <div className="bg-black/5 rounded-xl mt-2 divide-y">
+              <Comment nested />
+              <Comment nested />
+              <Comment nested />
+            </div>
+          </>
         )}
       </div>
     </div>

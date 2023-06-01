@@ -8,6 +8,7 @@ import {
   TbShare,
 } from "react-icons/tb";
 import { Comment } from "./components/Comment";
+import { CommentInput } from "./components/CommentInput";
 
 const PostViewPage: React.FC = () => {
   return (
@@ -88,6 +89,9 @@ const PostViewPage: React.FC = () => {
         </article>
         <div className="mt-8">
           <div className="text-2xl font-bold">댓글</div>
+          <div className="mt-4">
+            <CommentInput />
+          </div>
           <div className="mt-4 bg-white rounded-xl shadow-md divide-y">
             <Comment />
             <Comment />
