@@ -15,7 +15,7 @@ import { CommentInput } from "./components/CommentInput";
 const PostViewPage: React.FC = () => {
   return (
     <div className="px-6">
-      <div className="container mx-auto mt-12">
+      <div className="max-w-[768px] mx-auto mt-12">
         <article>
           <div className="flex gap-2 items-center">
             <Link href="/app/board/study" className="text-blue-500">
