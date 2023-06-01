@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" data-color-mode="light">
       <head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
