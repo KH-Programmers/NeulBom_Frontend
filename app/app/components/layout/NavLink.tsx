@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export const NavLink: React.FC<
   React.PropsWithChildren<{
-    href: LinkProps<any>["href"];
+    href: LinkProps["href"];
     match: (pathname: string) => boolean;
     as?: string;
   }>
