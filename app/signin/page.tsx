@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import axios from "axios";
 import { TbLock, TbUserCircle } from "react-icons/tb";
 import { SiKakao, SiNaver } from "react-icons/si";
 import { Turnstile } from "@marsidev/react-turnstile";
@@ -18,7 +19,7 @@ const SignIn = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(false);
-  const [captcha, setCaptcha] = useState(false);
+  const [token, setToken] = useState("");
 
   return (
     <div className="min-h-screen py-16 px-4 md:px-8 lg:px-16 flex justify-center items-center">
@@ -27,9 +28,9 @@ const SignIn = () => {
           <Image width={64} src={logo} alt="logo" />
           <form
             className="mt-8 w-full"
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
-              if (!captcha) return;
+              if (token === "") return;
             }}
           >
             <div className="divide-y-2 border-2 rounded-xl">
@@ -59,8 +60,7 @@ const SignIn = () => {
               siteKey={process.env.NEXT_PUBLIC_TURNSTLIE_SITE_KEY!}
               className="mt-4 mx-auto"
               onSuccess={(token) => {
-                setCaptcha(true);
-                console.log(token);
+                setToken(token);
               }}
             />
             <Button className="mt-6" type="submit">
