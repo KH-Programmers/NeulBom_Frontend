@@ -37,14 +37,12 @@ export const MealDetail: React.FC<{
           우유,메밀,게,새우,돼지고기,토마토,아황산류,닭고기
         </div>
       </div>
-      <div className="absolute right-8 bottom-8 flex flex-col gap-2">
-        <button className="px-2 gap-2 py-1 border-2 flex rounded-lg transition-all text-white bg-blue-500 border-blue-500 hover:bg-transparent hover:text-blue-500">
+      <div className="flex justify-end gap-2 mt-4">
+        <button className="p-1 gap-2 border-2 flex rounded-lg transition-all text-white bg-blue-500 border-blue-500 hover:bg-transparent hover:text-blue-500">
           <TbThumbUp size={24} />
-          좋아요
         </button>
-        <button className="px-2 gap-2 py-1 border-2 text-black/20 border-black/20 flex rounded-lg transition-all hover:text-red-500 hover:border-red-500">
+        <button className="p-1 gap-2 border-2 text-black/20 border-black/20 flex rounded-lg transition-all hover:text-red-500 hover:border-red-500">
           <TbThumbDown size={24} />
-          싫어요
         </button>
       </div>
     </div>
