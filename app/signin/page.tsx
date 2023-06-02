@@ -67,7 +67,10 @@ const SignIn = () => {
             </div>
             <div className="mt-2">
               <label className="flex gap-2 items-center font-bold">
-                <Checkbox />
+                <Checkbox
+                  onChange={(e) => setIsLogin(e.target.checked)}
+                  checked={isLogin}
+                />
                 로그인 상태 유지
               </label>
             </div>
