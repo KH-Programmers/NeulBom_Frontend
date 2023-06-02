@@ -31,14 +31,17 @@ const SignIn = () => {
             onSubmit={async (e) => {
               e.preventDefault();
               if (token === "") return;
-              await axios.post(
-                `${process.env.NEXT_PUBLIC_API_URI}/user/login`,
-                {
-                  username: username,
-                  password: password,
-                  token: token,
-                }
-              );
+              const response = await (
+                await axios.post(
+                  `${process.env.NEXT_PUBLIC_API_URI}/user/login/`,
+                  {
+                    username: username,
+                    password: password,
+                    token: token,
+                  }
+                )
+              ).data;
+              console.log(response);
             }}
           >
             <div className="divide-y-2 border-2 rounded-xl">
@@ -49,6 +52,8 @@ const SignIn = () => {
                 placeholder="아이디"
                 autoComplete="username"
                 type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <LoginInputField
                 tabIndex={0}
@@ -56,6 +61,8 @@ const SignIn = () => {
                 icon={TbLock}
                 placeholder="비밀번호"
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="mt-2">
