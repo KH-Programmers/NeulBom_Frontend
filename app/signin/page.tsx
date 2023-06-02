@@ -16,7 +16,7 @@ import { Checkbox } from "@/components/Checkbox";
 import { Button } from "@/components/Button";
 
 const SignIn = () => {
-  const [id, setId] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(false);
   const [token, setToken] = useState("");
@@ -31,6 +31,14 @@ const SignIn = () => {
             onSubmit={async (e) => {
               e.preventDefault();
               if (token === "") return;
+              await axios.post(
+                `${process.env.NEXT_PUBLIC_API_URI}/user/login`,
+                {
+                  username: username,
+                  password: password,
+                  token: token,
+                }
+              );
             }}
           >
             <div className="divide-y-2 border-2 rounded-xl">
