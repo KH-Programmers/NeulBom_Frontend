@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import axios, { AxiosError } from "axios";
-import { redirect } from "next/navigation";
 import { SiKakao, SiNaver } from "react-icons/si";
 import { TbLock, TbUserCircle } from "react-icons/tb";
 import { Turnstile } from "@marsidev/react-turnstile";
@@ -42,6 +41,8 @@ const SignIn = () => {
                   }
                 );
                 if (response.status === 200) {
+                  localStorage.clear();
+                  sessionStorage.clear();
                   if (isLogin) {
                     localStorage.setItem("token", response.data.token);
                   } else {
