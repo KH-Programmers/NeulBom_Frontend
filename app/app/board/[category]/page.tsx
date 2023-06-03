@@ -6,7 +6,9 @@ import axios from "axios";
 
 export default async function BoardCategoryView() {
   try {
-    const posts = await axios.get(`http://127.0.0.1:8000/board/1`);
+    const posts = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URI!}/board/1`
+    );
     console.log(await posts.data);
   } catch (e) {
     throw e;
