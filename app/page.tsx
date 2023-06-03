@@ -1,18 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { redirect } from "next/navigation";
 
-const Page = () => {
+const Page: React.FC = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const localData = localStorage.getItem("token");
       const sessionData = sessionStorage.getItem("token");
       if (!localData && !sessionData) {
-        window.location.href = "/welcome";
+        return redirect("/welcome");
+      } else {
+        return redirect("/app");
       }
     }
   }, []);
-  return <div></div>;
+  return <div />;
 };
 
 export default Page;
