@@ -3,6 +3,13 @@ import React from "react";
 import { IconType } from "react-icons";
 import { TbCalendar, TbEye, TbUser } from "react-icons/tb";
 
+interface PostListItem {
+  title: string;
+  author: string;
+  viewcounts: number;
+  created_at: string;
+}
+
 const StatItem: React.FC<React.PropsWithChildren<{ icon: IconType }>> = ({
   icon: Icon,
   children,
@@ -15,17 +22,22 @@ const StatItem: React.FC<React.PropsWithChildren<{ icon: IconType }>> = ({
   );
 };
 
-export const PostListItem: React.FC = () => {
+export const PostListItem: React.FC<PostListItem> = ({
+  title,
+  author,
+  viewcounts,
+  created_at,
+}) => {
   return (
     <Link
       href="/app/posts/1"
       className="bg-white p-4 gap-4 rounded-xl shadow-md hover:shadow-lg transition-all flex"
     >
-      <div className="flex-grow w-0">post</div>
+      <div className="flex-grow w-0">{title}</div>
       <div className="flex items-center divide-x gap-2 opacity-60">
-        <StatItem icon={TbUser}>sans</StatItem>
-        <StatItem icon={TbEye}>250</StatItem>
-        <StatItem icon={TbCalendar}>23.06.01</StatItem>
+        <StatItem icon={TbUser}>{author}</StatItem>
+        <StatItem icon={TbEye}>{viewcounts}</StatItem>
+        <StatItem icon={TbCalendar}>{created_at}</StatItem>
       </div>
     </Link>
   );
