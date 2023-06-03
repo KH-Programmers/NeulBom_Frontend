@@ -7,5 +7,5 @@ export const useSelectedCategory = () => {
     return params.category as string;
   }
 
-  return "all";
+  return "popular";
 };

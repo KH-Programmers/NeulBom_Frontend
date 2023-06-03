@@ -4,10 +4,6 @@ import { BoardCategory } from "./types";
 
 const categories: BoardCategory[] = [
   {
-    id: "all",
-    name: "전체",
-  },
-  {
     id: "popular",
     name: "인기글",
   },

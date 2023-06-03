@@ -24,7 +24,7 @@ const AppHeaderContent: React.FC = () => {
       {/* nav links */}
       <div className="flex gap-2">
         <NavLink
-          href="/app/board/all"
+          href="/app/board/popular"
           match={(path) => path.startsWith("/app/board")}
         >
           게시판

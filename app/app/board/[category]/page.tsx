@@ -1,7 +1,16 @@
 import React from "react";
-import { PostListItem } from "./components/PostListItem";
 
-const BoardCategoryView: React.FC = () => {
+import { Post } from "../types";
+import { PostListItem } from "./components/PostListItem";
+import axios from "axios";
+
+export default async function BoardCategoryView() {
+  try {
+    const posts = await axios.get(`http://127.0.0.1:8000/board/1`);
+    console.log(await posts.data);
+  } catch (e) {
+    throw e;
+  }
   return (
     <div className="flex flex-col gap-4 w-full">
       <PostListItem
@@ -62,6 +71,4 @@ const BoardCategoryView: React.FC = () => {
       />
     </div>
   );
-};
-
-export default BoardCategoryView;
+}
