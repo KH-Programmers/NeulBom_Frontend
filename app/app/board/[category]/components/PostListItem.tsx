@@ -4,7 +4,7 @@ import { IconType } from "react-icons";
 import { TbCalendar, TbEye, TbUser } from "react-icons/tb";
 
 interface PostListItem {
-  id: string;
+  id: number
   title: string;
   username: string;
   viewCount: number;
