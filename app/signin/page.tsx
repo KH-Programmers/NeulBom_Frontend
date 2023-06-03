@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import axios from "axios";
-import { TbLock, TbUserCircle } from "react-icons/tb";
+import axios, { AxiosError } from "axios";
+import { redirect } from "next/navigation";
 import { SiKakao, SiNaver } from "react-icons/si";
+import { TbLock, TbUserCircle } from "react-icons/tb";
 import { Turnstile } from "@marsidev/react-turnstile";
 
 import logo from "@/assets/NeulBom.svg";
@@ -31,17 +32,34 @@ const SignIn = () => {
             onSubmit={async (e) => {
               e.preventDefault();
               if (token === "") return;
-              const response = await (
-                await axios.post(
-                  `${process.env.NEXT_PUBLIC_API_URI}/user/login/`,
+              try {
+                const response = await axios.post(
+                  `${process.env.NEXT_PUBLIC_API_URI!}/user/login/`,
                   {
                     username: username,
                     password: password,
                     token: token,
                   }
-                )
-              ).data;
-              console.log(response);
+                );
+                if (response.status === 200) {
+                  if (isLogin) {
+                    localStorage.setItem("token", response.data.token);
+                  } else {
+                    sessionStorage.setItem("token", response.data.token);
+                  }
+                  window.location.href = "/app";
+                }
+              } catch (e) {
+                const error = e as AxiosError;
+                switch (error.response?.status) {
+                  case 400:
+                    return alert("아이디 또는 비밀번호가 잘못되었습니다.");
+                  case 406:
+                    return alert(
+                      "캡챠 인증에 실패했습니다. 다시 시도해주세요."
+                    );
+                }
+              }
             }}
           >
             <div className="divide-y-2 border-2 rounded-xl">
