@@ -52,11 +52,14 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
             }
           } catch (e) {
             const error = e as AxiosError;
+            console.log(error.response);
             switch (error.response?.status) {
               case 400:
                 return alert("잘못된 정보를 입력했습니다. 다시 확인해주세요.");
               case 406:
                 return alert("캡챠 인증에 실패했습니다. 다시 시도해주세요.");
+              case 409:
+                return alert("이미 존재하는 아이디입니다. 다시 시도해주세요.");
             }
           }
         })}

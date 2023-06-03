@@ -184,7 +184,7 @@ export const MealsCalendar: React.FC = () => {
                             : TodayMeal.dinner
                           ).map((meal, k) => (
                             <p key={k}>
-                              {meal.name} ({meal.allergy})
+                              {meal.name} {meal.allergy && `(${meal.allergy})`}
                             </p>
                           ))}
                         </span>
