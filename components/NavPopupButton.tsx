@@ -76,7 +76,7 @@ export const NavPopupButton: React.FC<
           {open && (
             <FloatingOverlay lockScroll style={{ zIndex: 99999 }}>
               <motion.div
-                className="overflow-y-auto overflow-x-hidden min-w-[240px] max-w-[360px] bg-white shadow-md rounded-xl ring-1 ring-black/10 origin-top"
+                className="overflow-y-auto relative overflow-x-hidden w-full max-w-[360px] bg-white shadow-md rounded-xl ring-1 ring-black/10 origin-top"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

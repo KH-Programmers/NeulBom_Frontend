@@ -6,9 +6,9 @@ import Image from "next/image";
 import { NavLink } from "./NavLink";
 import Link from "next/link";
 import {
+  TbBell,
   TbCalendar,
   TbMenu,
-  TbNotification,
   TbPencil,
   TbSearch,
   TbSoup,
@@ -18,6 +18,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { MobileNavLink } from "./MobileNavLink";
 import { MobileNavButton } from "./MobileNavButton";
 import { NavPopupButton } from "@/components/NavPopupButton";
+import { MobilePopupMenu } from "./MobilePopupMenu";
+import { NotificationPopupContent } from "../notification/NotificationPopupContent";
 
 const AppHeaderContent: React.FC = () => {
   return (
@@ -52,8 +54,11 @@ const AppHeaderContent: React.FC = () => {
             size={24}
           />
         </button>
-        <NavPopupButton buttonContent={<TbNotification size={24} />}>
-          notifications
+        <NavPopupButton buttonContent={<TbBell size={24} />}>
+          <div className="border-b px-4 py-2 text-lg font-bold sticky top-0 bg-white">
+            알림
+          </div>
+          <NotificationPopupContent />
         </NavPopupButton>
         <button onClick={() => alert("TODO")}>
           <TbUserCircle
@@ -67,8 +72,18 @@ const AppHeaderContent: React.FC = () => {
 };
 
 const AppMobileHeaderContent: React.FC = () => {
+  const [notificationPopup, setNotificationPopup] = React.useState(false);
+
   return (
     <div className="flex flex-col gap-1">
+      <MobilePopupMenu
+        title="알림"
+        open={notificationPopup}
+        onClose={() => setNotificationPopup(false)}
+      >
+        <NotificationPopupContent />
+      </MobilePopupMenu>
+
       <MobileNavLink
         icon={TbPencil}
         href="/app/board/all"
@@ -90,7 +105,7 @@ const AppMobileHeaderContent: React.FC = () => {
       >
         학사일정
       </MobileNavLink>
-      <MobileNavButton onClick={() => alert("TODO")} icon={TbNotification}>
+      <MobileNavButton onClick={() => setNotificationPopup(true)} icon={TbBell}>
         알림
       </MobileNavButton>
       <MobileNavButton onClick={() => alert("TODO")} icon={TbUserCircle}>
