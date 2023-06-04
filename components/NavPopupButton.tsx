@@ -15,12 +15,14 @@ import {
   useFloating,
   useInteractions,
 } from "@floating-ui/react";
+import clsx from "clsx";
 
 export const NavPopupButton: React.FC<
   React.PropsWithChildren<{
     buttonContent: React.ReactNode;
+    fullHeight?: boolean;
   }>
-> = ({ buttonContent, children }) => {
+> = ({ buttonContent, fullHeight, children }) => {
   const [open, setOpen] = React.useState(false);
 
   const { refs, floatingStyles, context, update } = useFloating({
@@ -76,7 +78,12 @@ export const NavPopupButton: React.FC<
           {open && (
             <FloatingOverlay lockScroll style={{ zIndex: 99999 }}>
               <motion.div
-                className="overflow-y-auto relative overflow-x-hidden w-full max-w-[360px] bg-white shadow-md rounded-xl ring-1 ring-black/10 origin-top"
+                className={clsx(
+                  "overflow-y-auto relative overflow-x-hidden w-full max-w-[360px] bg-white shadow-md rounded-xl ring-1 ring-black/10 origin-top",
+                  {
+                    "h-full": fullHeight,
+                  }
+                )}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

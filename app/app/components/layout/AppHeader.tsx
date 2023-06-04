@@ -54,11 +54,15 @@ const AppHeaderContent: React.FC = () => {
             size={24}
           />
         </button>
-        <NavPopupButton buttonContent={<TbBell size={24} />}>
-          <div className="border-b px-4 py-2 text-lg font-bold sticky top-0 bg-white">
-            알림
+        <NavPopupButton fullHeight buttonContent={<TbBell size={24} />}>
+          <div className="flex w-full h-full flex-col">
+            <div className="border-b px-4 py-2 text-lg font-bold sticky top-0 bg-white">
+              알림
+            </div>
+            <div className="flex-grow">
+              <NotificationPopupContent />
+            </div>
           </div>
-          <NotificationPopupContent />
         </NavPopupButton>
         <button onClick={() => alert("TODO")}>
           <TbUserCircle
