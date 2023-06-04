@@ -17,6 +17,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { MobileNavLink } from "./MobileNavLink";
 import { MobileNavButton } from "./MobileNavButton";
+import { NavPopupButton } from "@/components/NavPopupButton";
 
 const AppHeaderContent: React.FC = () => {
   return (
@@ -45,18 +46,15 @@ const AppHeaderContent: React.FC = () => {
       {/* spacer */}
       <div className="flex-grow"></div>
       <div className="pr-2 flex gap-4 items-center">
-        <button onClick={() => alert("TODO")}>
+        <button>
           <TbSearch
             className="text-black hover:text-primary transition-colors"
             size={24}
           />
         </button>
-        <button onClick={() => alert("TODO")}>
-          <TbNotification
-            className="text-black hover:text-primary transition-colors"
-            size={24}
-          />
-        </button>
+        <NavPopupButton buttonContent={<TbNotification size={24} />}>
+          notifications
+        </NavPopupButton>
         <button onClick={() => alert("TODO")}>
           <TbUserCircle
             className="text-black hover:text-primary transition-colors"

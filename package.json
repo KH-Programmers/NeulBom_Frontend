@@ -11,6 +11,7 @@
     "autoUpdateBuild": "yarn build"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.24.2",
     "@h6s/calendar": "^1.1.0-alpha.2",
     "@hookform/resolvers": "^3.1.0",
     "@marsidev/react-turnstile": "^0.2.1",
