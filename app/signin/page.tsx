@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import axios, { AxiosError } from "axios";
 import { SiKakao, SiNaver } from "react-icons/si";
@@ -16,9 +17,10 @@ import { Checkbox } from "@/components/Checkbox";
 import { Button } from "@/components/Button";
 
 const SignIn = () => {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isLogin, setIsLogin] = useState(false);
+  const [autoLogin, setAutoLogin] = useState(false);
   const [token, setToken] = useState("");
 
   return (
@@ -32,24 +34,13 @@ const SignIn = () => {
               e.preventDefault();
               if (token === "") return;
               try {
-                const response = await axios.post(
-                  `${process.env.NEXT_PUBLIC_API_URI!}/user/login/`,
-                  {
-                    username: username,
-                    password: password,
-                    token: token,
-                  }
-                );
-                if (response.status === 200) {
-                  localStorage.clear();
-                  sessionStorage.clear();
-                  if (isLogin) {
-                    localStorage.setItem("token", response.data.token);
-                  } else {
-                    sessionStorage.setItem("token", response.data.token);
-                  }
-                  window.location.href = "/app";
-                }
+                await axios.post(`/signin/api/?autoLogin=${autoLogin}`, {
+                  username: username,
+                  password: password,
+                  token: token,
+                  autoLogin: autoLogin,
+                });
+                router.push("/app");
               } catch (e) {
                 const error = e as AxiosError;
                 switch (error.response?.status) {
@@ -87,8 +78,8 @@ const SignIn = () => {
             <div className="mt-2">
               <label className="flex gap-2 items-center font-bold">
                 <Checkbox
-                  onChange={(e) => setIsLogin(e.target.checked)}
-                  checked={isLogin}
+                  onChange={(e) => setAutoLogin(e.target.checked)}
+                  checked={autoLogin}
                 />
                 로그인 상태 유지
               </label>
