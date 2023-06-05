@@ -4,9 +4,11 @@ import { redirect } from "next/navigation";
 
 import { Post } from "../types";
 import { GET } from "@/utils/request";
+import { useSelectedCategory } from "../utils/routes";
 import { PostListItem } from "./components/PostListItem";
 
 export default async function BoardCategoryView() {
+  const category = useSelectedCategory();
   const cookieStore = cookies();
   const token = cookieStore.get("token");
   if (!token) {
@@ -14,7 +16,7 @@ export default async function BoardCategoryView() {
   }
   let posts: Post[] = [];
   try {
-    const response = await GET("/board/1", token.value);
+    const response = await GET(`/board/${category}`, token.value);
     posts = response.data;
   } catch (e) {
     posts = [];
