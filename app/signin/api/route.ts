@@ -2,6 +2,30 @@ import { NextRequest, NextResponse } from "next/server";
 
 import axios, { AxiosError } from "axios";
 
+export async function GET(request: NextRequest) {
+  if (request.cookies.has("token")) {
+    return NextResponse.json(
+      {
+        message: "Already logged in",
+        code: 200,
+      },
+      {
+        status: 200,
+      }
+    );
+  } else {
+    return NextResponse.json(
+      {
+        message: "Unauthorized",
+        code: 401,
+      },
+      {
+        status: 200,
+      }
+    );
+  }
+}
+
 export async function POST(request: NextRequest) {
   const requestData = await request.json();
   try {

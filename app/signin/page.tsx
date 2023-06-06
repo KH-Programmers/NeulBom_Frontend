@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -22,6 +22,12 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [autoLogin, setAutoLogin] = useState(false);
   const [token, setToken] = useState("");
+
+  useEffect(() => {
+    axios.get("/signin/api/").then((res) => {
+      if (res.data.code === 200) router.push("/app");
+    });
+  }, [router]);
 
   return (
     <div className="min-h-screen py-16 px-4 md:px-8 lg:px-16 flex justify-center items-center">
