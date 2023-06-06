@@ -7,8 +7,11 @@ import { GET } from "@/utils/request";
 import { useSelectedCategory } from "../utils/routes";
 import { PostListItem } from "./components/PostListItem";
 
-export default async function BoardCategoryView() {
-  const category = useSelectedCategory();
+export default async function BoardCategoryView({
+  params,
+}: {
+  params: { category: string };
+}) {
   const cookieStore = cookies();
   const token = cookieStore.get("token");
   if (!token) {
@@ -16,7 +19,7 @@ export default async function BoardCategoryView() {
   }
   let posts: Post[] = [];
   try {
-    const response = await GET(`/board/${category}`, token.value);
+    const response = await GET(`/board/${params.category}`, token.value);
     posts = response.data;
   } catch (e) {
     posts = [];
