@@ -12,19 +12,19 @@ const TodayMeal: MealOfDate = {
     },
     {
       name: "순대국",
-      allergy: "2.5.6.10.13.16.",
+      allergy: [2, 5, 6, 10, 13, 16],
     },
     {
       name: "아삭고추된장무침",
-      allergy: "15.6.13.",
+      allergy: [15, 6, 3],
     },
     {
       name: "치킨직화스테이크/스위트칠리소",
-      allergy: "2.5.6.12.13.15.",
+      allergy: [2, 5, 6, 12, 13, 15],
     },
     {
       name: "깍두기",
-      allergy: "9.",
+      allergy: [9],
     },
     {
       name: "사과쥬스",
@@ -34,11 +34,11 @@ const TodayMeal: MealOfDate = {
   dinner: [
     {
       name: "불고기생야채비빔밥",
-      allergy: "5.6.16.",
+      allergy: [5, 6, 16],
     },
     {
       name: "미소국",
-      allergy: "5.6.",
+      allergy: [5, 6],
     },
     {
       name: "단무지무침",
@@ -46,15 +46,15 @@ const TodayMeal: MealOfDate = {
     },
     {
       name: "새우볼",
-      allergy: "1.5.6.9.",
+      allergy: [1, 5, 6, 9],
     },
     {
       name: "배추김치",
-      allergy: "9.",
+      allergy: [9],
     },
     {
       name: "포도쥬스",
-      allergy: "13.",
+      allergy: [13],
     },
   ],
 };

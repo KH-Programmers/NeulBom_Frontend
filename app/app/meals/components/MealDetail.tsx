@@ -27,7 +27,7 @@ export const MealDetail: React.FC<{
       <ul className="mt-2 list-disc list-inside">
         {menu.map((x, i) => (
           <li key={i} className="text-lg font-semibold text-black/60">
-            {x.name} {x.allergy && `(${x.allergy})`}
+            {x.name} {x.allergy && `(${x.allergy.map(x => x)})`}
           </li>
         ))}
       </ul>
@@ -38,7 +38,7 @@ export const MealDetail: React.FC<{
         </div>
       </div>
       <div className="flex justify-end gap-2 mt-4">
-        <button className="p-1 gap-2 border-2 flex rounded-lg transition-all text-white bg-blue-500 border-blue-500 hover:bg-transparent hover:text-blue-500">
+        <button className="p-1 gap-2 border-2 flex rounded-lg transition-all text-black/20 border-black/20 hover:bg-blue-500 hover:border-blue-500 hover:bg-transparent hover:text-blue-500">
           <TbThumbUp size={24} />
         </button>
         <button className="p-1 gap-2 border-2 text-black/20 border-black/20 flex rounded-lg transition-all hover:text-red-500 hover:border-red-500">

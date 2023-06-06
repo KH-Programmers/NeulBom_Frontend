@@ -14,3 +14,28 @@ export interface NotificationBase {
 }
 
 export type Notification = SystemNotification;
+
+export const Allergy = [
+  "달걀",
+  "우유",
+  "메밀",
+  "땅콩",
+  "대두",
+  "밀",
+  "고등어",
+  "게",
+  "새우",
+  "돼지고기",
+  "복숭아",
+  "토마토",
+  "아황산",
+  "호두",
+  "닭고기",
+  "쇠고기",
+  "오징어",
+  "조개류",
+  "굴",
+  "홍합",
+  "전복",
+  "잣",
+];

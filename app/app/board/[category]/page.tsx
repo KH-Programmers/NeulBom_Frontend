@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 
 import { Post } from "../types";
 import { GET } from "@/utils/request";
-import { useSelectedCategory } from "../utils/routes";
 import { PostListItem } from "./components/PostListItem";
 
 export default async function BoardCategoryView({

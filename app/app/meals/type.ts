@@ -1,6 +1,6 @@
 export type Meal = {
   name: string;
-  allergy: string | null;
+  allergy: number[] | null;
 };
 
 export type MealOfDate = {

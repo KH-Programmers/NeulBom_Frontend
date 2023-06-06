@@ -1,23 +1,15 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import React from "react";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 const Page: React.FC = () => {
-  const router = useRouter();
+  const cookieStore = cookies();
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const localData = localStorage.getItem("token");
-      const sessionData = sessionStorage.getItem("token");
-      if (!localData && !sessionData) {
-        return router.push("/welcome");
-      } else {
-        return router.push("/app");
-      }
-    }
-  }, [router]);
-  return <div />;
+  if (!cookieStore.has("token")) {
+    return redirect("/signin");
+  } else {
+    return redirect("/app");
+  }
 };
 
 export default Page;
