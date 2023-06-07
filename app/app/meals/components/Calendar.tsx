@@ -1,6 +1,5 @@
 "use client";
 
-import { isSameDate } from "@h6s/calendar";
 import clsx from "clsx";
 import {
   addDays,
@@ -16,71 +15,12 @@ import {
   subMonths,
 } from "date-fns";
 import React from "react";
-import {
-  TbArrowLeft,
-  TbArrowRight,
-  TbChevronRight,
-  TbRefresh,
-} from "react-icons/tb";
+import { TbArrowLeft, TbArrowRight, TbRefresh } from "react-icons/tb";
+import meals from "./meals.json";
 
-import { Meal, MealOfDate } from "../type";
 import { MealType, MealTypeSelect } from "./MealTypeSelect";
 
-const TodayMeal: MealOfDate = {
-  date: new Date(),
-  lunch: [
-    {
-      name: "흰밥",
-      allergy: null,
-    },
-    {
-      name: "순대국",
-      allergy: [2, 5, 6, 10, 13, 16],
-    },
-    {
-      name: "아삭고추된장무침",
-      allergy: [15, 6, 3],
-    },
-    {
-      name: "치킨직화스테이크/스위트칠리소",
-      allergy: [2, 5, 6, 12, 13, 15],
-    },
-    {
-      name: "깍두기",
-      allergy: [9],
-    },
-    {
-      name: "사과쥬스",
-      allergy: null,
-    },
-  ],
-  dinner: [
-    {
-      name: "불고기생야채비빔밥",
-      allergy: [5, 6, 16],
-    },
-    {
-      name: "미소국",
-      allergy: [5, 6],
-    },
-    {
-      name: "단무지무침",
-      allergy: null,
-    },
-    {
-      name: "새우볼",
-      allergy: [1, 5, 6, 9],
-    },
-    {
-      name: "배추김치",
-      allergy: [9],
-    },
-    {
-      name: "포도쥬스",
-      allergy: [13],
-    },
-  ],
-};
+const mealsData = Object.fromEntries(meals.map((x) => [x.date, x]));
 
 export const MealsCalendar: React.FC = () => {
   const [monthDate, setMonthDate] = React.useState(() =>
@@ -179,12 +119,23 @@ export const MealsCalendar: React.FC = () => {
                         </div>
                         {/* &nbsp; */}
                         <span>
-                          {(mealType === MealType.Lunch
-                            ? TodayMeal.lunch
-                            : TodayMeal.dinner
-                          ).map((meal, k) => (
-                            <p key={k}>
-                              {meal.name} {meal.allergy && `(${meal.allergy})`}
+                          {(mealsData[format(day, "yyyyMMdd")] ?? null)?.[
+                            mealType === MealType.Lunch
+                              ? "lunchData"
+                              : "dinnerData"
+                          ].map(([name, allergy], i) => (
+                            <p key={i}>
+                              {name}
+                              {!!allergy?.length && (
+                                <>
+                                  {" "}
+                                  (
+                                  {typeof allergy === "string"
+                                    ? allergy
+                                    : allergy.join(",")}
+                                  )
+                                </>
+                              )}
                             </p>
                           ))}
                         </span>
