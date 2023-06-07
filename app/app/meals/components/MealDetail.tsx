@@ -1,13 +1,22 @@
 import React from "react";
-import { MealOfDate } from "../type";
+
 import { format } from "date-fns";
 import { TbThumbDown, TbThumbUp } from "react-icons/tb";
+
+import { MealOfDate } from "../type";
+import { Allergy } from "@/utils/types";
 
 export const MealDetail: React.FC<{
   meal: MealOfDate;
   menuKey: "lunch" | "dinner";
 }> = ({ meal, menuKey }) => {
   const menu = meal[menuKey];
+  const allergy: number[] = [];
+  menu.forEach((x) => {
+    if (x.allergy) {
+      allergy.push(...x.allergy);
+    }
+  });
 
   return (
     <div className="bg-white p-8 relative rounded-xl shadow flex flex-col overflow-hidden w-full h-full min-h-[180px]">
@@ -27,14 +36,16 @@ export const MealDetail: React.FC<{
       <ul className="mt-2 list-disc list-inside">
         {menu.map((x, i) => (
           <li key={i} className="text-lg font-semibold text-black/60">
-            {x.name} {x.allergy && `(${x.allergy.map(x => x)})`}
+            {x.name}
           </li>
         ))}
       </ul>
       <div className="mt-4">
         <div className="text-primary font-light">알레르기 정보</div>
         <div className="font-semibold text-black/40">
-          우유,메밀,게,새우,돼지고기,토마토,아황산류,닭고기
+          {Object.keys(Object.fromEntries(allergy.map((v) => [v, 0])))
+            .map((x) => Allergy[Number(x) - 1])
+            .join(", ")}
         </div>
       </div>
       <div className="flex justify-end gap-2 mt-4">

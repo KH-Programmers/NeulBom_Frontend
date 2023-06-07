@@ -124,19 +124,7 @@ export const MealsCalendar: React.FC = () => {
                               ? "lunchData"
                               : "dinnerData"
                           ].map(([name, allergy], i) => (
-                            <p key={i}>
-                              {name}
-                              {!!allergy?.length && (
-                                <>
-                                  {" "}
-                                  (
-                                  {typeof allergy === "string"
-                                    ? allergy
-                                    : allergy.join(",")}
-                                  )
-                                </>
-                              )}
-                            </p>
+                            <p key={i}>{name}</p>
                           ))}
                         </span>
                       </td>
