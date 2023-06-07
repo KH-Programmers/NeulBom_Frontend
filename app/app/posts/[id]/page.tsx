@@ -13,6 +13,7 @@ import { redirect } from 'next/navigation';
 import { GET } from "@/utils/request";
 import {Category, CommentElement} from "./types";
 import { ShareButton } from './components/shareButton';
+import { LikeButton } from './components/LikeButton';
 
 export default async function PostViewPage({
   params,
@@ -46,6 +47,9 @@ export default async function PostViewPage({
       {boardName.board_name}
     </Link><TbChevronRight className="text-black/40" /></>
   ))
+
+  const requestUrl = `/board/${article.board_model[0].board_EN}/${article.id}`;
+
   return (
     <div className="px-6">
       <div className="max-w-[768px] mx-auto mt-12">
@@ -80,10 +84,11 @@ export default async function PostViewPage({
             </div>
           </div>
           <div className="mt-4 flex gap-4">
-            <button className="border-2 p-2 border-red-500 text-red-500 rounded-lg flex gap-2 items-center hover:bg-red-500 hover:text-white transition-all">
-              <TbHeart size={20} />
-              <div className="text-sm">{article.like_count}</div>
-            </button>
+            <LikeButton 
+              likeCount={article.like_count}
+              url={requestUrl}
+              token = {token}
+            />
             <div className="flex-grow w-0" />
             <ShareButton />
           </div>
