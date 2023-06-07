@@ -1,3 +1,4 @@
+"server-only";
 import axios from "axios";
 
 export const GET = async (path: string, token?: string) => {

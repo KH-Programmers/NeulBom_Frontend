@@ -10,8 +10,12 @@ import {
 } from "react-icons/tb";
 import { CommentInput } from "./CommentInput";
 import { AnimatePresence, motion } from "framer-motion";
+import {CommentElement} from "../types";
 
-export const Comment: React.FC<{ nested?: boolean }> = ({ nested }) => {
+export const Comment: React.FC<{ nested?: boolean, CommentElement:CommentElement}> = ({ 
+  nested, 
+  CommentElement,
+}) => {
   const [like, setLike] = React.useState(false);
   const [repliesOpen, setRepliesOpen] = React.useState(false);
 
@@ -25,17 +29,14 @@ export const Comment: React.FC<{ nested?: boolean }> = ({ nested }) => {
       />
       <div>
         <div className={clsx("font-semibold", nested ? "text-lg" : "text-xl")}>
-          Username
+          {CommentElement.authorName}
         </div>
         <div
           className={clsx({
             "text-sm": nested,
           })}
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
-          minima cupiditate placeat tempore a, possimus eum dolor eius nemo vel
-          consequatur eligendi doloremque quidem accusantium hic qui quaerat
-          veniam nihil?
+          {CommentElement.content}
         </div>
         <div className="flex mt-2 gap-4">
           {!nested && (
@@ -79,9 +80,6 @@ export const Comment: React.FC<{ nested?: boolean }> = ({ nested }) => {
                 <CommentInput nested />
               </div>
               <div className="bg-black/5 rounded-xl mt-2 divide-y">
-                <Comment nested />
-                <Comment nested />
-                <Comment nested />
               </div>
             </motion.div>
           )}

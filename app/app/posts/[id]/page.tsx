@@ -1,5 +1,4 @@
-"use client";
-
+import { cookies } from "next/headers";
 import Link from "next/link";
 import React from "react";
 import {
@@ -7,95 +6,86 @@ import {
   TbChevronRight,
   TbEye,
   TbHeart,
-  TbShare,
 } from "react-icons/tb";
 import { Comment } from "./components/Comment";
 import { CommentInput } from "./components/CommentInput";
+import { redirect } from 'next/navigation';
+import { GET } from "@/utils/request";
+import {Category, CommentElement} from "./types";
+import { ShareButton } from './components/shareButton';
 
-const PostViewPage: React.FC = () => {
+export default async function PostViewPage({
+  params,
+}: {
+  params: { id : string };
+}) {
+
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
+  let article;
+  if (!token) {
+    return redirect("/signin");
+  }
+  try{  
+    const response = await GET(`/board/study/${params.id}`, token.value);
+    article = response.data;
+  } catch (e) {
+    article = []
+  }
+  console.log(article);
+  const comment = article.comments.map((comment:CommentElement, k:number) => (
+    <Comment 
+      key={k}
+      nested={false}
+      CommentElement={comment}
+    />
+  ))
+
+  const BoardCategory = article.board_model.map((boardName:Category) => (
+    <><Link href={`/app/board/${boardName.board_EN}`} className="text-blue-500">
+      {boardName.board_name}
+    </Link><TbChevronRight className="text-black/40" /></>
+  ))
   return (
     <div className="px-6">
       <div className="max-w-[768px] mx-auto mt-12">
         <article>
           <div className="flex gap-2 items-center">
-            <Link href="/app/board/study" className="text-blue-500">
-              공부
-            </Link>
-
-            <TbChevronRight className="text-black/40" />
-
-            <Link href="/app/board/questions" className="text-blue-500">
-              질문
-            </Link>
-
-            <TbChevronRight className="text-black/40" />
-
-            <Link href="/app/board/question1" className="text-blue-500">
-              1학년 과목
-            </Link>
+            {BoardCategory}
           </div>
-          <h1 className="text-4xl font-extrabold mt-2">제목</h1>
+          <h1 className="text-4xl font-extrabold mt-2">{article.title}</h1>
           <hr className="border-t border-black/40 mt-2" />
           <div className="flex mt-2">
-            <div className="text-gray-500">(username)</div>
+            <div className="text-gray-500">{article.authorName}</div>
             <div className="flex-grow" />
             <div className="flex gap-4 items-center text-black/60">
               <div className="flex items-center gap-2">
                 <TbEye size={20} />
-                <span>1234</span>
+                <span>{article.viewcounts}</span>
               </div>
               <div className="flex items-center gap-2">
                 <TbHeart size={20} />
-                <span>10</span>
+                <span>{article.like_count}</span>
               </div>
               <div className="flex items-center gap-2">
                 <TbCalendar size={20} />
-                <span>23-06-01</span>
+                <span>{article.updated_at}</span>
               </div>
             </div>
           </div>
 
           <div className="bg-white p-8 mt-4 rounded-xl shadow-md">
             <div>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
-              <p>wow this is body</p>
+              {article.text}
             </div>
           </div>
           <div className="mt-4 flex gap-4">
             <button className="border-2 p-2 border-red-500 text-red-500 rounded-lg flex gap-2 items-center hover:bg-red-500 hover:text-white transition-all">
               <TbHeart size={20} />
-              <div className="text-sm">100</div>
+              <div className="text-sm">{article.like_count}</div>
             </button>
             <div className="flex-grow w-0" />
-            <button
-              className="border-2 p-2 border-blue-500 text-blue-500 rounded-lg flex gap-2 items-center hover:bg-blue-500 hover:text-white transition-all disabled:border-black/20 disabled:text-black/20 disabled:hover:border-black/20 disabled:hover:text-black/20 disabled:hover:bg-transparent"
-              disabled={typeof navigator === "undefined" || !navigator.share}
-              onClick={() => {
-                navigator.share({
-                  title: document.title,
-                  url: window.location.href,
-                });
-              }}
-            >
-              <TbShare size={20} />
-            </button>
+            <ShareButton />
           </div>
         </article>
         <div className="mt-8">
@@ -104,9 +94,7 @@ const PostViewPage: React.FC = () => {
             <CommentInput />
           </div>
           <div className="mt-4 bg-white rounded-xl shadow-md divide-y">
-            <Comment />
-            <Comment />
-            <Comment />
+            {comment}
           </div>
         </div>
         <div className="mt-16" />
@@ -115,4 +103,3 @@ const PostViewPage: React.FC = () => {
   );
 };
 
-export default PostViewPage;
