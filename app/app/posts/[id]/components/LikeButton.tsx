@@ -2,7 +2,7 @@
 import { GET } from '@/utils/request'
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies'
 import { TbHeart } from 'react-icons/tb'
-import { useState } from 'react'
+import React from 'react'
 
 interface likeAction {
   likeCount:number; 
@@ -11,10 +11,10 @@ interface likeAction {
 }
 
 export const LikeButton: React.FC<likeAction> = ({likeCount, url, token}) => { 
-  const [count, setCount] = useState(likeCount);
+  const [count, setCount] = React.useState(likeCount);
   
   const  like = async() => {
-    await GET(`${url}/like/`, token.value);
+    await GET(`${url}like/`, token.value);
     setCount(likeCount += 1);
   }
 

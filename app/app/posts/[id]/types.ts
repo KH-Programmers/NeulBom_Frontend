@@ -2,9 +2,9 @@ import { type } from 'os';
 
 export type CommentElement = {
   id: number;
-  authorName: string;
+  author_name: string;
   content: string;
-  updatedAt: string;
+  reply: Array<CommentElement>;
 }
 
 export type Category = {
