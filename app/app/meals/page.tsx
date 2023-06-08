@@ -7,50 +7,58 @@ const TodayMeal: MealOfDate = {
   date: new Date(),
   lunch: [
     {
-      name: "참치김치볶음덮밥",
-      allergy: [5, 9, 13],
+      name: "장조림버터비빔밥",
+      allergy: [1,2,16],
     },
     {
-      name: "즉석피자",
-      allergy: [1, 2, 5, 6, 10, 12, 13, 15, 16],
+      name: "가쓰오장국",
+      allergy: [1, 2, 5, 6, 9],
     },
     {
-      name: "두부미소국",
+      name: "오이도라지초무침",
+      allergy: [13],
+    },
+    {
+      name: "감자볼튀김",
       allergy: [5, 6],
     },
     {
-      name: "깍두기",
+      name: "배추김치",
       allergy: [9],
     },
     {
-      name: "딸기샐러드",
-      allergy: [11, 2, 5, 6, 11, 13],
+      name: "조리퐁라떼",
+      allergy: [1, 2, 5, 6],
     },
   ],
   dinner: [
     {
-      name: "치즈오븐스파게티",
-      allergy: [1, 2, 5, 6, 10, 12, 13, 15, 16],
-    },
-    {
-      name: "크로와상",
-      allergy: [1, 2, 5, 6],
-    },
-    {
-      name: "카프리썬",
-      allergy: [11, 12],
-    },
-    {
-      name: "피클",
+      name: "쌀밥",
       allergy: null,
     },
     {
-      name: "메론",
-      allergy: null,
+      name: "비빔막국수",
+      allergy: [3, 6],
     },
     {
-      name: "케이준샐러드",
-      allergy: [1, 2, 5, 6, 13, 15, 18],
+      name: "배추국",
+      allergy: [5, 6],
+    },
+    {
+      name: "보쌈",
+      allergy: [5, 6, 10],
+    },
+    {
+      name: "부추야채무침",
+      allergy: [5, 6],
+    },
+    {
+      name: "배추김치",
+      allergy: [9],
+    },
+    {
+      name: "망고쥬스",
+      allergy: [13],
     },
   ],
 };
