@@ -16,13 +16,17 @@ import {
 } from "date-fns";
 import React from "react";
 import { TbArrowLeft, TbArrowRight, TbRefresh } from "react-icons/tb";
-import meals from "./meals.json";
 
 import { MealType, MealTypeSelect } from "./MealTypeSelect";
 
-const mealsData = Object.fromEntries(meals.map((x) => [x.date, x]));
-
-export const MealsCalendar: React.FC = () => {
+export const MealsCalendar: React.FC<{
+  meals: Array<{
+    date: number;
+    lunchData: Array<[string, number[]]>;
+    dinnerData: Array<[string, number[]]>;
+  }>;
+}> = ({ meals }) => {
+  const mealsData = Object.fromEntries(meals.map((x) => [x.date, x]));
   const [monthDate, setMonthDate] = React.useState(() =>
     startOfMonth(new Date())
   );

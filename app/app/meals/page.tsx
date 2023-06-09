@@ -1,78 +1,75 @@
 import React from "react";
-import { MealsCalendar } from "./components/Calendar";
-import { MealDetail } from "./components/MealDetail";
+import { cookies } from "next/headers";
+
+import { format } from "date-fns";
+
 import { MealOfDate } from "./type";
+import { GET } from "@/utils/request";
+import { MealDetail } from "./components/MealDetail";
+import { MealsCalendar } from "./components/Calendar";
 
-const TodayMeal: MealOfDate = {
-  date: new Date(),
-  lunch: [
-    {
-      name: "장조림버터비빔밥",
-      allergy: [1,2,16],
-    },
-    {
-      name: "가쓰오장국",
-      allergy: [1, 2, 5, 6, 9],
-    },
-    {
-      name: "오이도라지초무침",
-      allergy: [13],
-    },
-    {
-      name: "감자볼튀김",
-      allergy: [5, 6],
-    },
-    {
-      name: "배추김치",
-      allergy: [9],
-    },
-    {
-      name: "조리퐁라떼",
-      allergy: [1, 2, 5, 6],
-    },
-  ],
-  dinner: [
-    {
-      name: "쌀밥",
-      allergy: null,
-    },
-    {
-      name: "비빔막국수",
-      allergy: [3, 6],
-    },
-    {
-      name: "배추국",
-      allergy: [5, 6],
-    },
-    {
-      name: "보쌈",
-      allergy: [5, 6, 10],
-    },
-    {
-      name: "부추야채무침",
-      allergy: [5, 6],
-    },
-    {
-      name: "배추김치",
-      allergy: [9],
-    },
-    {
-      name: "망고쥬스",
-      allergy: [13],
-    },
-  ],
-};
-
-const Board: React.FC = () => {
+export default async function Board() {
+  let monthMealData: Array<{
+    date: number;
+    lunchData: Array<[string, number[]]>;
+    dinnerData: Array<[string, number[]]>;
+  }> = [];
+  const today = new Date();
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
+  try {
+    const response = await GET(
+      `/food/${today.getFullYear()}/${today.getMonth() + 1}`,
+      token?.value
+    );
+    monthMealData = response.data;
+  } catch (e) {
+    console.error(e);
+  }
+  const todayMeal = monthMealData.filter(
+    (x) => x.date === Number(format(today, "yyyyMMdd"))
+  )[0];
   return (
     <div className="p-4 gap-4 flex-grow flex flex-col md:grid flex-shrink md:grid-cols-2 lg:grid-cols-3">
       <div className="row-span-2 col-span-2 min-h-[540px] flex flex-col">
-        <MealsCalendar />
+        <MealsCalendar meals={monthMealData} />
       </div>
-      <MealDetail meal={TodayMeal} menuKey="lunch" />
-      <MealDetail meal={TodayMeal} menuKey="dinner" />
+      <MealDetail
+        meal={{
+          date: new Date(),
+          lunch: todayMeal!.lunchData.map((x) => {
+            return {
+              name: x[0],
+              allergy: x[1],
+            };
+          }),
+          dinner: todayMeal!.dinnerData.map((x) => {
+            return {
+              name: x[0],
+              allergy: x[1],
+            };
+          }),
+        }}
+        menuKey="lunch"
+      />
+      <MealDetail
+        meal={{
+          date: new Date(),
+          lunch: todayMeal!.lunchData.map((x) => {
+            return {
+              name: x[0],
+              allergy: x[1],
+            };
+          }),
+          dinner: todayMeal!.dinnerData.map((x) => {
+            return {
+              name: x[0],
+              allergy: x[1],
+            };
+          }),
+        }}
+        menuKey="dinner"
+      />
     </div>
   );
-};
-
-export default Board;
+}
