@@ -15,17 +15,10 @@ interface CommentEl {
 }
 
 export const CommentInput: React.FC<CommentEl> = ({ nested, url, token, parentCommentId}) => {
-
+  const [textareaValue, setTextareaValue] = React.useState("");
+  
   const upload = async() => {
-    const comment = document.getElementById("commentInput") as HTMLTextAreaElement;
-    let parentComment;
-    if (nested) {
-      parentComment = null
-    } else {
-      parentComment = parentCommentId
-    } 
-    console.log(comment.value);
-    await POST(url, {content: comment.value, parent_comment:parentComment}, token.value);
+    await POST(url, {content:textareaValue, parent_comment:parentCommentId}, token.value);
   }
 
   return (
@@ -39,6 +32,8 @@ export const CommentInput: React.FC<CommentEl> = ({ nested, url, token, parentCo
             "text-sm": nested,
           }
         )}
+        value={textareaValue}
+        onChange={(e) => setTextareaValue(e.target.value)}
       ></textarea>
       <div className="flex mt-2">
         <div className="flex-grow"></div>

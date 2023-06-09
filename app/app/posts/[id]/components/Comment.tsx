@@ -21,8 +21,10 @@ export const Comment: React.FC<{ nested?: boolean, CommentElement:CommentElement
 }) => {
   const [like, setLike] = React.useState(false);
   const [repliesOpen, setRepliesOpen] = React.useState(false);
+  
   const requestUrl = parentUrl;
   
+
   let comment;
   if (CommentElement.reply[0] != null) {
     comment = CommentElement.reply.map((reply:CommentElement, k:number) => (
