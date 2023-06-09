@@ -26,9 +26,9 @@ export default async function Board() {
   } catch (e) {
     console.error(e);
   }
-  const todayMeal = monthMealData.filter(
+  const todayMeal = monthMealData.find(
     (x) => x.date === Number(format(today, "yyyyMMdd"))
-  )[0];
+  );
   return (
     <div className="p-4 gap-4 flex-grow flex flex-col md:grid flex-shrink md:grid-cols-2 lg:grid-cols-3">
       <div className="row-span-2 col-span-2 min-h-[540px] flex flex-col">

@@ -39,3 +39,7 @@ export const Allergy = [
   "전복",
   "잣",
 ];
+
+export function getAllergy(allergies: number[]): string {
+  return allergies.map((x) => Allergy[x - 1]).join(", ");
+}
