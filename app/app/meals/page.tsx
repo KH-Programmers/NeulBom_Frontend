@@ -1,74 +1,75 @@
 import React from "react";
-import { MealsCalendar } from "./components/Calendar";
-import { MealDetail } from "./components/MealDetail";
+import { cookies } from "next/headers";
+
+import { format } from "date-fns";
+
 import { MealOfDate } from "./type";
+import { GET } from "@/utils/request";
+import { MealDetail } from "./components/MealDetail";
+import { MealsCalendar } from "./components/Calendar";
 
-const TodayMeal: MealOfDate = {
-  date: new Date(),
-  lunch: [
-    {
-      name: "흰밥",
-      allergy: null,
-    },
-    {
-      name: "순대국",
-      allergy: [2, 5, 6, 10, 13, 16],
-    },
-    {
-      name: "아삭고추된장무침",
-      allergy: [15, 6, 3],
-    },
-    {
-      name: "치킨직화스테이크/스위트칠리소",
-      allergy: [2, 5, 6, 12, 13, 15],
-    },
-    {
-      name: "깍두기",
-      allergy: [9],
-    },
-    {
-      name: "사과쥬스",
-      allergy: null,
-    },
-  ],
-  dinner: [
-    {
-      name: "불고기생야채비빔밥",
-      allergy: [5, 6, 16],
-    },
-    {
-      name: "미소국",
-      allergy: [5, 6],
-    },
-    {
-      name: "단무지무침",
-      allergy: null,
-    },
-    {
-      name: "새우볼",
-      allergy: [1, 5, 6, 9],
-    },
-    {
-      name: "배추김치",
-      allergy: [9],
-    },
-    {
-      name: "포도쥬스",
-      allergy: [13],
-    },
-  ],
-};
-
-const Board: React.FC = () => {
+export default async function Board() {
+  let monthMealData: Array<{
+    date: number;
+    lunchData: Array<[string, number[]]>;
+    dinnerData: Array<[string, number[]]>;
+  }> = [];
+  const today = new Date();
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
+  try {
+    const response = await GET(
+      `/food/${today.getFullYear()}/${today.getMonth() + 1}`,
+      token?.value
+    );
+    monthMealData = response.data;
+  } catch (e) {
+    console.error(e);
+  }
+  const todayMeal = monthMealData.find(
+    (x) => x.date === Number(format(today, "yyyyMMdd"))
+  );
   return (
     <div className="p-4 gap-4 flex-grow flex flex-col md:grid flex-shrink md:grid-cols-2 lg:grid-cols-3">
       <div className="row-span-2 col-span-2 min-h-[540px] flex flex-col">
-        <MealsCalendar />
+        <MealsCalendar meals={monthMealData} />
       </div>
-      <MealDetail meal={TodayMeal} menuKey="lunch" />
-      <MealDetail meal={TodayMeal} menuKey="dinner" />
+      <MealDetail
+        meal={{
+          date: new Date(),
+          lunch: todayMeal!.lunchData.map((x) => {
+            return {
+              name: x[0],
+              allergy: x[1],
+            };
+          }),
+          dinner: todayMeal!.dinnerData.map((x) => {
+            return {
+              name: x[0],
+              allergy: x[1],
+            };
+          }),
+        }}
+        menuKey="lunch"
+      />
+      <MealDetail
+        meal={{
+          date: new Date(),
+          lunch: todayMeal!.lunchData.map((x) => {
+            return {
+              name: x[0],
+              allergy: x[1],
+            };
+          }),
+          dinner: todayMeal!.dinnerData.map((x) => {
+            return {
+              name: x[0],
+              allergy: x[1],
+            };
+          }),
+        }}
+        menuKey="dinner"
+      />
     </div>
   );
-};
-
-export default Board;
+}

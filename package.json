@@ -22,6 +22,7 @@
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
     "@types/react-router-dom": "^5.3.3",
+    "@uiw/react-md-editor": "^3.23.3",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "clsx": "^1.2.1",
@@ -38,7 +39,10 @@
     "react-hook-form": "^7.44.1",
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.11.2",
+    "react-is": "^18.2.0",
+    "react-select": "^5.7.3",
     "react-virtuoso": "^4.3.8",
+    "rehype-prism-plus": "^1.5.1",
     "sass": "^1.62.1",
     "sharp": "^0.32.1",
     "styled-components": "^5.3.11",
@@ -48,7 +52,11 @@
     "yup": "^1.2.0"
   },
   "devDependencies": {
+    "@types/prismjs": "^1.26.0",
     "@types/styled-components": "^5.1.26",
-    "prettier": "2.8.8"
-  }
+    "debug": "^4.3.4",
+    "prettier": "2.8.8",
+    "supports-color": "^9.3.1"
+  },
+  "packageManager": "yarn@3.6.0"
 }

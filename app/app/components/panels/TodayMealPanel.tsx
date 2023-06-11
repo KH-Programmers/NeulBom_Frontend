@@ -1,9 +1,18 @@
 "use client";
 
 import React from "react";
+
 import clsx from "clsx";
 
-export const TodayMealPanel: React.FC = () => {
+import { getAllergy } from "@/utils/types";
+
+export const TodayMealPanel: React.FC<{
+  meal: {
+    date: number;
+    lunchData: Array<[string, number[]]>;
+    dinnerData: Array<[string, number[]]>;
+  };
+}> = ({ meal }) => {
   const [isLunch, setIsLunch] = React.useState(true);
 
   return (
@@ -36,15 +45,16 @@ export const TodayMealPanel: React.FC = () => {
       </div>
       <div className="mt-2">
         <ul className="list-disc list-inside opacity-60 font-extralight text-lg">
-          <li>밥</li>
-          <li>밥</li>
-          <li>밥</li>
-          <li>밥</li>
-          <li>밥</li>
-          <li>밥</li>
+          {isLunch
+            ? meal.lunchData.map(([name, allergy], k) => (
+                <li key={k}>{name}</li>
+              ))
+            : meal.dinnerData.map(([name, allergy], k) => (
+                <li key={k}>{name}</li>
+              ))}
         </ul>
         <div className="opacity-40 mt-2">
-          알레르기 정보: asdfasfdasdfasdfasfdasfasdf
+          알레르기 정보: {getAllergy([1, 2, 5])}
         </div>
       </div>
     </div>

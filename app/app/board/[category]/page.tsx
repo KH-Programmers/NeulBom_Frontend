@@ -2,6 +2,8 @@ import React from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+import { format } from "date-fns";
+
 import { Post } from "../types";
 import { GET } from "@/utils/request";
 import { PostListItem } from "./components/PostListItem";
@@ -34,7 +36,7 @@ export default async function BoardCategoryView({
           username={post.authorName}
           commentCount={post.commentCount}
           viewCount={post.viewCounts}
-          createdAt={post.updatedAt}
+          createdAt={format(new Date(post.updatedAt), "yyyy-MM-dd")}
         />
       ))}
     </div>

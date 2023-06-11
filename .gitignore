@@ -39,3 +39,11 @@ next-env.d.ts
 public/sw.js
 public/sw.js.map
 public/workbox-*
+
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

@@ -8,7 +8,12 @@ if (process.env.NODE_ENV === "production") {
     disable: process.env.NODE_ENV !== "production",
   });
 
-  module.exports = withPWA(nextConfig);
+  module.exports = withPWA({
+    ...nextConfig,
+    experimental: {
+      esmExternals: "loose",
+    },
+  });
 } else {
   module.exports = nextConfig;
 }
