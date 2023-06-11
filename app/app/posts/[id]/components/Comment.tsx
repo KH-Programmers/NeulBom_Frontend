@@ -10,10 +10,33 @@ import {
 } from "react-icons/tb";
 import { CommentInput } from "./CommentInput";
 import { AnimatePresence, motion } from "framer-motion";
+import {CommentElement} from "../types";
+import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
-export const Comment: React.FC<{ nested?: boolean }> = ({ nested }) => {
+export const Comment: React.FC<{ nested?: boolean, CommentElement:CommentElement, parentUrl:string , token:RequestCookie}> = ({ 
+  nested, 
+  CommentElement,
+  parentUrl,
+  token,
+}) => {
   const [like, setLike] = React.useState(false);
   const [repliesOpen, setRepliesOpen] = React.useState(false);
+  
+  const requestUrl = parentUrl;
+  
+
+  let comment;
+  if (CommentElement.reply[0] != null) {
+    comment = CommentElement.reply.map((reply:CommentElement, k:number) => (
+      <Comment
+      key={k}
+      nested={true}
+      CommentElement={reply}
+      parentUrl={'null'}
+      token={token}
+      />
+    ))
+  }
 
   return (
     <div className="flex p-6 gap-4">
@@ -25,17 +48,14 @@ export const Comment: React.FC<{ nested?: boolean }> = ({ nested }) => {
       />
       <div>
         <div className={clsx("font-semibold", nested ? "text-lg" : "text-xl")}>
-          Username
+          {CommentElement.author_name}
         </div>
         <div
           className={clsx({
             "text-sm": nested,
           })}
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio
-          minima cupiditate placeat tempore a, possimus eum dolor eius nemo vel
-          consequatur eligendi doloremque quidem accusantium hic qui quaerat
-          veniam nihil?
+          {CommentElement.content}
         </div>
         <div className="flex mt-2 gap-4">
           {!nested && (
@@ -76,12 +96,10 @@ export const Comment: React.FC<{ nested?: boolean }> = ({ nested }) => {
               className="overflow-hidden"
             >
               <div className="mt-2">
-                <CommentInput nested />
+                <CommentInput nested={true} url={requestUrl} token={token} parentCommentId={CommentElement.id}/>
               </div>
               <div className="bg-black/5 rounded-xl mt-2 divide-y">
-                <Comment nested />
-                <Comment nested />
-                <Comment nested />
+                {comment}
               </div>
             </motion.div>
           )}
