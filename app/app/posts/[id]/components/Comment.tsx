@@ -21,13 +21,14 @@ export const Comment: React.FC<{ nested?: boolean, CommentElement:CommentElement
 }) => {
   const [like, setLike] = React.useState(false);
   const [repliesOpen, setRepliesOpen] = React.useState(false);
-  
+  const [replys, setReplys] = React.useState<CommentElement[]>(CommentElement.reply);
+
   const requestUrl = parentUrl;
   
 
   let comment;
-  if (CommentElement.reply[0] != null) {
-    comment = CommentElement.reply.map((reply:CommentElement, k:number) => (
+  if (replys[0] != null) {
+    comment = replys.map((reply:CommentElement, k:number) => (
       <Comment
       key={k}
       nested={true}
@@ -36,6 +37,17 @@ export const Comment: React.FC<{ nested?: boolean, CommentElement:CommentElement
       token={token}
       />
     ))
+  }
+
+  const replySubmit = (comment:string) => {
+    const newComment: CommentElement = {
+      id: replys[replys.length-1].id + 1,
+      author_name: CommentElement.author_name,
+      content: comment,
+      reply: [],
+    };
+
+    setReplys((prevComments) => [...prevComments, newComment]);
   }
 
   return (
@@ -96,7 +108,7 @@ export const Comment: React.FC<{ nested?: boolean, CommentElement:CommentElement
               className="overflow-hidden"
             >
               <div className="mt-2">
-                <CommentInput nested={true} url={requestUrl} token={token} parentCommentId={CommentElement.id}/>
+                <CommentInput nested={true} url={requestUrl} token={token} parentCommentId={CommentElement.id} onCommentSubmit={replySubmit}/>
               </div>
               <div className="bg-black/5 rounded-xl mt-2 divide-y">
                 {comment}

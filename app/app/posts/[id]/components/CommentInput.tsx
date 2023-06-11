@@ -12,13 +12,22 @@ interface CommentEl {
   url:string; 
   token:RequestCookie;
   parentCommentId: number;
+  onCommentSubmit: (comment:string) => void;
 }
 
-export const CommentInput: React.FC<CommentEl> = ({ nested, url, token, parentCommentId}) => {
+export const CommentInput: React.FC<CommentEl> = ({ nested, url, token, parentCommentId, onCommentSubmit}) => {
   const [textareaValue, setTextareaValue] = React.useState("");
   
   const upload = async() => {
-    await POST(url, {content:textareaValue, parent_comment:parentCommentId}, token.value);
+    let parentComment
+    if (!nested) {
+      parentComment = null
+    } else {
+      parentComment = parentCommentId
+    }
+    await POST(url, {content:textareaValue, parent_comment:parentComment}, token.value);
+    onCommentSubmit(textareaValue);
+    setTextareaValue("");
   }
 
   return (

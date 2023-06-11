@@ -7,20 +7,18 @@ import {
   TbEye,
   TbHeart,
 } from "react-icons/tb";
-import { Comment } from "./components/Comment";
-import { CommentInput } from "./components/CommentInput";
 import { redirect } from 'next/navigation';
 import { GET } from "@/utils/request";
-import {Category, CommentElement} from "./types";
+import {Category} from "./types";
 import { ShareButton } from "./components/shareButton";
 import { LikeButton } from "./components/LikeButton";
+import { CommentList } from './components/CommentList';
 
 export default async function PostViewPage({
   params,
 }: {
   params: { id : string };
 }) {
-
   const cookieStore = cookies();
   const token = cookieStore.get("token");
   let article;
@@ -37,22 +35,11 @@ export default async function PostViewPage({
   }
   const requestUrl = `/board/${article.board_model[0].board_EN}/${article.id}/`;
 
-  const comment = article.comments.map((comment:CommentElement, k:number) => (
-    <Comment 
-      key={k}
-      nested={false}
-      CommentElement={comment}
-      parentUrl={requestUrl}
-      token={token}
-    />
-  ))
-
   const BoardCategory = article.board_model.map((boardName:Category) => (
     <><Link href={`/app/board/${boardName.board_EN}`} className="text-blue-500">
       {boardName.board_name}
     </Link><TbChevronRight className="text-black/40" /></>
   ))
-
   return (
     <div className="px-6">
       <div className="max-w-[768px] mx-auto mt-12">
@@ -96,20 +83,11 @@ export default async function PostViewPage({
             <ShareButton />
           </div>
         </article>
-        <div className="mt-8">
-          <div className="text-2xl font-bold">댓글</div>
-          <div className="mt-4">
-            <CommentInput 
-              nested={false}
-              url={requestUrl}
-              token={token}
-              parentCommentId={0}
-            />
-          </div>
-          <div id="comment" className="mt-4 bg-white rounded-xl shadow-md divide-y">
-            {comment}
-          </div>
-        </div>
+        <CommentList
+          article={article}
+          requestUrl={requestUrl}
+          token={token}
+        />
         <div className="mt-16" />
       </div>
     </div>
