@@ -45,12 +45,15 @@ export default async function PostViewPage({
       <div className="max-w-[768px] mx-auto mt-12">
         <article>
           <div className="flex gap-2 items-center">
-            {BoardCategory}
+            <Link href={`app/board/study/`} className="text-blue-500">
+              전체
+            </Link>
+            {/*BoardCategory => 후에 카테고리 추가될 시 이걸로 변경*/}
           </div>
           <h1 className="text-4xl font-extrabold mt-2">{article.title}</h1>
           <hr className="border-t border-black/40 mt-2" />
           <div className="flex mt-2">
-            <div className="text-gray-500">{article.authorName}</div>
+            <div className="text-gray-500">익명{/*article.authorName 익명기능 추가*/}</div>
             <div className="flex-grow" />
             <div className="flex gap-4 items-center text-black/60">
               <div className="flex items-center gap-2">

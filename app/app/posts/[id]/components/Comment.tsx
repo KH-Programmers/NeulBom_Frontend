@@ -60,7 +60,7 @@ export const Comment: React.FC<{ nested?: boolean, CommentElement:CommentElement
       />
       <div>
         <div className={clsx("font-semibold", nested ? "text-lg" : "text-xl")}>
-          {CommentElement.author_name}
+          익명{/*CommentElement.author_name 익명기능 추가*/}
         </div>
         <div
           className={clsx({

@@ -9,7 +9,8 @@ const categories: BoardCategory[] = [
   },
   {
     id: "study",
-    name: "공부",
+    name: "전체",// 후에 공부로 변경
+    /*
     children: [
       {
         id: "questions",
@@ -33,12 +34,12 @@ const categories: BoardCategory[] = [
         id: "study-verify",
         name: "인증",
       },
-    ],
+    ],=> 후에 카테고리 다시 살리기 */
   },
-  {
+  /*{
     id: "school",
     name: "학교",
-  },
+  },*/
 ];
 
 const BoardLayout: React.FC<PropsWithChildren> = ({ children }) => {
