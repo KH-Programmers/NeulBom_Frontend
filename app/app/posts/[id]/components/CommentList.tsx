@@ -26,7 +26,7 @@ export const CommentList:React.FC<CommentList> = ({article, requestUrl, token}) 
 
   const commentSubmit= (comment:string) => {
     const newComment: CommentElement = {
-      id: comments[comment.length].id + 1,
+      id: comments.length + 1,
       author_name: article.author_name,
       content: comment,
       reply: [],

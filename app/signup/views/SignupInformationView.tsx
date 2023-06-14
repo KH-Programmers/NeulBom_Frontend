@@ -9,17 +9,23 @@ import { Turnstile } from "@marsidev/react-turnstile";
 import { FormLabel } from "@/components/FormLabel";
 import { FormInput } from "@/components/FormInput";
 import { Button } from "@/components/Button";
+import { headers } from 'next/headers';
+import { da } from 'date-fns/locale';
+import { ImageProps } from 'next/image';
+import { redirect } from "next/navigation";
+import { error } from 'console';
 
 const schema = yup
   .object({
     name: yup.string().min(2).max(4).required(),
-    studentId: yup.string().length(5).required(),
+    studentId: yup.number().required(),
     email: yup.string().email().required(),
     password: yup.string().required(),
     passwordConfirm: yup
       .string()
-      .oneOf([yup.ref("password")], "비밀번호 재확인이 일치하지 않습니다.")
+      .oneOf([yup.ref("password")], "비밀번호가 일치하지 않습니다.")
       .required(),
+    profileImg: yup.mixed().required(),
   })
   .required();
 type FormData = yup.InferType<typeof schema>;
@@ -31,24 +37,44 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
   const { register, handleSubmit } = form;
   const [token, setToken] = useState("");
 
+  const convertBase64 = (file:File) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      }
+    })
+  }
+
   return (
     <FormProvider {...form}>
       <form
         className="mt-4 w-full max-w-[420px] mx-auto flex flex-col gap-4"
         onSubmit={handleSubmit(async (data) => {
+          const file = data.profileImg[0];
+          const base64 = await convertBase64(file);
+          console.log(base64);
           try {
+            const content = {
+              username: data.name,
+              grade: data.studentId,
+              email: data.email,
+              password: data.password,
+              card_img: base64,
+              token : token,
+            }
             const response = await axios.post(
               `${process.env.NEXT_PUBLIC_API_URI!}/user/register/`,
-              {
-                username: data.name,
-                grade: data.studentId,
-                email: data.email,
-                password: data.password,
-                token: token,
-              }
+              content
             );
-            if (response.status === 201) {
-              next();
+            if (response.status == 201) {
+              return redirect("/signin");
             }
           } catch (e) {
             const error = e as AxiosError;
@@ -107,6 +133,16 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
           name="passwordConfirm"
         >
           비밀번호 재입력
+        </FormLabel>
+        <FormLabel
+          control={
+            <FormInput type='file' {...register("profileImg", {
+              required: "학생증 이미지는 필수입니다."})}
+            />
+          }
+          name = "profileImg"
+        >
+          학생증 사진
         </FormLabel>
         <Turnstile
           siteKey={process.env.NEXT_PUBLIC_TURNSTLIE_SITE_KEY!}

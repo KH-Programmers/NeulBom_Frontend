@@ -11,11 +11,14 @@ const PostCreatePage: React.FC = () => {
     return redirect("/signin");
   }
 
+  /*const onsubmit = () => {
+    redirect("/app/board/all");
+  }*/
   return (
     <div className="px-6">
       <div className="max-w-[768px] mx-auto mt-12">
         <div className="text-2xl font-bold">글쓰기</div>
-        <ConetentEditor token={token}/>
+        <ConetentEditor token={token} /*onSubmit={onsubmit}*//>
       </div>
     </div>
   );

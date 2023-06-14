@@ -8,7 +8,7 @@ const categories: BoardCategory[] = [
     name: "인기글",
   },
   {
-    id: "study",
+    id: "all",
     name: "전체",// 후에 공부로 변경
     /*
     children: [

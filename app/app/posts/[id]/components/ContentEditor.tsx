@@ -7,7 +7,6 @@ import { POST } from '@/utils/request';
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import { object } from 'yup';
 
-
 const categories = [
   {
     label: "전체",
@@ -18,9 +17,10 @@ const categories = [
 
 interface token {
   token:RequestCookie;
+  //onSubmit:() => void;
 }
 
-const ConetentEditor:React.FC<token> = ({token}) => {
+const ConetentEditor:React.FC<token> = ({token, /*onSubmit*/}) => {
   const [content, setContent] = React.useState("");
   const [title, setTitle] = React.useState("");
   const [showEditor, setShowEditor] = React.useState(false);
@@ -31,7 +31,7 @@ const ConetentEditor:React.FC<token> = ({token}) => {
 
   const articleSubmit = async() => {
     const data = {
-      title : "제목",
+      title : title,
       text : content,
     }
     POST(`/board/study/write/`, data, token.value)///url은 후에 category 받아와서 수정.
