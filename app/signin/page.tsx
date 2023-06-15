@@ -107,6 +107,7 @@ const SignIn = () => {
             <div className="flex-grow border-b border-black/20" />
           </div>
           <div className="flex justify-between mt-4 gap-4">
+            {/*
             <Link
               href="/"
               className="rounded-full shadow flex justify-center items-center w-12 h-12 bg-[#03c75a] overflow-hidden"
@@ -135,6 +136,7 @@ const SignIn = () => {
             >
               <SiKakao size={28} color="black" />
             </Link>
+            */}
           </div>
           <div className="flex gap-4 mt-4 justify-center w-full">
             <div className="relative">
