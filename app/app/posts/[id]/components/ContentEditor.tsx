@@ -6,6 +6,7 @@ import MDEditor from "@uiw/react-md-editor/esm";
 import { POST } from '@/utils/request';
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import { object } from 'yup';
+import { useRouter } from 'next/navigation';
 
 const categories = [
   {
@@ -17,14 +18,14 @@ const categories = [
 
 interface token {
   token:RequestCookie;
-  //onSubmit:() => void;
 }
 
-const ConetentEditor:React.FC<token> = ({token, /*onSubmit*/}) => {
+const ConetentEditor:React.FC<token> = ({token}) => {
   const [content, setContent] = React.useState("");
   const [title, setTitle] = React.useState("");
   const [showEditor, setShowEditor] = React.useState(false);
-  
+  const {push} = useRouter();
+
   React.useEffect(() => {
     setShowEditor(true);
   }, []);
@@ -34,7 +35,8 @@ const ConetentEditor:React.FC<token> = ({token, /*onSubmit*/}) => {
       title : title,
       text : content,
     }
-    POST(`/board/study/write/`, data, token.value)///url은 후에 category 받아와서 수정.
+    POST(`/board/study/write/`, data, token.value);///url은 후에 category 받아와서 수정.
+    push('/app/board/all');
   }
 
   return (

@@ -1,3 +1,4 @@
+"server-only";
 import React from "react";
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -8,17 +9,14 @@ const PostCreatePage: React.FC = () => {
   const token = cookieStore.get("token");
 
   if (!token) {
-    return redirect("/signin");
+    redirect("/signin");
   }
 
-  /*const onsubmit = () => {
-    redirect("/app/board/all");
-  }*/
   return (
     <div className="px-6">
       <div className="max-w-[768px] mx-auto mt-12">
         <div className="text-2xl font-bold">글쓰기</div>
-        <ConetentEditor token={token} /*onSubmit={onsubmit}*//>
+        <ConetentEditor token={token}/>
       </div>
     </div>
   );
