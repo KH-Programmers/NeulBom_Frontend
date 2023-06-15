@@ -64,7 +64,7 @@ const AppHeaderContent: React.FC = () => {
             </div>
           </div>
         </NavPopupButton>
-        <button onClick={() => alert("TODO")}>
+        <button onClick={() => {alert("준비중입니다.")}}>
           <TbUserCircle
             className="text-black hover:text-primary transition-colors"
             size={24}

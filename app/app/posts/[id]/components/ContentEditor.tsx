@@ -7,6 +7,7 @@ import { POST } from '@/utils/request';
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import { object } from 'yup';
 import { useRouter } from 'next/navigation';
+import { AxiosError } from 'axios';
 
 const categories = [
   {
@@ -35,8 +36,17 @@ const ConetentEditor:React.FC<token> = ({token}) => {
       title : title,
       text : content,
     }
-    POST(`/board/study/write/`, data, token.value);///url은 후에 category 받아와서 수정.
-    push('/app/board/all');
+    try {
+    const response = await POST(`/board/study/write/`, data, token.value);///url은 후에 category 받아와서 수정.
+    if (response.status === 201) {
+      push('/app/board/all');
+    }
+    } catch (e) {
+      const error = e as AxiosError;
+      switch (error.response?.status) {
+        case 400 : return alert("카테고리를 선택하지 않았거나 글 형식이 잘못되었습니다."); 
+      }
+    }
   }
 
   return (

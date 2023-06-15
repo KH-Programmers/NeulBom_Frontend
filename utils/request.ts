@@ -1,29 +1,31 @@
 "server-only";
 import axios from "axios";
+import { cookies } from 'next/headers';
 
-export const GET = async (path: string, token?: string) => {
+
+export const GET = async (path: string) => {
+  const cookieStore = cookies();
+  const token = cookieStore.get("token")?.value;
   return await axios.get(
     process.env.NEXT_PUBLIC_API_URI! + path,
-    token
-      ? {
+    {
           headers: {
             Authorization: `Token ${token}`,
           },
-        }
-      : {}
+    }
   );
 };
 
 export const POST = async (path: string, data?: object, token?: string) => {
+  const cookieStore = cookies();
+  const tokn = cookieStore.get("token")?.value;
   return await axios.post(
     process.env.NEXT_PUBLIC_API_URI! + path,
     data ? data : {},
     {
-      headers: token
-        ? {
-            Authorization: `Token ${token}`,
-          }
-        : {},
+      headers:{
+        Authorization: `Token ${tokn}`,
+      }
     }
   );
 };

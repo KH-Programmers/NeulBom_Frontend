@@ -108,7 +108,7 @@ export default async function AppMain() {
     },
   };
   try {
-    const response = await GET("/", token?.value);
+    const response = await GET("");
     data = response.data;
   } catch (e) {
     console.error(e);

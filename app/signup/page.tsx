@@ -9,7 +9,7 @@ import { SignupInformationView } from "@/app/signup/views/SignupInformationView"
 import { SignupComplete } from "@/app/signup/views/SignupComplete";
 
 const SignUp = () => {
-  const [currentStep, setCurrentStep] = React.useState(SignupStep.Information);
+  const [currentStep, setCurrentStep] = React.useState(SignupStep.Agreement);
 
   return (
     <div className="min-h-screen py-16 px-4 md:px-8 lg:px-16 flex justify-center items-center">

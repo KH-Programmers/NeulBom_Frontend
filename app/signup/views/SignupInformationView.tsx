@@ -33,7 +33,6 @@ type FormData = yup.InferType<typeof schema>;
 export const SignupInformationView: React.FC<{ next: () => void }> = ({
   next,
 }) => {
-  const {push} = useRouter();
   const form = useForm<FormData>({ resolver: yupResolver(schema) });
   const { register, handleSubmit } = form;
   const [token, setToken] = useState("");
@@ -75,11 +74,10 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
             );
             console.log(response);
             if (response.status === 201) {
-              push("/signin");
+              next();
             }
           } catch (e) {
             const error = e as AxiosError;
-            console.log(error.response);
             switch (error.response?.status) {
               case 400:
                 return alert("잘못된 정보를 입력했습니다. 다시 확인해주세요.");
