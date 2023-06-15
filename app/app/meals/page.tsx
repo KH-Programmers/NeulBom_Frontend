@@ -19,7 +19,7 @@ export default async function Board() {
   const token = cookieStore.get("token");
   try {
     const response = await GET(
-      `/food/${today.getFullYear()}/${today.getMonth() + 1}`,
+      `/food/${today.getFullYear()}/${today.getMonth() + 1}`, token?.value
     );
     monthMealData = response.data;
   } catch (e) {

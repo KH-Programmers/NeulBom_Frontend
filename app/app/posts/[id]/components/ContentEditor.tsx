@@ -17,7 +17,11 @@ const categories = [
   /* 카테고리 추가할 것. */
 ];
 
-const ConetentEditor:React.FC = () => {
+interface token {
+  token :RequestCookie;
+}
+
+const ConetentEditor:React.FC<token> = ({token}) => {
   const [content, setContent] = React.useState("");
   const [title, setTitle] = React.useState("");
   const [showEditor, setShowEditor] = React.useState(false);
@@ -33,7 +37,7 @@ const ConetentEditor:React.FC = () => {
       text : content,
     }
     try {
-    const response = await POST(`/board/study/write/`, data);///url은 후에 category 받아와서 수정.
+    const response = await POST(`/board/study/write/`, data, token.value);///url은 후에 category 받아와서 수정.
     if (response.status === 201) {
       push('/app/board/all');
     }
