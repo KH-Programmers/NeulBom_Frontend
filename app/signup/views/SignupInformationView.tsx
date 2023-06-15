@@ -12,7 +12,7 @@ import { Button } from "@/components/Button";
 import { headers } from 'next/headers';
 import { da } from 'date-fns/locale';
 import { ImageProps } from 'next/image';
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { error } from 'console';
 
 const schema = yup
@@ -25,7 +25,7 @@ const schema = yup
       .string()
       .oneOf([yup.ref("password")], "비밀번호가 일치하지 않습니다.")
       .required(),
-    profileImg: yup.mixed().required(),
+    profileImg: yup.mixed<Array<File>>().required(),
   })
   .required();
 type FormData = yup.InferType<typeof schema>;
@@ -33,6 +33,7 @@ type FormData = yup.InferType<typeof schema>;
 export const SignupInformationView: React.FC<{ next: () => void }> = ({
   next,
 }) => {
+  const {push} = useRouter();
   const form = useForm<FormData>({ resolver: yupResolver(schema) });
   const { register, handleSubmit } = form;
   const [token, setToken] = useState("");
@@ -59,7 +60,6 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
         onSubmit={handleSubmit(async (data) => {
           const file = data.profileImg[0];
           const base64 = await convertBase64(file);
-          console.log(base64);
           try {
             const content = {
               username: data.name,
@@ -73,8 +73,9 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
               `${process.env.NEXT_PUBLIC_API_URI!}/user/register/`,
               content
             );
-            if (response.status == 201) {
-              return redirect("/signin");
+            console.log(response);
+            if (response.status === 201) {
+              push("/signin");
             }
           } catch (e) {
             const error = e as AxiosError;
