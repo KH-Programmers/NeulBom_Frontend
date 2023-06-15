@@ -9,22 +9,22 @@ export const GET = async (path: string) => {
   return await axios.get(
     process.env.NEXT_PUBLIC_API_URI! + path,
     {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
+      headers: {
+        Authorization: `Token ${token}`,
+      },
     }
   );
 };
 
-export const POST = async (path: string, data?: object, token?: string) => {
+export const POST = async (path: string, data?: object) => {
   const cookieStore = cookies();
-  const tokn = cookieStore.get("token")?.value;
+  const token = cookieStore.get("token")?.value;
   return await axios.post(
     process.env.NEXT_PUBLIC_API_URI! + path,
     data ? data : {},
     {
       headers:{
-        Authorization: `Token ${tokn}`,
+        Authorization: `Token ${token}`,
       }
     }
   );

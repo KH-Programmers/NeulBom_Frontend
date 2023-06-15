@@ -9,9 +9,8 @@ import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 interface CommentList {
   article:Article;
   requestUrl:string;
-  token:RequestCookie;
 }
-export const CommentList:React.FC<CommentList> = ({article, requestUrl, token}) => {
+export const CommentList:React.FC<CommentList> = ({article, requestUrl}) => {
   const [comments, setComments] = React.useState<CommentElement[]>(article.comments)
   
   const comment = comments.map((comment:CommentElement, k:number) => (
@@ -20,7 +19,6 @@ export const CommentList:React.FC<CommentList> = ({article, requestUrl, token}) 
       nested={false}
       CommentElement={comment}
       parentUrl={requestUrl}
-      token={token}
     />
   ))
 
@@ -41,7 +39,6 @@ export const CommentList:React.FC<CommentList> = ({article, requestUrl, token}) 
             <CommentInput 
               nested={false}
               url={requestUrl}
-              token={token}
               parentCommentId={0}
               onCommentSubmit={commentSubmit}
             />

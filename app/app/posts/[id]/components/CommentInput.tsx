@@ -10,12 +10,11 @@ import { CommentElement } from '../types';
 interface CommentEl {
   nested?: boolean; 
   url:string; 
-  token:RequestCookie;
   parentCommentId: number;
   onCommentSubmit: (comment:string) => void;
 }
 
-export const CommentInput: React.FC<CommentEl> = ({ nested, url, token, parentCommentId, onCommentSubmit}) => {
+export const CommentInput: React.FC<CommentEl> = ({ nested, url, parentCommentId, onCommentSubmit}) => {
   const [textareaValue, setTextareaValue] = React.useState("");
   
   const upload = async() => {
@@ -25,7 +24,7 @@ export const CommentInput: React.FC<CommentEl> = ({ nested, url, token, parentCo
     } else {
       parentComment = parentCommentId
     }
-    await POST(url, {content:textareaValue, parent_comment:parentComment}, token.value);
+    await POST(url, {content:textareaValue, parent_comment:parentComment});
     onCommentSubmit(textareaValue);
     setTextareaValue("");
   }

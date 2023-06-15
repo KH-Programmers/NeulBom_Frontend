@@ -13,11 +13,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import {CommentElement} from "../types";
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
-export const Comment: React.FC<{ nested?: boolean, CommentElement:CommentElement, parentUrl:string , token:RequestCookie}> = ({ 
+interface Comment {
+  nested?: boolean, 
+  CommentElement:CommentElement, 
+  parentUrl:string
+}
+export const Comment: React.FC<Comment> = ({ 
   nested, 
   CommentElement,
   parentUrl,
-  token,
 }) => {
   const [like, setLike] = React.useState(false);
   const [repliesOpen, setRepliesOpen] = React.useState(false);
@@ -34,7 +38,6 @@ export const Comment: React.FC<{ nested?: boolean, CommentElement:CommentElement
       nested={true}
       CommentElement={reply}
       parentUrl={'null'}
-      token={token}
       />
     ))
   }
@@ -108,7 +111,7 @@ export const Comment: React.FC<{ nested?: boolean, CommentElement:CommentElement
               className="overflow-hidden"
             >
               <div className="mt-2">
-                <CommentInput nested={true} url={requestUrl} token={token} parentCommentId={CommentElement.id} onCommentSubmit={replySubmit}/>
+                <CommentInput nested={true} url={requestUrl} parentCommentId={CommentElement.id} onCommentSubmit={replySubmit}/>
               </div>
               <div className="bg-black/5 rounded-xl mt-2 divide-y">
                 {comment}
