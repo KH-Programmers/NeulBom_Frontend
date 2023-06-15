@@ -144,7 +144,7 @@ const SignIn = () => {
                 가입하기
               </a>
               <span className="text-black/40">|</span>
-              <a href="/forgot" className="absolute left-4 whitespace-nowrap">
+              <a href="/forget" className="absolute left-4 whitespace-nowrap">
                 비밀번호 찾기
               </a>
             </div>
