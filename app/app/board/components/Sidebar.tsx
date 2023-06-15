@@ -1,6 +1,7 @@
 import React from "react";
 import { BoardCategory } from "../types";
 import { SidebarItem } from "./SidebarItem";
+import Link from "next/link";
 
 export const BoardListSidebar: React.FC<{
   categories: BoardCategory[];
@@ -10,6 +11,12 @@ export const BoardListSidebar: React.FC<{
       {categories.map((x, i) => (
         <SidebarItem key={i} category={x} />
       ))}
+      <Link 
+        href="/app/posts/"
+        className="text-center mt-10 block transition-colors p-1 rounded-lg bg-primary text-white"
+      >
+        글쓰기
+      </Link>
     </div>
   );
 };
