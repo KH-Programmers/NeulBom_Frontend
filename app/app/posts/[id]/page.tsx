@@ -13,6 +13,8 @@ import {Category} from "./types";
 import { ShareButton } from "./components/shareButton";
 import { LikeButton } from "./components/LikeButton";
 import { CommentList } from './components/CommentList';
+import { remark } from 'remark';
+import html from 'remark-html';
 
 export default async function PostViewPage({
   params,
@@ -40,6 +42,12 @@ export default async function PostViewPage({
       {boardName.board_name}
     </Link><TbChevronRight className="text-black/40" /></>
   ))
+
+  const processedContent = await remark()
+    .use(html)
+    .process(article.text);
+  const contentHtml = processedContent.toString();
+
   return (
     <div className="px-6">
       <div className="max-w-[768px] mx-auto mt-12">
@@ -72,9 +80,7 @@ export default async function PostViewPage({
           </div>
 
           <div className="bg-white p-8 mt-4 rounded-xl shadow-md">
-            <div>
-              {article.text}
-            </div>
+            <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
           </div>
           <div className="mt-4 flex gap-4">
             <LikeButton

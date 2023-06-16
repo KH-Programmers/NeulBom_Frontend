@@ -5044,6 +5044,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hast-util-sanitize@npm:^4.0.0":
+  version: 4.1.0
+  resolution: "hast-util-sanitize@npm:4.1.0"
+  dependencies:
+    "@types/hast": ^2.0.0
+  checksum: 4f1786d6556bae6485a657a3e77e7e71b573fd20e4e2d70678e0f445eb8fe3dc6c4441cda6d18b89a79b53e2c03b6232eb6c470ecd478737050724ea09398603
+  languageName: node
+  linkType: hard
+
 "hast-util-select@npm:^5.0.5, hast-util-select@npm:~5.0.1":
   version: 5.0.5
   resolution: "hast-util-select@npm:5.0.5"
@@ -6173,7 +6182,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mdast-util-to-hast@npm:^12.1.0":
+"mdast-util-to-hast@npm:^12.0.0, mdast-util-to-hast@npm:^12.1.0":
   version: 12.3.0
   resolution: "mdast-util-to-hast@npm:12.3.0"
   dependencies:
@@ -6847,6 +6856,8 @@ __metadata:
     react-select: ^5.7.3
     react-virtuoso: ^4.3.8
     rehype-prism-plus: ^1.5.1
+    remark: ^14.0.3
+    remark-html: ^15.0.2
     sass: ^1.62.1
     sharp: ^0.32.1
     styled-components: ^5.3.11
@@ -8153,6 +8164,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"remark-html@npm:^15.0.2":
+  version: 15.0.2
+  resolution: "remark-html@npm:15.0.2"
+  dependencies:
+    "@types/mdast": ^3.0.0
+    hast-util-sanitize: ^4.0.0
+    hast-util-to-html: ^8.0.0
+    mdast-util-to-hast: ^12.0.0
+    unified: ^10.0.0
+  checksum: 1fe1bf1fd229f5ae999626f274b9e6a972c1406533f5e78392c1994e01ec35511d0d307a927bb22a828e51007c80f12f3befcea73e9f5f01db7bed229a989d54
+  languageName: node
+  linkType: hard
+
 "remark-parse@npm:^10.0.0":
   version: 10.0.2
   resolution: "remark-parse@npm:10.0.2"
@@ -8173,6 +8197,29 @@ __metadata:
     mdast-util-to-hast: ^12.1.0
     unified: ^10.0.0
   checksum: b9ac8acff3383b204dfdc2599d0bdf86e6ca7e837033209584af2e6aaa6a9013e519a379afa3201299798cab7298c8f4b388de118c312c67234c133318aec084
+  languageName: node
+  linkType: hard
+
+"remark-stringify@npm:^10.0.0":
+  version: 10.0.3
+  resolution: "remark-stringify@npm:10.0.3"
+  dependencies:
+    "@types/mdast": ^3.0.0
+    mdast-util-to-markdown: ^1.0.0
+    unified: ^10.0.0
+  checksum: 6004e204fba672ee322c3cf0bef090e95802feedf7ef875f88b120c5e6208f1eb09c014486d5ca42a1e199c0a17ce0ed165fb248c66608458afed4bdca51dd3a
+  languageName: node
+  linkType: hard
+
+"remark@npm:^14.0.3":
+  version: 14.0.3
+  resolution: "remark@npm:14.0.3"
+  dependencies:
+    "@types/mdast": ^3.0.0
+    remark-parse: ^10.0.0
+    remark-stringify: ^10.0.0
+    unified: ^10.0.0
+  checksum: 36eec9668c5f5e497507fa5d396c79183265a5f7dd204a608e7f031a4f61b48f7bb5cfaec212f5614ccd1266cc4a9f8d7a59a45e95aed9876986b4c453b191be
   languageName: node
   linkType: hard
 
