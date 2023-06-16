@@ -44,7 +44,7 @@ export const Comment: React.FC<Comment> = ({
       />
     ))
   }
-
+  const replyCount = CommentElement.reply.length;
   const replySubmit = (comment:string) => {
     const newComment: CommentElement = {
       id: replys[replys.length-1].id + 1,
@@ -86,7 +86,7 @@ export const Comment: React.FC<Comment> = ({
               ) : (
                 <TbCornerDownRight size={22} />
               )}
-              답장
+              답장({replyCount})
             </button>
           )}
           <button
@@ -97,12 +97,12 @@ export const Comment: React.FC<Comment> = ({
             })}
             onClick={() => setLike((v) => !v)}
           >
-            {like ? (
+            {/*like ? (
               <TbHeartFilled size={nested ? 20 : 22} />
             ) : (
               <TbHeart size={nested ? 20 : 22} />
-            )}
-            10
+            )*/}
+            {/*10*/}
           </button>
         </div>
         <AnimatePresence>

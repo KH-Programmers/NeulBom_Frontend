@@ -23,7 +23,7 @@ export const CommentList:React.FC<CommentList> = ({article, requestUrl, token}) 
       token={token}
     />
   ))
-
+  const commentCount = comments.length;
   const commentSubmit= (comment:string) => {
     const newComment: CommentElement = {
       id: comments.length + 1,
@@ -36,7 +36,7 @@ export const CommentList:React.FC<CommentList> = ({article, requestUrl, token}) 
   } 
   return(
     <div className="mt-8">
-          <div className="text-2xl font-bold">댓글</div>
+          <div className="text-2xl font-bold">댓글({commentCount})</div>
           <div className="mt-4">
             <CommentInput 
               nested={false}
