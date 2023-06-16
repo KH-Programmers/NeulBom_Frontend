@@ -93,7 +93,7 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
           control={<FormInput type="text" {...register("name")} />}
           name="name"
         >
-          이름
+          아이디
         </FormLabel>
         <FormLabel
           control={
