@@ -17,6 +17,7 @@ import { error } from 'console';
 
 const schema = yup
   .object({
+    username:yup.string().required(),
     name: yup.string().min(2).max(4).required(),
     studentId: yup.number().required(),
     email: yup.string().email().required(),
@@ -61,7 +62,8 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
           const base64 = await convertBase64(file);
           try {
             const content = {
-              username: data.name,
+              username: data.username,
+              name: data.name,
               grade: data.studentId,
               email: data.email,
               password: data.password,
@@ -102,10 +104,16 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
         })}
       >
         <FormLabel
+          control={<FormInput type="text" {...register("username")} />}
+          name="username"
+        >
+          아이디
+        </FormLabel>
+        <FormLabel
           control={<FormInput type="text" {...register("name")} />}
           name="name"
         >
-          아이디
+          이름
         </FormLabel>
         <FormLabel
           control={
