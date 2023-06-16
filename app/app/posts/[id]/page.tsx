@@ -15,6 +15,7 @@ import { LikeButton } from "./components/LikeButton";
 import { CommentList } from './components/CommentList';
 import { remark } from 'remark';
 import html from 'remark-html';
+import matter from 'gray-matter';
 
 export default async function PostViewPage({
   params,
@@ -42,10 +43,8 @@ export default async function PostViewPage({
       {boardName.board_name}
     </Link><TbChevronRight className="text-black/40" /></>
   ))
-
-  const processedContent = await remark()
-    .use(html)
-    .process(article.text);
+  const matterResult = matter(article.text).content;
+  const processedContent = await remark().use(html).process(matterResult);
   const contentHtml = processedContent.toString();
 
   return (

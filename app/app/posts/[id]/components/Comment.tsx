@@ -30,7 +30,6 @@ export const Comment: React.FC<Comment> = ({
   const [replys, setReplys] = React.useState<CommentElement[]>(CommentElement.reply);
 
   const requestUrl = parentUrl;
-  
 
   let comment;
   if (replys[0] != null) {
@@ -44,10 +43,10 @@ export const Comment: React.FC<Comment> = ({
       />
     ))
   }
-  const replyCount = replys.length;
+
   const replySubmit = (comment:string) => {
     const newComment: CommentElement = {
-      id: replys[replys.length-1].id + 1,
+      id: replys.length + 1,
       author_name: CommentElement.author_name,
       content: comment,
       reply: [],
@@ -86,7 +85,7 @@ export const Comment: React.FC<Comment> = ({
               ) : (
                 <TbCornerDownRight size={22} />
               )}
-              답장({replyCount})
+              답장({replys.length})
             </button>
           )}
           <button
