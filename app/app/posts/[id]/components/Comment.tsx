@@ -44,7 +44,7 @@ export const Comment: React.FC<Comment> = ({
       />
     ))
   }
-  const replyCount = CommentElement.reply.length;
+  const replyCount = replys.length;
   const replySubmit = (comment:string) => {
     const newComment: CommentElement = {
       id: replys[replys.length-1].id + 1,
