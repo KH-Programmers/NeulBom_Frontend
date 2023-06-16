@@ -38,12 +38,12 @@ const AppHeaderContent: React.FC = () => {
         >
           급식
         </NavLink>
-        <NavLink
+        {/*<NavLink
           href="/app/events"
           match={(path) => path.startsWith("/app/events")}
         >
           학사일정
-        </NavLink>
+        </NavLink>*/}
       </div>
       {/* spacer */}
       <div className="flex-grow"></div>
@@ -102,13 +102,13 @@ const AppMobileHeaderContent: React.FC = () => {
       >
         급식
       </MobileNavLink>
-      <MobileNavLink
+      {/*<MobileNavLink
         icon={TbCalendar}
         href="/app/events"
         match={(path) => path.startsWith("/app/events")}
       >
         학사일정
-      </MobileNavLink>
+      </MobileNavLink>*/}
       <MobileNavButton onClick={() => setNotificationPopup(true)} icon={TbBell}>
         알림
       </MobileNavButton>
