@@ -72,7 +72,7 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
               `${process.env.NEXT_PUBLIC_API_URI!}/user/register/`,
               content
             );
-            console.log(response);
+            
             if (response.status === 201) {
               next();
             }
@@ -80,7 +80,19 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
             const error = e as AxiosError;
             switch (error.response?.status) {
               case 400:
-                return alert("잘못된 정보를 입력했습니다. 다시 확인해주세요.");
+                const data = error.response.data;
+                console.log(data);
+                let msg = ""
+                if (data?.hasOwnProperty("password")) {
+                  msg += "비밀번호가 적절하지 않습니다.\n<비밀번호 조건>\n1. 8자 이상\n2. 너무 쉬운 비밀번호가 아니어야 함.\n3. 문자,특수문자 혼합\n";
+                  if (data?.hasOwnProperty("email")) {
+                    msg +="---------------------------\n";
+                  }
+                }
+                if (data?.hasOwnProperty("email")) {
+                  msg += "이메일이 이미 존재합니다.\n"
+                }                
+                return alert(msg);
               case 406:
                 return alert("캡챠 인증에 실패했습니다. 다시 시도해주세요.");
               case 409:
