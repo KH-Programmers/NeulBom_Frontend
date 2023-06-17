@@ -6,7 +6,7 @@ import { MainBanner } from "./components/MainBanner";
 import { TodayMealPanel } from "./components/panels/TodayMealPanel";
 import { TodayTodoPanel } from "./components/panels/TodayTodoPanel";
 import { PopularPostsPanel } from "./components/panels/PopularPostsPanel";
-import { cookies } from 'next/headers';
+import { cookies } from "next/headers";
 
 export default async function AppMain() {
   const cookieStore = cookies();
@@ -79,6 +79,7 @@ export default async function AppMain() {
   try {
     const response = await GET("/", token?.value);
     data = response.data;
+    console.log(data);
   } catch (e) {
     console.error(e);
   }

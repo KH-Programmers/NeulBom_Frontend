@@ -118,6 +118,11 @@ export default function RootLayout({
           content="/icons/mstile-310x310.png"
         />
         <meta name="theme-color" content="#9E1915" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4808458196722819"
+          crossOrigin="anonymous"
+        ></script>
       </head>
       <body>
         <div className="min-h-screen bg-gradient-to-br from-[#FAE8FF] via-[#E2E8F0] to-[#FFFCED]">

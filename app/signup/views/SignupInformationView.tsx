@@ -9,15 +9,10 @@ import { Turnstile } from "@marsidev/react-turnstile";
 import { FormLabel } from "@/components/FormLabel";
 import { FormInput } from "@/components/FormInput";
 import { Button } from "@/components/Button";
-import { headers } from 'next/headers';
-import { da } from 'date-fns/locale';
-import { ImageProps } from 'next/image';
-import { redirect, useRouter } from "next/navigation";
-import { error } from 'console';
 
 const schema = yup
   .object({
-    username:yup.string().required(),
+    username: yup.string().required(),
     name: yup.string().min(2).max(4).required(),
     studentId: yup.number().required(),
     email: yup.string().email().required(),
@@ -38,7 +33,7 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
   const { register, handleSubmit } = form;
   const [token, setToken] = useState("");
 
-  const convertBase64 = (file:File) => {
+  const convertBase64 = (file: File) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
@@ -49,9 +44,9 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
 
       fileReader.onerror = (error) => {
         reject(error);
-      }
-    })
-  }
+      };
+    });
+  };
 
   return (
     <FormProvider {...form}>
@@ -68,13 +63,13 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
               email: data.email,
               password: data.password,
               card_img: base64,
-              token : token,
-            }
+              token: token,
+            };
             const response = await axios.post(
               `${process.env.NEXT_PUBLIC_API_URI!}/user/register/`,
               content
             );
-            
+
             if (response.status === 201) {
               next();
             }
@@ -84,16 +79,17 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
               case 400:
                 const data = error.response.data;
                 console.log(data);
-                let msg = ""
+                let msg = "";
                 if (data?.hasOwnProperty("password")) {
-                  msg += "비밀번호가 적절하지 않습니다.\n<비밀번호 조건>\n1. 8자 이상\n2. 너무 쉬운 비밀번호가 아니어야 함.\n3. 문자,특수문자 혼합\n";
+                  msg +=
+                    "비밀번호가 적절하지 않습니다.\n<비밀번호 조건>\n1. 8자 이상\n2. 너무 쉬운 비밀번호가 아니어야 함.\n3. 문자,특수문자 혼합\n";
                   if (data?.hasOwnProperty("email")) {
-                    msg +="---------------------------\n";
+                    msg += "---------------------------\n";
                   }
                 }
                 if (data?.hasOwnProperty("email")) {
-                  msg += "이메일이 이미 존재합니다.\n"
-                }                
+                  msg += "이메일이 이미 존재합니다.\n";
+                }
                 return alert(msg);
               case 406:
                 return alert("캡챠 인증에 실패했습니다. 다시 시도해주세요.");
@@ -155,11 +151,14 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
         </FormLabel>
         <FormLabel
           control={
-            <FormInput type='file' {...register("profileImg", {
-              required: "학생증 이미지는 필수입니다."})}
+            <FormInput
+              type="file"
+              {...register("profileImg", {
+                required: "학생증 이미지는 필수입니다.",
+              })}
             />
           }
-          name = "profileImg"
+          name="profileImg"
         >
           학생증 사진
         </FormLabel>
