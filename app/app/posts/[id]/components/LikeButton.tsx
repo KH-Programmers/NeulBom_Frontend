@@ -8,11 +8,12 @@ interface likeAction {
   likeCount:number; 
   url:string; 
   token:RequestCookie;
+  isLiked:Boolean;
 }
 
-export const LikeButton: React.FC<likeAction> = ({likeCount, url, token}) => { 
+export const LikeButton: React.FC<likeAction> = ({likeCount, url, token, isLiked}) => { 
   const [count, setCount] = React.useState(likeCount);
-  const [isCounted, setIsCounted] = React.useState(false);
+  const [isCounted, setIsCounted] = React.useState(!isLiked);
   
   const  like = async() => {
     if (!isCounted) {
