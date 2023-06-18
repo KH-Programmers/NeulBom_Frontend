@@ -15,6 +15,19 @@ export const TodayMealPanel: React.FC<{
 }> = ({ meal }) => {
   const [isLunch, setIsLunch] = React.useState(true);
 
+  const allergies: number[][] = [[], []];
+
+  meal.lunchData.map(([name, allergy]) => {
+    allergy.map((allergy) => {
+      allergies[0].push(allergy);
+    });
+  });
+  meal.dinnerData.map(([name, allergy]) => {
+    allergy.map((allergy) => {
+      allergies[1].push(allergy);
+    });
+  });
+
   return (
     <div className="p-4">
       <div className="flex gap-2">
@@ -54,7 +67,11 @@ export const TodayMealPanel: React.FC<{
               ))}
         </ul>
         <div className="opacity-40 mt-2">
-          알레르기 정보: {getAllergy([1, 2, 5])}
+          {meal.lunchData.length === 0
+            ? ""
+            : `알레르기 정보: ${getAllergy([
+                ...new Set(allergies[isLunch ? 0 : 1]),
+              ])}`}
         </div>
       </div>
     </div>

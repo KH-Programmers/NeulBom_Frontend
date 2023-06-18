@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 
 import { format } from "date-fns";
 
-import { MealOfDate } from "./type";
 import { GET } from "@/utils/request";
 import { MealDetail } from "./components/MealDetail";
 import { MealsCalendar } from "./components/Calendar";
@@ -19,7 +18,8 @@ export default async function Board() {
   const token = cookieStore.get("token");
   try {
     const response = await GET(
-      `/food/${today.getFullYear()}/${today.getMonth() + 1}`, token?.value
+      `/food/${today.getFullYear()}/${today.getMonth() + 1}`,
+      token?.value
     );
     monthMealData = response.data;
   } catch (e) {

@@ -34,52 +34,10 @@ export default async function AppMain() {
     requester?: {
       username: string;
     };
-  } = {
-    eventData: [
-      {
-        date: 20230604,
-        eventName: null,
-        type: null,
-      },
-      {
-        date: 20230605,
-        eventName: "재량휴업일",
-        type: "재량휴업일",
-      },
-      {
-        date: 20230606,
-        eventName: "현충일",
-        type: "공휴일",
-      },
-      {
-        date: 20230607,
-        eventName: null,
-        type: null,
-      },
-      {
-        date: 20230608,
-        eventName: null,
-        type: null,
-      },
-      {
-        date: 20230609,
-        eventName: null,
-        type: null,
-      },
-      {
-        date: 202306010,
-        eventName: null,
-        type: null,
-      },
-    ],
-    requester: {
-      username: "Yeon",
-    },
-  };
+  } = {};
   try {
     const response = await GET("/", token?.value);
     data = response.data;
-    console.log(data);
   } catch (e) {
     console.error(e);
   }
