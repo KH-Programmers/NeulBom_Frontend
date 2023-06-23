@@ -86,7 +86,7 @@ export default async function PostViewPage({
               likeCount={article.like_count}
               url={requestUrl}
               token = {token}
-              isLiked={article.isLiked}
+              isLiked={article.IsLiked}
             />
             <div className="flex-grow w-0" />
             <ShareButton />
