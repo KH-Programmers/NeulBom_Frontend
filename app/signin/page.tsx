@@ -8,13 +8,13 @@ import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { SiKakao, SiNaver } from "react-icons/si";
 import { TbLock, TbUserCircle } from "react-icons/tb";
-import { Turnstile } from "@marsidev/react-turnstile";
 
 import logo from "@/assets/NeulBom.svg";
 import GoogleLogo from "@/assets/google.svg";
 import { LoginInputField } from "@/components/LoginInputField";
 import { Checkbox } from "@/components/Checkbox";
 import { Button } from "@/components/Button";
+import { default as Captcha } from "@/utils/captcha";
 
 const SignIn = () => {
   const router = useRouter();
@@ -81,7 +81,7 @@ const SignIn = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="mt-2">
+            <div className="my-2">
               <label className="flex gap-2 items-center font-bold">
                 <Checkbox
                   onChange={(e) => setAutoLogin(e.target.checked)}
@@ -90,11 +90,11 @@ const SignIn = () => {
                 로그인 상태 유지
               </label>
             </div>
-            <Turnstile
-              siteKey={process.env.NEXT_PUBLIC_TURNSTLIE_SITE_KEY!}
-              className="mt-4 mx-auto"
-              onSuccess={(token) => {
+            <Captcha
+              sitekey={process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY!}
+              onVerify={(token: string, ekey: string) => {
                 setToken(token);
+                console.log(token);
               }}
             />
             <Button className="mt-6" type="submit">

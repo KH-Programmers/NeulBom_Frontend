@@ -1298,7 +1298,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.14.6, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7":
+"@babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.14.6, @babel/runtime@npm:^7.17.2, @babel/runtime@npm:^7.17.9, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.21.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7":
   version: 7.22.5
   resolution: "@babel/runtime@npm:7.22.5"
   dependencies:
@@ -1609,6 +1609,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hcaptcha/react-hcaptcha@npm:^1.8.1":
+  version: 1.8.1
+  resolution: "@hcaptcha/react-hcaptcha@npm:1.8.1"
+  dependencies:
+    "@babel/runtime": ^7.17.9
+  peerDependencies:
+    react: ">= 16.3.0"
+    react-dom: ">= 16.3.0"
+  checksum: 01fcfe91bce52e1f45c7ddb4a9a6b885765eee0b8241e838c5637fc764cab4cf30f562b120a9a1e88fec27d17f155d3ae172a9769081d0e6c0eb9f7c1f00ae3a
+  languageName: node
+  linkType: hard
+
 "@hookform/resolvers@npm:^3.1.0":
   version: 3.1.1
   resolution: "@hookform/resolvers@npm:3.1.1"
@@ -1713,16 +1725,6 @@ __metadata:
     "@jridgewell/resolve-uri": 3.1.0
     "@jridgewell/sourcemap-codec": 1.4.14
   checksum: 0572669f855260808c16fe8f78f5f1b4356463b11d3f2c7c0b5580c8ba1cbf4ae53efe9f627595830856e57dbac2325ac17eb0c3dd0ec42102e6f227cc289c02
-  languageName: node
-  linkType: hard
-
-"@marsidev/react-turnstile@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "@marsidev/react-turnstile@npm:0.2.1"
-  peerDependencies:
-    react: ">=16.8.0"
-    react-dom: ">=16.8.0"
-  checksum: 9d50b3dc131b0ac2979bfa0f6515e0a15cfc532e9fe6e6ff5136ca3502de27e28810f43febf5f6c77e97a104c21ad41aed56a51d223cdb78a1f29718465c3eb2
   languageName: node
   linkType: hard
 
@@ -6889,8 +6891,8 @@ __metadata:
     "@faker-js/faker": ^8.0.2
     "@floating-ui/react": ^0.24.2
     "@h6s/calendar": ^1.1.0-alpha.2
+    "@hcaptcha/react-hcaptcha": ^1.8.1
     "@hookform/resolvers": ^3.1.0
-    "@marsidev/react-turnstile": ^0.2.1
     "@react-icons/all-files": ^4.1.0
     "@types/next-pwa": ^5.6.4
     "@types/node": 20.2.4
