@@ -37,7 +37,11 @@ export default async function PostViewPage({
     article = []
   }
   const requestUrl = `/board/${article.board_model[0].board_EN}/${article.id}/`;
-
+  let authorName = "익명"
+  if (article.user.isAdmin) {
+    authorName = "관리자";
+  }
+  
   const BoardCategory = article.board_model.map((boardName:Category) => (
     <><Link href={`/app/board/${boardName.board_EN}`} className="text-blue-500">
       {boardName.board_name}
@@ -60,7 +64,7 @@ export default async function PostViewPage({
           <h1 className="text-4xl font-extrabold mt-2">{article.title}</h1>
           <hr className="border-t border-black/40 mt-2" />
           <div className="flex mt-2">
-            <div className="text-gray-500">익명{/*article.authorName 익명기능 추가*/}</div>
+            <div className="text-gray-500">{authorName}{/*article.authorName 익명기능 추가*/}</div>
             <div className="flex-grow" />
             <div className="flex gap-4 items-center text-black/60">
               <div className="flex items-center gap-2">

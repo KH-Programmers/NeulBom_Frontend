@@ -33,7 +33,7 @@ export default async function BoardCategoryView({
           key={k}
           id={post.id}
           title={post.title}
-          username={post.authorName}
+          user={post.user}
           commentCount={post.commentCount}
           viewCount={post.viewCounts}
           createdAt={format(new Date(post.updatedAt), "yyyy-MM-dd")}
