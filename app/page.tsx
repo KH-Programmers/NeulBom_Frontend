@@ -1,14 +1,20 @@
 import React from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { GET } from "@/utils/request";
 
-const Page: React.FC = () => {
+const Page = async () => {
   const cookieStore = cookies();
-
-  if (!cookieStore.has("token")) {
+  const token = cookieStore.get("token");
+  if (!token) {
     return redirect("/signin");
   } else {
-    return redirect("/app");
+    const response = await GET("user/authenticate", token.value)
+    if (response.status == 200) {
+      return redirect("/app");
+    } else {
+      return redirect("/signin");
+    }
   }
 };
 
