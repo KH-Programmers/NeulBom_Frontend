@@ -23,4 +23,5 @@ export type Article = {
   like_count:number;
   dislike_count:number;
   updated_at:string;
+  canDelete:boolean;
 }

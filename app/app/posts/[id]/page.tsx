@@ -16,6 +16,7 @@ import { CommentList } from './components/CommentList';
 import { remark } from 'remark';
 import html from 'remark-html';
 import matter from 'gray-matter';
+import { DeleteButton } from './components/DeleteButton';
 
 export default async function PostViewPage({
   params,
@@ -25,7 +26,9 @@ export default async function PostViewPage({
   const cookieStore = cookies();
   const token = cookieStore.get("token");
   let article;
-  let currentPostId = 0;
+  let currentPostId = params.id;
+  let isDelete = false;
+
   if (!token) {
     return redirect("/signin");
   }
@@ -40,8 +43,10 @@ export default async function PostViewPage({
   let authorName = "익명"
   if (article.user.isAdmin) {
     authorName = "관리자";
+  } // 추후에 본인 글은 삭제할 수 있게 권한 추가
+  if (article.canDelete) {
+    isDelete = true;
   }
-  
   const BoardCategory = article.board_model.map((boardName:Category) => (
     <><Link href={`/app/board/${boardName.board_EN}`} className="text-blue-500">
       {boardName.board_name}
@@ -94,6 +99,9 @@ export default async function PostViewPage({
             />
             <div className="flex-grow w-0" />
             <ShareButton />
+            {isDelete &&
+              (<DeleteButton id = {currentPostId} token = {token}/>)
+            }
           </div>
         </article>
         <CommentList
