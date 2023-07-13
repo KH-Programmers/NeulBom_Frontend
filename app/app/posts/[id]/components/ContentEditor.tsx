@@ -1,21 +1,38 @@
 "use client";
 
 import React from 'react';
-import Select from "react-select";
+import Select, { ActionMeta, SingleValue } from "react-select";
+import { Options } from "react-select";
 import MDEditor from "@uiw/react-md-editor/esm";
 import { POST } from '@/utils/request';
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
-import { object } from 'yup';
 import { useRouter } from 'next/navigation';
 import { AxiosError } from 'axios';
 
 const categories = [
   {
-    label: "전체",
+    label: "공부",
     value: "study",
   },
+  {
+    label: "학교생활",
+    value: "school",
+  },
+  {
+    label: "컨텐츠",
+    value: "entertainment",
+  },
+  {
+    value: "스포츠",
+    label: "sports",
+  }
   /* 카테고리 추가할 것. */
 ];
+
+type Option = {
+  label : string,
+  value : string,
+}
 
 interface token {
   token :RequestCookie;
@@ -25,6 +42,8 @@ const ConetentEditor:React.FC<token> = ({token}) => {
   const [content, setContent] = React.useState("");
   const [title, setTitle] = React.useState("");
   const [showEditor, setShowEditor] = React.useState(false);
+  const [category, setCategory] = React.useState("study");
+
   const {push} = useRouter();
 
   React.useEffect(() => {
@@ -37,9 +56,9 @@ const ConetentEditor:React.FC<token> = ({token}) => {
       text : content,
     }
     try {
-    const response = await POST(`/board/study/write/`, data, token.value);///url은 후에 category 받아와서 수정.
+    const response = await POST(`/board/${category}/write/`, data, token.value);///url은 후에 category 받아와서 수정.
     if (response.status === 201) {
-      push('/app/board/all');
+      push(`/app/board/all`);
     }
     } catch (e) {
       const error = e as AxiosError;
@@ -48,12 +67,16 @@ const ConetentEditor:React.FC<token> = ({token}) => {
       }
     }
   }
+  
+  const categorySubmit = (newValue: SingleValue<Option> | null, actionMeta: ActionMeta<Option>) => {
+    setCategory(newValue? newValue.value : "study");
+  }
 
   return (
     <>
       <div className="w-full flex gap-2 mt-2">
         <div>
-          <Select className="w-[180px]" options={categories}/>
+          <Select className="w-[180px]" options={categories} onChange={categorySubmit}/>
         </div>
         {/* <input
           type="text"

@@ -8,38 +8,21 @@ const categories: BoardCategory[] = [
     name: "인기글",
   },
   {
-    id: "all",
-    name: "전체",// 후에 공부로 변경
-    /*
-    children: [
-      {
-        id: "questions",
-        name: "질문",
-        children: [
-          {
-            id: "question1",
-            name: "1학년 과목",
-          },
-          {
-            id: "question2",
-            name: "2학년 과목",
-          },
-          {
-            id: "question3",
-            name: "3학년 과목",
-          },
-        ],
-      },
-      {
-        id: "study-verify",
-        name: "인증",
-      },
-    ],=> 후에 카테고리 다시 살리기 */
+    id: "study",
+    name: "공부",
   },
-  /*{
+  {
     id: "school",
-    name: "학교",
-  },*/
+    name: "학교생활",
+  },
+  {
+    id: "entertainment",
+    name: "컨텐츠",
+  },
+  {
+    id: "sports",
+    name: "스포츠",
+  }
 ];
 
 const BoardLayout: React.FC<PropsWithChildren> = ({ children }) => {
