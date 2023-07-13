@@ -16,6 +16,6 @@ export type Post = {
 
 export type user = {
   id:string;
-  autherName:string;
+  authorName:string;
   isAdmin:boolean;
 }

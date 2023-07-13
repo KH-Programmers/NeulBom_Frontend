@@ -44,7 +44,7 @@ export const PostListItem: React.FC<PostListItem> = ({
     >
       <div className="flex-grow w-0">{title}</div>
       <div className="flex items-center divide-x gap-2 opacity-60">
-        <StatItem icon={TbUser}>{authorName}{/*username 익명 기능 추가*/}</StatItem>
+        <StatItem icon={TbUser}>{authorName}</StatItem>
         <StatItem icon={TbEye}>{viewCount}</StatItem>
         <StatItem icon={TbCalendar}>{createdAt}</StatItem>
       </div>
