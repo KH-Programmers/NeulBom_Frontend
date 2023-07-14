@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Select, { ActionMeta, SingleValue } from "react-select";
-import { Options } from "react-select";
 import MDEditor from "@uiw/react-md-editor/esm";
 import { POST } from '@/utils/request';
 import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
@@ -23,8 +22,8 @@ const categories = [
     value: "entertainment",
   },
   {
-    value: "스포츠",
-    label: "sports",
+    label : "스포츠",
+    value : "sports",
   }
   /* 카테고리 추가할 것. */
 ];
@@ -56,9 +55,10 @@ const ConetentEditor:React.FC<token> = ({token}) => {
       text : content,
     }
     try {
+    console.log(category);
     const response = await POST(`/board/${category}/write/`, data, token.value);///url은 후에 category 받아와서 수정.
     if (response.status === 201) {
-      push(`/app/board/all`);
+      push(`/app/board/${category}`);
     }
     } catch (e) {
       const error = e as AxiosError;
