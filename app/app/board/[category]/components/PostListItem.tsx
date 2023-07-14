@@ -41,6 +41,7 @@ export const PostListItem: React.FC<PostListItem> = ({
     <Link
       href={`/app/posts/${id}`}
       className="bg-white p-4 gap-4 rounded-xl shadow-md hover:shadow-lg transition-all flex"
+      prefetch={false}
     >
       <div className="flex-grow w-0">{title}</div>
       <div className="flex items-center divide-x gap-2 opacity-60">

@@ -61,10 +61,7 @@ export default async function PostViewPage({
       <div className="max-w-[768px] mx-auto mt-12">
         <article>
           <div className="flex gap-2 items-center">
-            <Link href={`app/board/all/`} className="text-blue-500">
-              전체
-            </Link>
-            {/*BoardCategory => 후에 카테고리 추가될 시 이걸로 변경*/}
+            {BoardCategory}
           </div>
           <h1 className="text-4xl font-extrabold mt-2">{article.title}</h1>
           <hr className="border-t border-black/40 mt-2" />
