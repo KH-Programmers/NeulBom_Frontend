@@ -14,7 +14,7 @@ import GoogleLogo from "@/assets/google.svg";
 import { LoginInputField } from "@/components/LoginInputField";
 import { Checkbox } from "@/components/Checkbox";
 import { Button } from "@/components/Button";
-import { default as Captcha } from "@/utils/captcha";
+import Captcha from "@/utils/captcha";
 
 const SignIn = () => {
   const router = useRouter();
