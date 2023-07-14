@@ -4,11 +4,11 @@ import { FormProvider, useForm } from "react-hook-form";
 import axios, { AxiosError } from "axios";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Turnstile } from "@marsidev/react-turnstile";
 
 import { FormLabel } from "@/components/FormLabel";
 import { FormInput } from "@/components/FormInput";
 import { Button } from "@/components/Button";
+import Captcha from "@/utils/captcha";
 
 const schema = yup
   .object({
@@ -162,12 +162,12 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
         >
           학생증 사진
         </FormLabel>
-        <Turnstile
-          siteKey={process.env.NEXT_PUBLIC_TURNSTLIE_SITE_KEY!}
-          className="mt-4 mx-auto"
-          onSuccess={(token) => {
-            setToken(token);
-          }}
+        <Captcha
+            sitekey={process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY!}
+            onVerify={(token: string, ekey: string) => {
+              setToken(token);
+              console.log(token);
+            }}
         />
         <Button type="submit" className="mt-4">
           가입하기
