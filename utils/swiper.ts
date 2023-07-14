@@ -1,6 +1,6 @@
 import type { ReactNode, RefObject } from "react";
 import type Swiper from "swiper";
-import type { SwiperOptions } from "swiper";
+import type { SwiperOptions } from "swiper/types";
 import type { SwiperSlideProps } from "swiper/react";
 import { register } from "swiper/element/bundle";
 
