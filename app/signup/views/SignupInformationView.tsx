@@ -9,6 +9,7 @@ import { FormLabel } from "@/components/FormLabel";
 import { FormInput } from "@/components/FormInput";
 import { Button } from "@/components/Button";
 import Captcha from "@/utils/captcha";
+import { HashLoader } from "react-spinners";
 
 const schema = yup
   .object({
@@ -32,6 +33,7 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
   const form = useForm<FormData>({ resolver: yupResolver(schema) });
   const { register, handleSubmit } = form;
   const [token, setToken] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const convertBase64 = (file: File) => {
     return new Promise((resolve, reject) => {
@@ -53,6 +55,7 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
       <form
         className="mt-4 w-full max-w-[420px] mx-auto flex flex-col gap-4"
         onSubmit={handleSubmit(async (data) => {
+          setIsLoading(true);
           const file = data.profileImg[0];
           const base64 = await convertBase64(file);
           try {
@@ -167,9 +170,17 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
             setToken(token);
           }}
         />
-        <Button type="submit" className="mt-4">
-          가입하기
-        </Button>
+        <div className="mt-4 transition-all ease-in duration-100">
+          <Button className={isLoading ? "hidden" : "block"} type="submit">
+            가입하기
+          </Button>
+          <HashLoader
+            color="#9E1915"
+            size={36}
+            className="mx-auto mb-4"
+            loading={isLoading}
+          />
+        </div>
       </form>
     </FormProvider>
   );

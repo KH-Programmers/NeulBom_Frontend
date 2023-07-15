@@ -7497,6 +7497,7 @@ __metadata:
     react-is: ^18.2.0
     react-router-dom: ^6.14.1
     react-select: ^5.7.4
+    react-spinners: ^0.13.8
     react-virtuoso: ^4.4.0
     rehype-prism-plus: ^1.6.1
     remark: ^14.0.3
@@ -8470,6 +8471,16 @@ __metadata:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: ca72941ad1d2c578ec04c09ed3deb7e373f987e589f403fadedc6fcc3e29935b5425ec4d2628f0fe58c21319bcaf153c0d0172432e09fc6423da869d848de757
+  languageName: node
+  linkType: hard
+
+"react-spinners@npm:^0.13.8":
+  version: 0.13.8
+  resolution: "react-spinners@npm:0.13.8"
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: cb58f916bbf00c4f7fc33c1a75a8c0f91a98a42af26944340a0e29e4b3a97937a03f0292bc444eb5f5f0bea099344b580f9c04a81524246dadbf0571bdb57e62
   languageName: node
   linkType: hard
 

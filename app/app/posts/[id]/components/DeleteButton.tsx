@@ -29,7 +29,7 @@ export const DeleteButton: React.FC<{ id: string; token: RequestCookie }> = ({
   return (
     <button
       onClick={deletePost}
-      className="text-center block transition-colors p-2 rounded-lg bg-primary text-white"
+      className="text-center block px-4 py-2 rounded-lg transition-all border-red-500 hover:bg-red-500 border-2 text-red-500 hover:text-white"
     >
       삭제
     </button>

@@ -6,15 +6,16 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import axios, { AxiosError } from "axios";
+import { HashLoader } from "react-spinners";
 import { SiKakao, SiNaver } from "react-icons/si";
 import { TbLock, TbUserCircle } from "react-icons/tb";
 
+import Captcha from "@/utils/captcha";
 import logo from "@/assets/NeulBom.svg";
 import GoogleLogo from "@/assets/google.svg";
-import { LoginInputField } from "@/components/LoginInputField";
-import { Checkbox } from "@/components/Checkbox";
 import { Button } from "@/components/Button";
-import Captcha from "@/utils/captcha";
+import { Checkbox } from "@/components/Checkbox";
+import { LoginInputField } from "@/components/LoginInputField";
 
 const SignIn = () => {
   const router = useRouter();
@@ -22,6 +23,7 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [autoLogin, setAutoLogin] = useState(false);
   const [token, setToken] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     axios.get("/signin/api/").then((res) => {
@@ -38,6 +40,7 @@ const SignIn = () => {
             className="mt-8 w-full"
             onSubmit={async (e) => {
               e.preventDefault();
+              setIsLoading(true);
               if (token === "") return;
               try {
                 await axios.post(`/signin/api/?autoLogin=${autoLogin}`, {
@@ -97,9 +100,17 @@ const SignIn = () => {
                 console.log(token);
               }}
             />
-            <Button className="mt-6" type="submit">
-              로그인
-            </Button>
+            <div className="mt-6 transition-all ease-in duration-100">
+              <Button className={isLoading ? "hidden" : "block"} type="submit">
+                로그인
+              </Button>
+              <HashLoader
+                color="#9E1915"
+                size={36}
+                className="mx-auto mb-4"
+                loading={isLoading}
+              />
+            </div>
           </form>
           <div className="flex w-full items-center gap-4 mt-2">
             <div className="flex-grow border-b border-black/20" />

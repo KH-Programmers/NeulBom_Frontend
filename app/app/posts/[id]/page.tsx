@@ -1,17 +1,20 @@
-import { cookies } from "next/headers";
-import Link from "next/link";
 import React from "react";
-import { TbCalendar, TbChevronRight, TbEye, TbHeart } from "react-icons/tb";
+import Link from "next/link";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { GET } from "@/utils/request";
+
 import { Category } from "./types";
-import { ShareButton } from "./components/shareButton";
+import { GET } from "@/utils/request";
 import { LikeButton } from "./components/LikeButton";
+import { ShareButton } from "./components/shareButton";
 import { CommentList } from "./components/CommentList";
-import { remark } from "remark";
+
 import html from "remark-html";
+import { remark } from "remark";
 import matter from "gray-matter";
+import { AxiosError } from "axios";
 import { DeleteButton } from "./components/DeleteButton";
+import { TbCalendar, TbChevronRight, TbEye, TbHeart } from "react-icons/tb";
 
 export default async function PostViewPage({
   params,
@@ -23,33 +26,29 @@ export default async function PostViewPage({
   let article;
   let currentPostId = params.id;
   let isDelete = false;
-
-  if (!token) {
-    return redirect("/signin");
-  }
   try {
-    const response = await GET(`/board/study/${params.id}`, token.value);
+    const response = await GET(`/board/study/${params.id}`, token?.value);
     article = response.data;
     currentPostId = article.id;
   } catch (e) {
     article = [];
   }
+  console.log(article);
   const requestUrl = `/board/${article.board_model[0].board_EN}/${article.id}/`;
-  let authorName = "익명";
-  if (article.user.isAdmin) {
-    authorName = "관리자";
-  } // 추후에 본인 글은 삭제할 수 있게 권한 추가
-  if (article.canDelete) {
-    isDelete = true;
-  }
-  const BoardCategory = article.board_model.map((boardName: Category) => (
-    <>
-      <Link href={`/app/board/${boardName.board_EN}`} className="text-blue-500">
-        {boardName.board_name}
-      </Link>
-      <TbChevronRight className="text-black/40" />
-    </>
-  ));
+  // 추후에 본인 글은 삭제할 수 있게 권한 추가
+  const BoardCategory = article.board_model.map(
+    (boardName: Category, k: number) => (
+      <div key={k}>
+        <Link
+          href={`/app/board/${boardName.board_EN}`}
+          className="text-blue-500"
+        >
+          {boardName.board_name}
+        </Link>
+        <TbChevronRight className="text-black/40" />
+      </div>
+    ),
+  );
   const matterResult = matter(article.text).content;
   const processedContent = await remark().use(html).process(matterResult);
   const contentHtml = processedContent.toString();
@@ -63,7 +62,7 @@ export default async function PostViewPage({
           <hr className="border-t border-black/40 mt-2" />
           <div className="flex mt-2">
             <div className="text-gray-500">
-              {authorName}
+              {article.user.isAdmin ? "관리자" : "익명"}
               {/*article.authorName 익명기능 추가*/}
             </div>
             <div className="flex-grow" />
@@ -90,15 +89,17 @@ export default async function PostViewPage({
             <LikeButton
               likeCount={article.like_count}
               url={requestUrl}
-              token={token}
+              token={token!}
               isLiked={article.IsLiked}
             />
             <div className="flex-grow w-0" />
             <ShareButton />
-            {isDelete && <DeleteButton id={currentPostId} token={token} />}
+            {article.canDelete && (
+              <DeleteButton id={currentPostId} token={token!} />
+            )}
           </div>
         </article>
-        <CommentList article={article} requestUrl={requestUrl} token={token} />
+        <CommentList article={article} requestUrl={requestUrl} token={token!} />
         <div className="mt-16" />
       </div>
     </div>
