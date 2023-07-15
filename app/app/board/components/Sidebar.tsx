@@ -4,7 +4,7 @@ import React from "react";
 import { BoardCategory } from "../types";
 import { SidebarItem } from "./SidebarItem";
 import Link from "next/link";
-import { useSelectedCategory } from '../utils/routes';
+import { useSelectedCategory } from "../utils/routes";
 
 export const BoardListSidebar: React.FC<{
   categories: BoardCategory[];
@@ -17,8 +17,8 @@ export const BoardListSidebar: React.FC<{
       ))}
       <Link
         href={{
-          pathname: '/app/posts',
-          query: { category : selectedCategory },
+          pathname: "/app/posts",
+          query: { category: selectedCategory },
         }}
         prefetch={false}
         className="text-center mt-10 block transition-colors p-1 rounded-lg bg-primary text-white"

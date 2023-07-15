@@ -34,7 +34,7 @@ type Option = {
 };
 
 interface edit {
-  defaultCategory:string | null;
+  defaultCategory: string | null;
   token: RequestCookie;
 }
 
@@ -43,13 +43,12 @@ const ContentEditor: React.FC<edit> = ({ defaultCategory, token }) => {
   const [title, setTitle] = React.useState("");
   const [showEditor, setShowEditor] = React.useState(false);
   const [category, setCategory] = React.useState("study");
-  
-  for(let i=0; i<categories.length; i++) {
+
+  for (let i = 0; i < categories.length; i++) {
     if (categories[i].value == defaultCategory) {
       defaultCategory = categories[i].label;
     }
   }
-
 
   const { push } = useRouter();
 
@@ -71,7 +70,7 @@ const ContentEditor: React.FC<edit> = ({ defaultCategory, token }) => {
       ); ///url은 후에 category 받아와서 수정.
       if (response.status === 201) {
         push(`/app/board/${category}`);
-        return alert("업로드 되었습니다.")
+        return alert("업로드 되었습니다.");
       }
     } catch (e) {
       const error = e as AxiosError;

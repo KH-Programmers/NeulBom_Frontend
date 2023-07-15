@@ -3,7 +3,9 @@ import ContentEditor from "./[id]/components/ContentEditor";
 import { cookies } from "next/headers";
 import { redirect } from "next/dist/client/components/navigation";
 
-const PostCreatePage: React.FC<{searchParams:{category:string}}> = ({searchParams}) => {
+const PostCreatePage: React.FC<{ searchParams: { category: string } }> = ({
+  searchParams,
+}) => {
   const cookieStore = cookies();
   const token = cookieStore.get("token");
 

@@ -7490,6 +7490,7 @@ __metadata:
     postcss: ^8.4.26
     prettier: ^3.0.0
     react: ^18.2.0
+    react-confirm-alert: ^3.0.6
     react-dom: ^18.2.0
     react-ga: ^3.3.1
     react-hook-form: ^7.45.1
@@ -8312,6 +8313,16 @@ __metadata:
   bin:
     rc: ./cli.js
   checksum: 2e26e052f8be2abd64e6d1dabfbd7be03f80ec18ccbc49562d31f617d0015fbdbcf0f9eed30346ea6ab789e0fdfe4337f033f8016efdbee0df5354751842080e
+  languageName: node
+  linkType: hard
+
+"react-confirm-alert@npm:^3.0.6":
+  version: 3.0.6
+  resolution: "react-confirm-alert@npm:3.0.6"
+  peerDependencies:
+    react: ">=18.0.0"
+    react-dom: ">=10.0.0"
+  checksum: 9ae9bfff2bf4cc5d64e0fa1a2b6b2c01415871baf646c1b43ffebe01a9c97133ea4fe8a0a962a72db11a4d74d2c22189eef088ed76cd1aefec0fbc87aae5951a
   languageName: node
   linkType: hard
 

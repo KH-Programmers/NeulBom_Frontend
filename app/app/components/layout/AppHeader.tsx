@@ -19,6 +19,7 @@ import { MobileNavLink } from "./MobileNavLink";
 import { MobileNavButton } from "./MobileNavButton";
 import { NavPopupButton } from "@/components/NavPopupButton";
 import { MobilePopupMenu } from "./MobilePopupMenu";
+import { LogoutButton } from './logoutButton'
 import { NotificationPopupContent } from "../notification/NotificationPopupContent";
 
 const AppHeaderContent: React.FC = () => {
@@ -64,16 +65,19 @@ const AppHeaderContent: React.FC = () => {
             </div>
           </div>
         </NavPopupButton>
-        <button
-          onClick={() => {
-            alert("준비중입니다.");
-          }}
-        >
-          <TbUserCircle
+        <NavPopupButton fullHeight buttonContent={<TbUserCircle
             className="text-black hover:text-primary transition-colors"
             size={24}
-          />
-        </button>
+          />}>
+          <div className="flex w-full h-full flex-col">
+            <div className="border-b px-4 py-2">
+              <div className='inline font-bold sticky top-0 bg-white'>
+                내 정보
+              </div>
+              {/*<LogoutButton />*/}
+            </div>
+          </div>
+        </NavPopupButton>
       </div>
     </div>
   );

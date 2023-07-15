@@ -31,7 +31,7 @@ export default async function PostViewPage({
     article = [];
   }
   const requestUrl = `/board/${article.board_model[0].board_EN}/${article.id}/`;
-  const category = article.board_model[0].board_EN
+  const category = article.board_model[0].board_EN;
   const BoardCategory = article.board_model.map(
     (boardName: Category, k: number) => (
       <div className="flex items-center" key={k}>
@@ -91,7 +91,11 @@ export default async function PostViewPage({
             <div className="flex-grow w-0" />
             <ShareButton />
             {article.canDelete && (
-              <DeleteButton category={category} url={requestUrl} token={token!} />
+              <DeleteButton
+                category={category}
+                url={requestUrl}
+                token={token!}
+              />
             )}
           </div>
         </article>
