@@ -33,15 +33,23 @@ type Option = {
   value: string;
 };
 
-interface token {
+interface edit {
+  defaultCategory:string | null;
   token: RequestCookie;
 }
 
-const ContentEditor: React.FC<token> = ({ token }) => {
+const ContentEditor: React.FC<edit> = ({ defaultCategory, token }) => {
   const [content, setContent] = React.useState("");
   const [title, setTitle] = React.useState("");
   const [showEditor, setShowEditor] = React.useState(false);
   const [category, setCategory] = React.useState("study");
+  
+  for(let i=0; i<categories.length; i++) {
+    if (categories[i].value == defaultCategory) {
+      defaultCategory = categories[i].label;
+    }
+  }
+
 
   const { push } = useRouter();
 
@@ -91,6 +99,7 @@ const ContentEditor: React.FC<token> = ({ token }) => {
             className="w-[180px]"
             options={categories}
             onChange={categorySubmit}
+            placeholder={defaultCategory}
           />
         </div>
         {/* <input

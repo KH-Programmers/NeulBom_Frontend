@@ -30,10 +30,8 @@ export default async function PostViewPage({
   } catch (e) {
     article = [];
   }
-  console.log(article);
   const requestUrl = `/board/${article.board_model[0].board_EN}/${article.id}/`;
   const category = article.board_model[0].board_EN
-  // 추후에 본인 글은 삭제할 수 있게 권한 추가
   const BoardCategory = article.board_model.map(
     (boardName: Category, k: number) => (
       <div className="flex items-center" key={k}>
