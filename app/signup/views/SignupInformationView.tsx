@@ -67,7 +67,7 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
             };
             const response = await axios.post(
               `${process.env.NEXT_PUBLIC_API_URI!}/user/register/`,
-              content
+              content,
             );
 
             if (response.status === 201) {
@@ -78,7 +78,6 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
             switch (error.response?.status) {
               case 400:
                 const data = error.response.data;
-                console.log(data);
                 let msg = "";
                 if (data?.hasOwnProperty("password")) {
                   msg +=
@@ -163,11 +162,10 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
           학생증 사진
         </FormLabel>
         <Captcha
-            sitekey={process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY!}
-            onVerify={(token: string, ekey: string) => {
-              setToken(token);
-              console.log(token);
-            }}
+          sitekey={process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY!}
+          onVerify={(token: string, ekey: string) => {
+            setToken(token);
+          }}
         />
         <Button type="submit" className="mt-4">
           가입하기

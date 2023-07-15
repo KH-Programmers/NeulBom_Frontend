@@ -11,7 +11,7 @@ export const BoardListSidebar: React.FC<{
       {categories.map((x, i) => (
         <SidebarItem key={i} category={x} />
       ))}
-      <Link 
+      <Link
         href="/app/posts/"
         className="text-center mt-10 block transition-colors p-1 rounded-lg bg-primary text-white"
       >

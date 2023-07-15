@@ -4,31 +4,41 @@ import clsx from "clsx";
 import React from "react";
 import { TbSend } from "react-icons/tb";
 import { POST } from "@/utils/request";
-import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
-import { CommentElement } from '../types';
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { CommentElement } from "../types";
 
 interface CommentEl {
-  nested?: boolean; 
-  url:string; 
-  token:RequestCookie;
+  nested?: boolean;
+  url: string;
+  token: RequestCookie;
   parentCommentId: number;
-  onCommentSubmit: (comment:string) => void;
+  onCommentSubmit: (comment: string) => void;
 }
 
-export const CommentInput: React.FC<CommentEl> = ({ nested, url, token, parentCommentId, onCommentSubmit}) => {
+export const CommentInput: React.FC<CommentEl> = ({
+  nested,
+  url,
+  token,
+  parentCommentId,
+  onCommentSubmit,
+}) => {
   const [textareaValue, setTextareaValue] = React.useState("");
-  
-  const upload = async() => {
-    let parentComment
+
+  const upload = async () => {
+    let parentComment;
     if (!nested) {
-      parentComment = null
+      parentComment = null;
     } else {
-      parentComment = parentCommentId
+      parentComment = parentCommentId;
     }
-    await POST(url, {content:textareaValue, parent_comment:parentComment}, token.value);
+    await POST(
+      url,
+      { content: textareaValue, parent_comment: parentComment },
+      token.value,
+    );
     onCommentSubmit(textareaValue);
     setTextareaValue("");
-  }
+  };
 
   return (
     <div>
@@ -39,7 +49,7 @@ export const CommentInput: React.FC<CommentEl> = ({ nested, url, token, parentCo
           "bg-black/5 w-full resize-none rounded-xl focus:outline-none p-4",
           {
             "text-sm": nested,
-          }
+          },
         )}
         value={textareaValue}
         onChange={(e) => setTextareaValue(e.target.value)}
@@ -52,7 +62,7 @@ export const CommentInput: React.FC<CommentEl> = ({ nested, url, token, parentCo
             "bg-blue-500 text-white px-4 py-2 hover:brightness-90 active:brightness-75 transition-all rounded-lg flex gap-2 items-center",
             {
               "text-sm": nested,
-            }
+            },
           )}
         >
           <TbSend size={nested ? 14 : 16} />

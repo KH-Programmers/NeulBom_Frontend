@@ -28,7 +28,7 @@ export const MealsCalendar: React.FC<{
 }> = ({ meals }) => {
   const mealsData = Object.fromEntries(meals.map((x) => [x.date, x]));
   const [monthDate, setMonthDate] = React.useState(() =>
-    startOfMonth(new Date())
+    startOfMonth(new Date()),
   );
   const [mealType, setMealType] = React.useState(MealType.Lunch);
 
@@ -115,7 +115,7 @@ export const MealsCalendar: React.FC<{
                           {
                             "border-primary": isToday(day),
                             "opacity-40": !isSameMonth(day, monthDate),
-                          }
+                          },
                         )}
                       >
                         <div className="absolute w-full h-full left-0 top-0 flex justify-center items-center opacity-40 text-4xl font-black select-none pointer-events-none">
@@ -127,9 +127,7 @@ export const MealsCalendar: React.FC<{
                             mealType === MealType.Lunch
                               ? "lunchData"
                               : "dinnerData"
-                          ].map(([name, allergy], i) => (
-                            <p key={i}>{name}</p>
-                          ))}
+                          ].map(([name, allergy], i) => <p key={i}>{name}</p>)}
                         </span>
                       </td>
                     ))}

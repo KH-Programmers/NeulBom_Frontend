@@ -37,7 +37,7 @@ export const TodayMealPanel: React.FC<{
             {
               "hover:bg-black/5": !isLunch,
               "bg-primary text-white": isLunch,
-            }
+            },
           )}
           onClick={() => setIsLunch(true)}
         >
@@ -49,7 +49,7 @@ export const TodayMealPanel: React.FC<{
             {
               "hover:bg-black/5": isLunch,
               "bg-primary text-white": !isLunch,
-            }
+            },
           )}
           onClick={() => setIsLunch(false)}
         >

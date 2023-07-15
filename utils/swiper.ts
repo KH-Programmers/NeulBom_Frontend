@@ -16,7 +16,7 @@ export const registerSwiper = () => {
 //? ref:  https://github.com/nolimits4web/swiper/issues/6466#issuecomment-1464979762
 type Kebab<
   T extends string,
-  A extends string = ""
+  A extends string = "",
 > = T extends `${infer F}${infer R}`
   ? Kebab<R, `${A}${F extends Lowercase<F> ? "" : "-"}${Lowercase<F>}`>
   : A;

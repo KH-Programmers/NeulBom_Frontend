@@ -2,12 +2,12 @@ import Link from "next/link";
 import React from "react";
 import { IconType } from "react-icons";
 import { TbCalendar, TbEye, TbUser } from "react-icons/tb";
-import { user } from '../../types';
+import { User } from "../../types";
 
 interface PostListItem {
   id: string;
   title: string;
-  user : user;
+  user: User;
   viewCount: number;
   createdAt: string;
   commentCount: number;
@@ -33,10 +33,6 @@ export const PostListItem: React.FC<PostListItem> = ({
   viewCount,
   commentCount,
 }) => {
-  let authorName = "익명"
-  if (user.isAdmin) {
-    authorName = "관리자";
-  }
   return (
     <Link
       href={`/app/posts/${id}`}
@@ -45,7 +41,7 @@ export const PostListItem: React.FC<PostListItem> = ({
     >
       <div className="flex-grow w-0">{title}</div>
       <div className="flex items-center divide-x gap-2 opacity-60">
-        <StatItem icon={TbUser}>{authorName}</StatItem>
+        <StatItem icon={TbUser}>{user.IsAdmin ? "관리자" : "익명"}</StatItem>
         <StatItem icon={TbEye}>{viewCount}</StatItem>
         <StatItem icon={TbCalendar}>{createdAt}</StatItem>
       </div>

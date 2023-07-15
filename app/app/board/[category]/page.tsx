@@ -22,6 +22,7 @@ export default async function BoardCategoryView({
   try {
     const response = await GET(`/board/${params.category}`, token.value);
     posts = response.data;
+    console.log(posts);
   } catch (e) {
     posts = [];
   }

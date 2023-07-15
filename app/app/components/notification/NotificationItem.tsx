@@ -17,7 +17,7 @@ export const NotificationItem: React.FC<{ notification: Notification }> = ({
 }) => {
   const Icon = React.useMemo(
     () => getIcon(notification.type),
-    [notification.type]
+    [notification.type],
   );
   const timeFormat = React.useMemo(() => {
     if (typeof window !== "undefined") {

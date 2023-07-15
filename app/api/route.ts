@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
       },
       {
         status: 401,
-      }
+      },
     );
   }
   try {
@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
         headers: {
           Authorization: `Token ${request.cookies.get("token")?.value}`,
         },
-      }
+      },
     );
     return NextResponse.json(response.data, {
       status: response.status,
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
       },
       {
         status: 401,
-      }
+      },
     );
   }
   try {
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
         headers: {
           Authorization: `Token ${request.cookies.get("token")?.value}`,
         },
-      }
+      },
     );
     return NextResponse.json(response.data, {
       status: response.status,

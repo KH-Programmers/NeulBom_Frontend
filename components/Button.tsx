@@ -8,7 +8,7 @@ export const Button: React.FC<
     <button
       className={clsx(
         className,
-        "w-full text-center py-2 text-white bg-primary rounded-lg font-bold hover:brightness-90 active:brightness-75 transition-all"
+        "w-full text-center py-2 text-white bg-primary rounded-lg font-bold hover:brightness-90 active:brightness-75 transition-all",
       )}
       {...props}
     />

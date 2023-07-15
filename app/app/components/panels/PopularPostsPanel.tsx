@@ -16,7 +16,9 @@ export const PopularPostsPanel: React.FC<{
       {posts.map((x, k) => {
         return (
           <div key={k} className="p-4">
-            <a className="text-xl" href={`/app/posts/${x.id}/`}>{x.title}</a>
+            <a className="text-xl" href={`/app/posts/${x.id}/`}>
+              {x.title}
+            </a>
             <div className="mt-1 font-light text-sm overflow-hidden text-ellipsis text-black/60">
               익명
             </div>

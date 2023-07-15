@@ -22,7 +22,7 @@ const categories: BoardCategory[] = [
   {
     id: "sports",
     name: "스포츠",
-  }
+  },
 ];
 
 const BoardLayout: React.FC<PropsWithChildren> = ({ children }) => {

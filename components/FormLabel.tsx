@@ -26,7 +26,7 @@ export const FormLabel: React.FC<
             "flex-col items-start": !horizontal,
             "flex-row-reverse items-center": horizontal,
           },
-          className
+          className,
         )}
       >
         <div>{children}</div>

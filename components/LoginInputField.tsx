@@ -14,7 +14,7 @@ export const LoginInputField: React.FC<
         <input
           className={clsx(
             className,
-            "bg-transparent text-lg w-full h-full focus:outline-none font-bold"
+            "bg-transparent text-lg w-full h-full focus:outline-none font-bold",
           )}
           {...props}
         />

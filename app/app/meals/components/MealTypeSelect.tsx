@@ -16,7 +16,7 @@ const MealTypeButton: React.FC<
         {
           "bg-white text-primary": active,
           "text-white": !active,
-        }
+        },
       )}
       onClick={onClick}
     >

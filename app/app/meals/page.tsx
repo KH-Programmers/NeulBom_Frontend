@@ -19,14 +19,14 @@ export default async function Board() {
   try {
     const response = await GET(
       `/food/${today.getFullYear()}/${today.getMonth() + 1}`,
-      token?.value
+      token?.value,
     );
     monthMealData = response.data;
   } catch (e) {
     console.error(e);
   }
   const todayMeal = monthMealData.find(
-    (x) => x.date === Number(format(today, "yyyyMMdd"))
+    (x) => x.date === Number(format(today, "yyyyMMdd")),
   );
   return (
     <div className="p-4 gap-4 flex-grow flex flex-col md:grid flex-shrink md:grid-cols-2 lg:grid-cols-3">

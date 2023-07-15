@@ -9,7 +9,7 @@ const Page = async () => {
   if (!token) {
     return redirect("/signin");
   } else {
-    const response = await GET("/user/authentication", token.value)
+    const response = await GET("/user/authentication", token.value);
     if (response.status == 200) {
       return redirect("/app");
     } else {

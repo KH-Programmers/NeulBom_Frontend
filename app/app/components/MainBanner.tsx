@@ -7,7 +7,7 @@ registerSwiper();
 
 export const MainBanner: React.FC = () => {
   const [swiperContent, setSwiperContent] = React.useState<React.ReactNode>(
-    <></>
+    <></>,
   );
 
   React.useEffect(() => {
@@ -22,7 +22,7 @@ export const MainBanner: React.FC = () => {
         <swiper-slide>
           <div className="h-24 flex justify-center items-center">Slide 3</div>
         </swiper-slide>
-      </swiper-container>
+      </swiper-container>,
     );
   }, []);
 

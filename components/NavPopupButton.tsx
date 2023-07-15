@@ -34,7 +34,7 @@ export const NavPopupButton: React.FC<
         apply({ elements, availableHeight }) {
           elements.floating.style.maxHeight = `${Math.min(
             480,
-            availableHeight
+            availableHeight,
           )}px`;
         },
       }),
@@ -56,7 +56,7 @@ export const NavPopupButton: React.FC<
         () => {
           console.log("update");
           update();
-        }
+        },
       );
 
       return () => cleanup();
@@ -82,7 +82,7 @@ export const NavPopupButton: React.FC<
                   "overflow-y-auto relative overflow-x-hidden w-full max-w-[360px] bg-white shadow-md rounded-xl ring-1 ring-black/10 origin-top",
                   {
                     "h-full": fullHeight,
-                  }
+                  },
                 )}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

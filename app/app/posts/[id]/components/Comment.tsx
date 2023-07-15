@@ -10,41 +10,43 @@ import {
 } from "react-icons/tb";
 import { CommentInput } from "./CommentInput";
 import { AnimatePresence, motion } from "framer-motion";
-import {CommentElement} from "../types";
-import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
+import { CommentElement } from "../types";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 interface Comment {
-  nested?: boolean, 
-  CommentElement:CommentElement, 
-  parentUrl:string,
-  token:RequestCookie,
+  nested?: boolean;
+  CommentElement: CommentElement;
+  parentUrl: string;
+  token: RequestCookie;
 }
-export const Comment: React.FC<Comment> = ({ 
-  nested, 
+export const Comment: React.FC<Comment> = ({
+  nested,
   CommentElement,
   parentUrl,
   token,
 }) => {
   const [like, setLike] = React.useState(false);
   const [repliesOpen, setRepliesOpen] = React.useState(false);
-  const [replys, setReplys] = React.useState<CommentElement[]>(CommentElement.reply);
+  const [replys, setReplys] = React.useState<CommentElement[]>(
+    CommentElement.reply,
+  );
 
   const requestUrl = parentUrl;
 
   let comment;
   if (replys[0] != null) {
-    comment = replys.map((reply:CommentElement, k:number) => (
+    comment = replys.map((reply: CommentElement, k: number) => (
       <Comment
-      key={k}
-      nested={true}
-      CommentElement={reply}
-      parentUrl={'null'}
-      token={token}
+        key={k}
+        nested={true}
+        CommentElement={reply}
+        parentUrl={"null"}
+        token={token}
       />
-    ))
+    ));
   }
 
-  const replySubmit = (comment:string) => {
+  const replySubmit = (comment: string) => {
     const newComment: CommentElement = {
       id: replys.length + 1,
       author_name: CommentElement.author_name,
@@ -53,7 +55,7 @@ export const Comment: React.FC<Comment> = ({
     };
 
     setReplys((prevComments) => [...prevComments, newComment]);
-  }
+  };
 
   return (
     <div className="flex p-6 gap-4">
@@ -113,7 +115,13 @@ export const Comment: React.FC<Comment> = ({
               className="overflow-hidden"
             >
               <div className="mt-2">
-                <CommentInput nested={true} url={requestUrl} token={token} parentCommentId={CommentElement.id} onCommentSubmit={replySubmit}/>
+                <CommentInput
+                  nested={true}
+                  url={requestUrl}
+                  token={token}
+                  parentCommentId={CommentElement.id}
+                  onCommentSubmit={replySubmit}
+                />
               </div>
               <div className="bg-black/5 rounded-xl mt-2 divide-y">
                 {comment}

@@ -14,11 +14,11 @@ const Step: React.FC<
 > = ({ noLine, children, icon: Icon, step, currentStep }) => {
   const shouldHighlightLine = React.useMemo(
     () => step < currentStep,
-    [step, currentStep]
+    [step, currentStep],
   );
   const shouldHighlightIcon = React.useMemo(
     () => step <= currentStep,
-    [step, currentStep]
+    [step, currentStep],
   );
 
   return (
@@ -39,7 +39,7 @@ const Step: React.FC<
             {
               "bg-primary text-white": shouldHighlightIcon,
               "bg-black/20 text-black/40": !shouldHighlightIcon,
-            }
+            },
           )}
         >
           <Icon size={24} />

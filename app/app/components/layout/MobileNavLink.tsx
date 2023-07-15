@@ -42,7 +42,7 @@ export const MobileNavLink: React.FC<
           {
             "hover:bg-black/10": !isMatched,
             "bg-black/10": isMatched,
-          }
+          },
         )}
         href={href}
         as={as}

@@ -7,15 +7,15 @@ export type BoardCategory = {
 export type Post = {
   id: string;
   title: string;
-  user : user;
+  user: User;
   commentCount: number;
   viewCounts: number;
   updatedAt: string;
   likeCount: number;
 };
 
-export type user = {
-  id:string;
-  authorName:string;
-  isAdmin:boolean;
-}
+export type User = {
+  id: string;
+  authorName: string;
+  IsAdmin: boolean;
+};

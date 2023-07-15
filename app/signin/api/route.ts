@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
       },
       {
         status: 200,
-      }
+      },
     );
   } else {
     return NextResponse.json(
@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
       },
       {
         status: 200,
-      }
+      },
     );
   }
 }
@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
   try {
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URI!}/user/login/`,
-      requestData
+      requestData,
     );
     const token = response.data.token;
     if (response.status === 200) {
