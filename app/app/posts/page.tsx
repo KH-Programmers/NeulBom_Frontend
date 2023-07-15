@@ -1,5 +1,3 @@
-"use server";
-
 import React from "react";
 import ContentEditor from "./[id]/components/ContentEditor";
 import { cookies } from "next/headers";

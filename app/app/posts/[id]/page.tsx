@@ -38,7 +38,7 @@ export default async function PostViewPage({
   // 추후에 본인 글은 삭제할 수 있게 권한 추가
   const BoardCategory = article.board_model.map(
     (boardName: Category, k: number) => (
-      <div key={k}>
+      <div className="flex items-center" key={k}>
         <Link
           href={`/app/board/${boardName.board_EN}`}
           className="text-blue-500"
