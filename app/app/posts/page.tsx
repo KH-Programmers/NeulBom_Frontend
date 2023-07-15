@@ -1,4 +1,5 @@
-"server-only";
+"use server";
+
 import React from "react";
 import ConetentEditor from "./[id]/components/ContentEditor";
 import { cookies } from "next/headers";
