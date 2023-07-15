@@ -24,17 +24,15 @@ export default async function PostViewPage({
   const cookieStore = cookies();
   const token = cookieStore.get("token");
   let article;
-  let currentPostId = params.id;
-  let isDelete = false;
   try {
-    const response = await GET(`/board/study/${params.id}`, token?.value);
+    const response = await GET(`/board/all/${params.id}`, token?.value);
     article = response.data;
-    currentPostId = article.id;
   } catch (e) {
     article = [];
   }
   console.log(article);
   const requestUrl = `/board/${article.board_model[0].board_EN}/${article.id}/`;
+  const category = article.board_model[0].board_EN
   // 추후에 본인 글은 삭제할 수 있게 권한 추가
   const BoardCategory = article.board_model.map(
     (boardName: Category, k: number) => (
@@ -95,7 +93,7 @@ export default async function PostViewPage({
             <div className="flex-grow w-0" />
             <ShareButton />
             {article.canDelete && (
-              <DeleteButton id={currentPostId} token={token!} />
+              <DeleteButton category={category} url={requestUrl} token={token!} />
             )}
           </div>
         </article>

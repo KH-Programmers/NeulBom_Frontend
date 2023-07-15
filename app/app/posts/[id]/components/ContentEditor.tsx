@@ -63,6 +63,7 @@ const ContentEditor: React.FC<token> = ({ token }) => {
       ); ///url은 후에 category 받아와서 수정.
       if (response.status === 201) {
         push(`/app/board/${category}`);
+        return alert("업로드 되었습니다.")
       }
     } catch (e) {
       const error = e as AxiosError;

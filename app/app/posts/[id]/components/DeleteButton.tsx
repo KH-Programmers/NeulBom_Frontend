@@ -3,16 +3,19 @@
 import { DELETE } from "@/utils/request";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { AxiosError } from "axios";
+import { url } from 'inspector';
 
-export const DeleteButton: React.FC<{ id: string; token: RequestCookie }> = ({
-  id,
+export const DeleteButton: React.FC<{category:string; token: RequestCookie; url: string }> = ({
+  category,
   token,
+  url
 }) => {
   const deletePost = async () => {
     try {
-      const response = await DELETE(`/board/study/${id}/`, token.value); ///url은 후에 category 받아와서 수정.
+      const response = await DELETE( url , token.value); ///url은 후에 category 받아와서 수정.
       if (response.status === 204) {
-        window.location.replace("/app/board/all");
+        window.location.replace(`/app/board/${category}`);
+        return alert("정상적으로 삭제되었습니다.");
       }
     } catch (e) {
       const error = e as AxiosError;
