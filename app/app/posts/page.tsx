@@ -1,7 +1,7 @@
 "use server";
 
 import React from "react";
-import ConetentEditor from "./[id]/components/ContentEditor";
+import ContentEditor from "./[id]/components/ContentEditor";
 import { cookies } from "next/headers";
 import { redirect } from "next/dist/client/components/navigation";
 
@@ -17,7 +17,7 @@ const PostCreatePage: React.FC = () => {
     <div className="px-6">
       <div className="max-w-[768px] mx-auto mt-12">
         <div className="text-2xl font-bold">글쓰기</div>
-        <ConetentEditor token={token} />
+        <ContentEditor token={token} />
       </div>
     </div>
   );

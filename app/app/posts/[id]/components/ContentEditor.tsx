@@ -37,7 +37,7 @@ interface token {
   token: RequestCookie;
 }
 
-const ConetentEditor: React.FC<token> = ({ token }) => {
+const ContentEditor: React.FC<token> = ({ token }) => {
   const [content, setContent] = React.useState("");
   const [title, setTitle] = React.useState("");
   const [showEditor, setShowEditor] = React.useState(false);
@@ -128,4 +128,4 @@ const ConetentEditor: React.FC<token> = ({ token }) => {
   );
 };
 
-export default ConetentEditor;
+export default ContentEditor;
