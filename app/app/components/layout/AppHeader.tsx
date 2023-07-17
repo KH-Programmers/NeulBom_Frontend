@@ -19,7 +19,7 @@ import { MobileNavLink } from "./MobileNavLink";
 import { MobileNavButton } from "./MobileNavButton";
 import { NavPopupButton } from "@/components/NavPopupButton";
 import { MobilePopupMenu } from "./MobilePopupMenu";
-import { LogoutButton } from './logoutButton'
+import { LogoutButton } from './LogoutButton'
 import { NotificationPopupContent } from "../notification/NotificationPopupContent";
 
 const AppHeaderContent: React.FC = () => {
