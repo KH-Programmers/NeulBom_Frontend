@@ -98,7 +98,7 @@ const ContentEditor: React.FC<edit> = ({ defaultCategory, token }) => {
             className="w-[180px]"
             options={categories}
             onChange={categorySubmit}
-            placeholder={defaultCategory}
+            placeholder={defaultCategory=="all"? "카테고리 선택":defaultCategory}
           />
         </div>
         {/* <input

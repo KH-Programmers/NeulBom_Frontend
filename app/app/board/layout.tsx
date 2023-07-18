@@ -8,6 +8,10 @@ const categories: BoardCategory[] = [
     name: "인기글",
   },
   {
+    id: "all",
+    name: "전체",
+  },
+  {
     id: "study",
     name: "공부",
   },
