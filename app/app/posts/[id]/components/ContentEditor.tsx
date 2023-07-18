@@ -44,9 +44,10 @@ const ContentEditor: React.FC<edit> = ({ defaultCategory, token }) => {
   const [showEditor, setShowEditor] = React.useState(false);
   const [category, setCategory] = React.useState("study");
 
+  let defaultValue;
   for (let i = 0; i < categories.length; i++) {
     if (categories[i].value == defaultCategory) {
-      defaultCategory = categories[i].label;
+      defaultValue = categories[i];
     }
   }
 
@@ -98,7 +99,7 @@ const ContentEditor: React.FC<edit> = ({ defaultCategory, token }) => {
             className="w-[180px]"
             options={categories}
             onChange={categorySubmit}
-            placeholder={defaultCategory=="all"? "카테고리 선택":defaultCategory}
+            defaultValue={defaultValue}
           />
         </div>
         {/* <input
