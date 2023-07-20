@@ -12,7 +12,7 @@ import { TbLock, TbUserCircle } from "react-icons/tb";
 
 import Captcha from "@/utils/captcha";
 import logo from "@/assets/NeulBom.svg";
-import GoogleLogo from "@/assets/google.svg";
+// import GoogleLogo from "@/assets/google.svg";
 import { Button } from "@/components/Button";
 import { Checkbox } from "@/components/Checkbox";
 import { LoginInputField } from "@/components/LoginInputField";
@@ -60,6 +60,8 @@ const SignIn = () => {
                       "캡챠 인증에 실패했습니다. 다시 시도해주세요.",
                     );
                 }
+              } finally {
+                setIsLoading(false);
               }
             }}
           >
@@ -101,15 +103,16 @@ const SignIn = () => {
               }}
             />
             <div className="mt-6 transition-all ease-in duration-100">
-              <Button className={isLoading ? "hidden" : "block"} type="submit">
-                로그인
-              </Button>
-              <HashLoader
-                color="#9E1915"
-                size={36}
-                className="mx-auto mb-4"
-                loading={isLoading}
-              />
+              {!isLoading ? (
+                <Button type="submit">로그인</Button>
+              ) : (
+                <HashLoader
+                  color="#9E1915"
+                  size={36}
+                  className="mx-auto mb-4"
+                  loading={isLoading}
+                />
+              )}
             </div>
           </form>
           <div className="flex w-full items-center gap-4 mt-2">

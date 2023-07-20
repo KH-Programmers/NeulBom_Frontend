@@ -98,6 +98,8 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
               case 409:
                 return alert("이미 존재하는 아이디입니다. 다시 시도해주세요.");
             }
+          } finally {
+            setIsLoading(false);
           }
         })}
       >
@@ -171,15 +173,16 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
           }}
         />
         <div className="mt-4 transition-all ease-in duration-100">
-          <Button className={isLoading ? "hidden" : "block"} type="submit">
-            가입하기
-          </Button>
-          <HashLoader
-            color="#9E1915"
-            size={36}
-            className="mx-auto mb-4"
-            loading={isLoading}
-          />
+          {!isLoading ? (
+            <Button type="submit">가입하기</Button>
+          ) : (
+            <HashLoader
+              color="#9E1915"
+              size={36}
+              className="mx-auto mb-4"
+              loading={isLoading}
+            />
+          )}
         </div>
       </form>
     </FormProvider>
