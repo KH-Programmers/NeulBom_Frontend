@@ -63,6 +63,7 @@
     "@types/styled-components": "^5.1.26",
     "debug": "^4.3.4",
     "prettier": "^3.0.0",
+    "prop-types": "^15.8.1",
     "supports-color": "^9.4.0"
   },
   "packageManager": "yarn@3.6.0"
