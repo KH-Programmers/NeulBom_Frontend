@@ -25,6 +25,7 @@ export default async function BoardCategoryView({
   } catch (e) {
     posts = [];
   }
+  console.log(posts);
 
   return (
     <div className="flex flex-col gap-4 w-full">
