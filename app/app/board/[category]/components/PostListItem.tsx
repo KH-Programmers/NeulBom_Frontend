@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { IconType } from "react-icons";
-import { TbCalendar, TbEye, TbUser } from "react-icons/tb";
+import { TbCalendar, TbEye, TbUser, TbMessages } from "react-icons/tb";
 import { User } from "../../types";
 import clsx from "clsx";
 
@@ -54,6 +54,7 @@ export const PostListItem: React.FC<PostListItem> = ({
         </StatItem>
         <StatItem icon={TbEye}>{viewCount}</StatItem>
         <StatItem icon={TbCalendar}>{createdAt}</StatItem>
+        <StatItem icon={TbMessages}>{commentCount}</StatItem>
       </div>
     </Link>
   );
