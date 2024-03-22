@@ -14,7 +14,7 @@ import { HashLoader } from "react-spinners";
 const schema = yup
   .object({
     username: yup.string().required(),
-    name: yup.string().min(2).max(4).required(),
+    nickname: yup.string().min(2).max(4).required(),
     studentId: yup.number().required(),
     email: yup.string().email().required(),
     password: yup.string().required(),
@@ -22,7 +22,6 @@ const schema = yup
       .string()
       .oneOf([yup.ref("password")], "비밀번호가 일치하지 않습니다.")
       .required(),
-    profileImg: yup.mixed<Array<File>>().required(),
   })
   .required();
 type FormData = yup.InferType<typeof schema>;
@@ -35,41 +34,23 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
   const [token, setToken] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const convertBase64 = (file: File) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
-
   return (
     <FormProvider {...form}>
       <form
         className="mt-4 w-full max-w-[420px] mx-auto flex flex-col gap-4"
         onSubmit={handleSubmit(async (data) => {
           setIsLoading(true);
-          const file = data.profileImg[0];
-          const base64 = await convertBase64(file);
           try {
             const content = {
               username: data.username,
-              name: data.name,
+              nickname: data.nickname,
               grade: data.studentId,
               email: data.email,
               password: data.password,
-              card_img: base64,
               token: token,
             };
             const response = await axios.post(
-              `${process.env.NEXT_PUBLIC_API_URI!}/user/register/`,
+              `${process.env.NEXT_PUBLIC_API_URI!}/user/signup/`,
               content,
             );
 
@@ -110,8 +91,8 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
           아이디
         </FormLabel>
         <FormLabel
-          control={<FormInput type="text" {...register("name")} />}
-          name="name"
+          control={<FormInput type="text" {...register("nickname")} />}
+          name="nickname"
         >
           이름
         </FormLabel>
@@ -152,19 +133,6 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
           name="passwordConfirm"
         >
           비밀번호 재입력
-        </FormLabel>
-        <FormLabel
-          control={
-            <FormInput
-              type="file"
-              {...register("profileImg", {
-                required: "학생증 이미지는 필수입니다.",
-              })}
-            />
-          }
-          name="profileImg"
-        >
-          학생증 사진
         </FormLabel>
         <Captcha
           sitekey={process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY!}
