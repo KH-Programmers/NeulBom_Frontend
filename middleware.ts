@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-import axios from "axios";
-
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get("token");
   if (token !== undefined) {

@@ -17,7 +17,7 @@ import { LoginInputField } from "@/components/LoginInputField";
 
 const SignIn = () => {
   const router = useRouter();
-  const [username, setUsername] = useState("");
+  const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [autoLogin, setAutoLogin] = useState(false);
   const [token, setToken] = useState("");
@@ -41,8 +41,8 @@ const SignIn = () => {
               setIsLoading(true);
               if (token === "") return;
               try {
-                await axios.post(`/signin/api/?autoLogin=${autoLogin}`, {
-                  username: username,
+                await axios.post(`/signin/api/`, {
+                  userId: userId,
                   password: password,
                   token: token,
                   autoLogin: autoLogin,
@@ -52,7 +52,7 @@ const SignIn = () => {
                 const error = e as AxiosError;
                 switch (error.response?.status) {
                   case 400:
-                    return alert("아이디 또는 비밀번호가 잘못되었습니다.");
+                    return alert("유저를 확인하지 못했습니다.\n아이디 또는 비밀번호를 확인해주세요.");
                   case 406:
                     return alert(
                       "캡챠 인증에 실패했습니다. 다시 시도해주세요.",
@@ -71,8 +71,8 @@ const SignIn = () => {
                 placeholder="아이디"
                 autoComplete="username"
                 type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={userId}
+                onChange={(e) => setUserId(e.target.value)}
               />
               <LoginInputField
                 tabIndex={0}

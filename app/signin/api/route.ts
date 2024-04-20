@@ -27,23 +27,23 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const requestData = await request.json();
+  const data = await request.json();
   try {
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_API_URI!}/user/login/`,
-      requestData,
+      data,
     );
-    const token = response.data.token;
+    const accessToken = response.data.accessToken;
     if (response.status === 200) {
       const response = NextResponse.json({}, { status: 200 });
-      response.cookies.set("token", token, {
+      response.cookies.set("accessToken", accessToken, {
         path: "/",
         httpOnly: true,
-        maxAge: requestData["autoLogin"] ? 60 * 60 * 24 * 7 : undefined,
+        maxAge: data["autoLogin"] ? 60 * 60 * 24 * 7 : undefined,
       });
       response.cookies.set({
         name: "autoLogin",
-        value: requestData["autoLogin"] ? "true" : "false",
+        value: data["autoLogin"] ? "true" : "false",
         path: "/",
         httpOnly: true,
       });

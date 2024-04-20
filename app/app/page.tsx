@@ -14,33 +14,8 @@ import { PopularPostsPanel } from "./components/panels/PopularPostsPanel";
 export default async function AppMain() {
   const cookieStore = cookies();
   const token = cookieStore.get("token");
-  let data: {
-    foodData?: {
-      date: number;
-      lunchData: Array<[string, number[]]>;
-      dinnerData: Array<[string, number[]]>;
-    };
-    articleData?: Array<{
-      id: number;
-      authorName: string;
-      title: string;
-      commentCount: number;
-      viewCounts: number;
-      updatedAt: string;
-      likeCount: number;
-    }>;
-    eventData?: Array<{
-      date: number;
-      eventName: string | null;
-      type: string | null;
-    }>;
-    requester?: {
-      username: string;
-    };
-  } = {};
   try {
     const response = await GET("/", token?.value);
-    data = response.data;
   } catch (e) {
     const error = e as AxiosError;
     if (error.response?.status === 401) {
@@ -52,10 +27,10 @@ export default async function AppMain() {
       <MainBanner />
       <div className="flex-grow gap-4 lg:flex-row flex-col grid md:grid-cols-2 lg:grid-cols-3">
         <MainCard title="인기글">
-          <PopularPostsPanel posts={data.articleData ?? []} />
+          <PopularPostsPanel posts={[]} />
         </MainCard>
         <MainCard title="오늘의 급식">
-          <TodayMealPanel meal={data.foodData!} />
+          {/*<TodayMealPanel meal={data.foodData!} />*/}
         </MainCard>
         <MainCard title="오늘의 일정">
           <TodayTodoPanel />

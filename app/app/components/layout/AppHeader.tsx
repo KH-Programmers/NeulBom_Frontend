@@ -33,12 +33,19 @@ const AppHeaderContent: React.FC = () => {
         >
           게시판
         </NavLink>
+        {/*<NavLink*/}
+        {/*  href="/app/meals"*/}
+        {/*  match={(path) => path.startsWith("/app/meals")}*/}
+        {/*>*/}
+        {/*  급식*/}
+        {/*</NavLink>*/}
         <NavLink
-          href="/app/meals"
-          match={(path) => path.startsWith("/app/meals")}
+          href="/app/studentCard"
+          match={(path) => path.startsWith("/app/studentCard")}
         >
-          급식
+          학생증
         </NavLink>
+
         {/*<NavLink
           href="/app/events"
           match={(path) => path.startsWith("/app/events")}
@@ -103,26 +110,34 @@ const AppMobileHeaderContent: React.FC = () => {
       >
         게시판
       </MobileNavLink>
+
+      {/*<MobileNavLink*/}
+      {/*  icon={TbSoup}*/}
+      {/*  href="/app/meals"*/}
+      {/*  match={(path) => path.startsWith("/app/meals")}*/}
+      {/*>*/}
+      {/*  급식*/}
+      {/*</MobileNavLink>*/}
+      {/*<MobileNavLink*/}
+      {/*  icon={TbCalendar}*/}
+      {/*  href="/app/events"*/}
+      {/*  match={(path) => path.startsWith("/app/events")}*/}
+      {/*>*/}
+      {/*  학사일정*/}
+      {/*</MobileNavLink>*/}
       <MobileNavLink
-        icon={TbSoup}
-        href="/app/meals"
-        match={(path) => path.startsWith("/app/meals")}
+        icon={TbUserCircle}
+        href="/app/studentCard"
+        match={(path) => path.startsWith("/app/studentCard")}
       >
-        급식
+        학생증
       </MobileNavLink>
-      {/*<MobileNavLink
-        icon={TbCalendar}
-        href="/app/events"
-        match={(path) => path.startsWith("/app/events")}
-      >
-        학사일정
-      </MobileNavLink>*/}
       <MobileNavButton onClick={() => setNotificationPopup(true)} icon={TbBell}>
         알림
       </MobileNavButton>
-      <MobileNavButton onClick={() => alert("TODO")} icon={TbUserCircle}>
-        (username)
-      </MobileNavButton>
+      {/*<MobileNavButton onClick={() => alert("TODO")} icon={TbUserCircle}>*/}
+      {/*  (username)*/}
+      {/*</MobileNavButton>*/}
     </div>
   );
 };
