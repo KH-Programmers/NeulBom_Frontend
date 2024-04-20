@@ -7,12 +7,10 @@ import { useRouter } from "next/navigation";
 
 import axios, { AxiosError } from "axios";
 import { HashLoader } from "react-spinners";
-import { SiKakao, SiNaver } from "react-icons/si";
 import { TbLock, TbUserCircle } from "react-icons/tb";
 
 import Captcha from "@/utils/captcha";
 import logo from "@/assets/NeulBom.svg";
-// import GoogleLogo from "@/assets/google.svg";
 import { Button } from "@/components/Button";
 import { Checkbox } from "@/components/Checkbox";
 import { LoginInputField } from "@/components/LoginInputField";
@@ -99,7 +97,6 @@ const SignIn = () => {
               sitekey={process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY!}
               onVerify={(token: string, ekey: string) => {
                 setToken(token);
-                console.log(token);
               }}
             />
             <div className="mt-6 transition-all ease-in duration-100">
@@ -115,43 +112,6 @@ const SignIn = () => {
               )}
             </div>
           </form>
-          <div className="flex w-full items-center gap-4 mt-2">
-            <div className="flex-grow border-b border-black/20" />
-            또는
-            <div className="flex-grow border-b border-black/20" />
-          </div>
-          <div className="flex justify-between mt-4 gap-4">
-            {/*
-            <Link
-              href="/"
-              className="rounded-full shadow flex justify-center items-center w-12 h-12 bg-[#03c75a] overflow-hidden"
-              tabIndex={0}
-            >
-              <SiNaver size={16} color="white" />
-            </Link>
-            <Link
-              href="/"
-              className="rounded-full shadow justify-center flex items-center w-12 h-12 bg-white overflow-hidden"
-              tabIndex={0}
-            >
-              <Image
-                src={GoogleLogo}
-                alt="google"
-                draggable="false"
-                className="select-none"
-                width={24}
-                height={24}
-              />
-            </Link>
-            <Link
-              href="/"
-              className="rounded-full shadow justify-center flex items-center w-12 h-12 bg-[#FEE500] overflow-hidden"
-              tabIndex={0}
-            >
-              <SiKakao size={28} color="black" />
-            </Link>
-            */}
-          </div>
           <div className="flex gap-4 mt-4 justify-center w-full">
             <div className="relative">
               <a href="/signup" className="absolute right-4 whitespace-nowrap">
@@ -166,10 +126,10 @@ const SignIn = () => {
           <h1 className="text-center font-extralight mt-4">
             Powered By{" "}
             <Link
-              href="https://kyungheeboy.hs.kr/"
+              href="https://github.com/KH-Programmers"
               className="font-bold text-primary"
             >
-              KyungHee
+              Programmers&apos;
             </Link>
           </h1>
         </div>
