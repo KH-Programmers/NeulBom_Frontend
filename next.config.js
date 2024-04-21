@@ -10,9 +10,11 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    esmExternals: "loose",
-  },
 };
 
+if (process.env.NODE_ENV === "production") {
+  nextConfig.experimental = {
+    esmExternals: "loose",
+  };
+}
 module.exports = nextConfig;
