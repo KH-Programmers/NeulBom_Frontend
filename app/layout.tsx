@@ -14,13 +14,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-color-mode="light">
-      <head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <link rel="icon" href="/favicon.ico" />
-      </head>
-      <body>
-        <div className="min-h-screen bg-gradient-to-br from-[#FAE8FF] via-[#E2E8F0] to-[#FFFCED]">
+    <head>
+      <title>{metadata.title}</title>
+      <meta name="description" content={metadata.description} />
+      <meta name="naver-site-verification" content="f5a2e7b5e25cef7790bb7e7ab8367a8f492bdda6" />
+      <link rel="icon" href="/favicon.ico" />
+    </head>
+    <body>
+    <div className="min-h-screen bg-gradient-to-br from-[#FAE8FF] via-[#E2E8F0] to-[#FFFCED]">
           {children}
         </div>
       </body>
