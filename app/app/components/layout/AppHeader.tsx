@@ -19,13 +19,12 @@ import { MobileNavLink } from "./MobileNavLink";
 import { MobileNavButton } from "./MobileNavButton";
 import { NavPopupButton } from "@/components/NavPopupButton";
 import { MobilePopupMenu } from "./MobilePopupMenu";
-import { LogoutButton } from './LogoutButton'
+import { LogoutButton } from "./LogoutButton";
 import { NotificationPopupContent } from "../notification/NotificationPopupContent";
 
 const AppHeaderContent: React.FC = () => {
   return (
     <div className="hidden md:flex items-center gap-4 flex-grow">
-      {/* nav links */}
       <div className="flex gap-2">
         <NavLink
           href="/app/board/popular"
@@ -72,13 +71,18 @@ const AppHeaderContent: React.FC = () => {
             </div>
           </div>
         </NavPopupButton>
-        <NavPopupButton fullHeight buttonContent={<TbUserCircle
-            className="text-black hover:text-primary transition-colors"
-            size={24}
-          />}>
+        <NavPopupButton
+          fullHeight
+          buttonContent={
+            <TbUserCircle
+              className="text-black hover:text-primary transition-colors"
+              size={24}
+            />
+          }
+        >
           <div className="flex w-full h-full flex-col">
             <div className="border-b px-4 py-2">
-              <div className='inline font-bold sticky top-0 bg-white'>
+              <div className="inline font-bold sticky top-0 bg-white">
                 내 정보
               </div>
               {/*<LogoutButton />*/}

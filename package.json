@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "autoReloadInstall": "yarn install",
-    "autoUpdateBuild": "yarn build"
+    "autoReloadInstall": "pnpm install",
+    "autoUpdateBuild": "pnpm build"
   },
   "dependencies": {
     "@faker-js/faker": "^8.0.2",
@@ -66,5 +66,5 @@
     "prop-types": "^15.8.1",
     "supports-color": "^9.4.0"
   },
-  "packageManager": "yarn@3.6.0"
+  "packageManager": "pnpm@9.0.4"
 }

@@ -52,7 +52,9 @@ const SignIn = () => {
                 const error = e as AxiosError;
                 switch (error.response?.status) {
                   case 400:
-                    return alert("유저를 확인하지 못했습니다.\n아이디 또는 비밀번호를 확인해주세요.");
+                    return alert(
+                      "유저를 확인하지 못했습니다.\n아이디 또는 비밀번호를 확인해주세요.",
+                    );
                   case 406:
                     return alert(
                       "캡챠 인증에 실패했습니다. 다시 시도해주세요.",

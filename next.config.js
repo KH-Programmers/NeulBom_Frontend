@@ -1,5 +1,16 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.discordapp.com",
+        port: "",
+        pathname: "/*/**",
+      },
+    ],
+  },
+};
 
 if (process.env.NODE_ENV === "production") {
   const withPWA = require("next-pwa")({
