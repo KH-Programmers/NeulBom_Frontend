@@ -10,6 +10,12 @@ import { MainBanner } from "./components/MainBanner";
 import { TodayMealPanel } from "./components/panels/TodayMealPanel";
 import { TodayTodoPanel } from "./components/panels/TodayTodoPanel";
 import { PopularPostsPanel } from "./components/panels/PopularPostsPanel";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NeulBom",
+  description: "늘봄에 오신 것을 환영합니다.",
+};
 
 export default async function AppMain() {
   const cookieStore = cookies();
