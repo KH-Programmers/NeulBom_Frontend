@@ -24,7 +24,7 @@ export async function middleware(request: NextRequest) {
         headers: {
           "Set-Cookie": `accessToken=${accessToken.value}; refreshToken=${refreshToken.value} Path=/; HttpOnly; Max-Age=${
             request.cookies.get("autoLogin")?.value === "true"
-              ? 60 * 60 * 24 * 7
+              ? 60 * 60 * 24 * 8
               : undefined
           }`,
         },
@@ -54,7 +54,7 @@ export async function middleware(request: NextRequest) {
           headers: {
             "Set-Cookie": `accessToken=${updatedTokens["accessToken"]}; refreshToken=${updatedTokens["refreshToken"]} Path=/; HttpOnly; Max-Age=${
               request.cookies.get("autoLogin")?.value === "true"
-                ? 60 * 60 * 24 * 7
+                ? 60 * 60 * 24 * 8
                 : undefined
             }`,
           },
@@ -68,7 +68,7 @@ export async function middleware(request: NextRequest) {
       headers: {
         "Set-Cookie": `accessToken=${accessToken.value}; refreshToken=${refreshToken.value} Path=/; HttpOnly; Max-Age=${
           request.cookies.get("autoLogin")?.value === "true"
-            ? 60 * 60 * 24 * 7
+            ? 60 * 60 * 24 * 8
             : undefined
         }`,
       },
