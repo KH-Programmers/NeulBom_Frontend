@@ -34,9 +34,15 @@ export async function POST(request: NextRequest) {
       data,
     );
     const accessToken = response.data.accessToken;
+    const refreshToken = response.data.refreshToken;
     if (response.status === 200) {
       const response = NextResponse.json({}, { status: 200 });
       response.cookies.set("accessToken", accessToken, {
+        path: "/",
+        httpOnly: true,
+        maxAge: data["autoLogin"] ? 60 * 60 * 24 * 7 : undefined,
+      });
+      response.cookies.set("refreshToken", refreshToken, {
         path: "/",
         httpOnly: true,
         maxAge: data["autoLogin"] ? 60 * 60 * 24 * 7 : undefined,

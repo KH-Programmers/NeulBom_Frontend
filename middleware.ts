@@ -1,21 +1,18 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { GET } from "@/utils/request";
 
 export async function middleware(request: NextRequest) {
   const token = request.cookies.get("token");
   if (token !== undefined) {
-    if (
-      (
-        await fetch(`${process.env.NEXT_PUBLIC_API_URI!}/user/authentication`, {
-          method: "GET",
-          headers: {
-            Authorization: `Token ${token.value}`,
-          },
-        })
-      ).status !== 200
-    ) {
+    const TokenValidity = await GET("/user/authentication", token.value);
+    if (TokenValidity.status === 401) {
+      // Unauthorized (Token Not Found)
       request.cookies.delete("token");
       return NextResponse.rewrite(new URL("/signin", request.url));
+    } else if (TokenValidity.status === 406) {
+      // Not Acceptable (Token Expired)
+      await GET("/user/refresh", token.value);
     }
     return NextResponse.next({
       headers: {

@@ -2,6 +2,12 @@ import React from "react";
 import Image from "next/image";
 
 import Barcode from "@/assets/barcode.svg";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "NeulBom 학생증",
+  description: "당신의 학생증을 확인하세요.",
+};
 
 const StudentCard: React.FC = () => {
   const user: {
