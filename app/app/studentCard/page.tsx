@@ -17,7 +17,7 @@ const StudentCard: React.FC = () => {
     barcodeImg: require("../../../assets/barcode.svg"),
   };
   return (
-    <div className='absolute m-0 top-1/2 -translate-y-1/2 w-full'>
+    <div className="absolute m-0 top-1/2 -translate-y-1/2 w-full">
       <div className="max-w-64 w-1/3 h-auto rounded-full mx-auto">
         {user.profileImg ? (
           <Image
