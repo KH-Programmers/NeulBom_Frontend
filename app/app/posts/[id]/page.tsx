@@ -22,7 +22,7 @@ export default async function PostViewPage({
   params: { id: string };
 }) {
   const cookieStore = cookies();
-  const token = cookieStore.get("token");
+  const token = cookieStore.get("accessToken");
   let article;
   try {
     const response = await GET(`/board/all/${params.id}`, token?.value);

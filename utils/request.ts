@@ -1,13 +1,18 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export const GET = async (path: string, token?: string) => {
-  return await axios.get(process.env.NEXT_PUBLIC_API_URI! + path, {
-    headers: token
-      ? {
-          Authorization: `Token ${token}`,
-        }
-      : {},
-  });
+  try {
+    return await axios.get(process.env.NEXT_PUBLIC_API_URI! + path, {
+      headers: token
+        ? {
+            Authorization: `Token ${token}`,
+          }
+        : {},
+    });
+  } catch (e) {
+    const error = e as AxiosError;
+    return error.response;
+  }
 };
 
 export const POST = async (path: string, data?: object, token?: string) => {

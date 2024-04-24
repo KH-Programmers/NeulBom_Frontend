@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default async function AppMain() {
   const cookieStore = cookies();
-  const token = cookieStore.get("token");
+  const token = cookieStore.get("accessToken");
   try {
     const response = await GET("/", token?.value);
   } catch (e) {

@@ -33,8 +33,8 @@ export async function POST(request: NextRequest) {
       `${process.env.NEXT_PUBLIC_API_URI!}/user/login/`,
       data,
     );
-    const accessToken = response.data.accessToken;
-    const refreshToken = response.data.refreshToken;
+    const accessToken = response.data["data"]["accessToken"];
+    const refreshToken = response.data["data"]["refreshToken"];
     if (response.status === 200) {
       const response = NextResponse.json({}, { status: 200 });
       response.cookies.set("accessToken", accessToken, {

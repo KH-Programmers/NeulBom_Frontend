@@ -7,7 +7,7 @@ const PostCreatePage: React.FC<{ searchParams: { category: string } }> = ({
   searchParams,
 }) => {
   const cookieStore = cookies();
-  const token = cookieStore.get("token");
+  const token = cookieStore.get("accessToken");
 
   if (!token) {
     redirect("/signin");

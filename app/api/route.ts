@@ -4,7 +4,7 @@ import axios, { AxiosError } from "axios";
 
 export async function GET(request: NextRequest) {
   const params = new URL(request.url).searchParams;
-  if (!request.cookies.has("token")) {
+  if (!request.cookies.has("accessToken")) {
     return NextResponse.json(
       {
         message: "Unauthorized",
@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
       process.env.NEXT_PUBLIC_API_URI! + params.get("path"),
       {
         headers: {
-          Authorization: `Token ${request.cookies.get("token")?.value}`,
+          Authorization: `Token ${request.cookies.get("accessToken")?.value}`,
         },
       },
     );

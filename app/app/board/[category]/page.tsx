@@ -14,7 +14,7 @@ export default async function BoardCategoryView({
   params: { category: string };
 }) {
   const cookieStore = cookies();
-  const token = cookieStore.get("token");
+  const token = cookieStore.get("accessToken");
   if (!token) {
     return redirect("/signin");
   }

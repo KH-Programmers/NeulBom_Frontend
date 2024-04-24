@@ -15,7 +15,7 @@ export default async function Board() {
   }> = [];
   const today = new Date();
   const cookieStore = cookies();
-  const token = cookieStore.get("token");
+  const token = cookieStore.get("accessToken");
   try {
     const response = await GET(
       `/food/${today.getFullYear()}/${today.getMonth() + 1}`,
