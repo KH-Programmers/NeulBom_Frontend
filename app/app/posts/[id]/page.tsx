@@ -26,7 +26,7 @@ export default async function PostViewPage({
   let article;
   try {
     const response = await GET(`/board/all/${params.id}`, token?.value);
-    article = response.data;
+    article = response!.data;
   } catch (e) {
     article = [];
   }

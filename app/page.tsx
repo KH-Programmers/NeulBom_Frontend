@@ -11,7 +11,7 @@ const Page = async () => {
   } else {
     const response = await GET("/user/authentication", token.value);
     console.log(response);
-    if (response.status == 200) {
+    if (response!.status == 200) {
       return redirect("/app");
     } else {
       return redirect("/signin");

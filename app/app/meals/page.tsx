@@ -21,7 +21,7 @@ export default async function Board() {
       `/food/${today.getFullYear()}/${today.getMonth() + 1}`,
       token?.value,
     );
-    monthMealData = response.data;
+    monthMealData = response!.data;
   } catch (e) {
     console.error(e);
   }
