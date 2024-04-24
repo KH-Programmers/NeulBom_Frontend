@@ -1,7 +1,5 @@
-import React from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { GET } from "@/utils/request";
 
 const Page = async () => {
   const cookieStore = cookies();
@@ -10,7 +8,7 @@ const Page = async () => {
     return redirect("/signin");
   } else {
     const response = await fetch(
-      `${process.env.NEXT_API}/user/authentication`,
+      `${process.env.NEXT_PUBLIC_API_URI}/user/authentication`,
       {
         method: "GET",
         headers: {
@@ -18,7 +16,7 @@ const Page = async () => {
         },
       },
     );
-    if (response!.status == 200) {
+    if (response!.status === 200) {
       return redirect("/app");
     } else {
       return redirect("/signin");

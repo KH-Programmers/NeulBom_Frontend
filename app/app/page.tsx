@@ -20,14 +20,6 @@ export const metadata: Metadata = {
 export default async function AppMain() {
   const cookieStore = cookies();
   const token = cookieStore.get("accessToken");
-  try {
-    const response = await GET("/", token?.value);
-  } catch (e) {
-    const error = e as AxiosError;
-    if (error.response?.status === 401) {
-      return redirect("/signin");
-    }
-  }
   return (
     <div className="p-4 flex flex-col w-full h-full gap-4 flex-grow">
       <MainBanner />
