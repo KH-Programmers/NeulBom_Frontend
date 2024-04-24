@@ -40,12 +40,12 @@ export async function POST(request: NextRequest) {
       response.cookies.set("accessToken", accessToken, {
         path: "/",
         httpOnly: true,
-        maxAge: data["autoLogin"] ? 60 * 60 * 24 * 7 : undefined,
+        maxAge: data["autoLogin"] ? 60 * 60 * 24 * 8 : undefined,
       });
       response.cookies.set("refreshToken", refreshToken, {
         path: "/",
         httpOnly: true,
-        maxAge: data["autoLogin"] ? 60 * 60 * 24 * 7 : undefined,
+        maxAge: data["autoLogin"] ? 60 * 60 * 24 * 8 : undefined,
       });
       response.cookies.set({
         name: "autoLogin",
@@ -57,6 +57,7 @@ export async function POST(request: NextRequest) {
     }
   } catch (e) {
     const error = e as AxiosError;
+    console.log(error);
     return NextResponse.json(error.response?.data, {
       status: error.response?.status,
     });

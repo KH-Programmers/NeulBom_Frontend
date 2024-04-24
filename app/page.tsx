@@ -9,8 +9,15 @@ const Page = async () => {
   if (!token) {
     return redirect("/signin");
   } else {
-    const response = await GET("/user/authentication", token.value);
-    console.log(response);
+    const response = await fetch(
+      `${process.env.NEXT_API}/user/authentication`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Token ${token.value}`,
+        },
+      },
+    );
     if (response!.status == 200) {
       return redirect("/app");
     } else {
