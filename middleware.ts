@@ -37,10 +37,17 @@ export async function middleware(request: NextRequest) {
             ? 60 * 60 * 24 * 8
             : undefined,
       });
+      if (request.cookies.get("autoLogin")) {
+        response.cookies.set("autoLogin", "true", {
+          path: "/",
+          httpOnly: true,
+          maxAge: 60 * 60 * 24 * 8,
+        });
+      }
       return response;
     } else if (TokenValidity.status === 401) {
       // Unauthorized (Access Token Is Not Found)
-      request.cookies.delete(["accessToken", "refreshToken"]);
+      request.cookies.delete(["accessToken", "refreshToken", "autoLogin"]);
       return NextResponse.rewrite(new URL("/signin", request.url));
     } else if (TokenValidity.status === 406) {
       // Not Acceptable (Token Expired)
@@ -54,7 +61,7 @@ export async function middleware(request: NextRequest) {
         },
       );
       if (!refreshTokenResponse) {
-        request.cookies.delete(["accessToken", "refreshToken"]);
+        request.cookies.delete(["accessToken", "refreshToken", "autoLogin"]);
         return NextResponse.rewrite(new URL("/signin", request.url));
       }
       if (refreshTokenResponse.status === 200) {
@@ -75,9 +82,16 @@ export async function middleware(request: NextRequest) {
               ? 60 * 60 * 24 * 8
               : undefined,
         });
+        if (request.cookies.get("autoLogin")) {
+          response.cookies.set("autoLogin", "true", {
+            path: "/",
+            httpOnly: true,
+            maxAge: 60 * 60 * 24 * 8,
+          });
+        }
         return response;
       } else {
-        request.cookies.delete(["accessToken", "refreshToken"]);
+        request.cookies.delete(["accessToken", "refreshToken", "autoLogin"]);
         return NextResponse.rewrite(new URL("/signin", request.url));
       }
     }
@@ -97,12 +111,17 @@ export async function middleware(request: NextRequest) {
           ? 60 * 60 * 24 * 8
           : undefined,
     });
+    if (request.cookies.get("autoLogin")) {
+      response.cookies.set("autoLogin", "true", {
+        path: "/",
+        httpOnly: true,
+        maxAge: 60 * 60 * 24 * 8,
+      });
+    }
     return response;
   }
-  console.log(accessToken);
-  console.log(refreshToken);
   if ([accessToken, refreshToken].includes(undefined)) {
-    request.cookies.delete(["accessToken", "refreshToken"]);
+    request.cookies.delete(["accessToken", "refreshToken", "autoLogin"]);
     return NextResponse.rewrite(new URL("/signin", request.url));
   }
   return NextResponse.next();

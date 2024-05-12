@@ -52,12 +52,13 @@ export async function POST(request: NextRequest) {
         value: data["autoLogin"] ? "true" : "false",
         path: "/",
         httpOnly: true,
+        maxAge: 60 * 60 * 24 * 8,
       });
       return response;
     }
   } catch (e) {
     const error = e as AxiosError;
-    console.log(error);
+    console.error(error);
     return NextResponse.json(error.response?.data, {
       status: error.response?.status,
     });
