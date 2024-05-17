@@ -124,7 +124,7 @@ export async function middleware(request: NextRequest) {
     request.cookies.delete(["accessToken", "refreshToken", "autoLogin"]);
     return NextResponse.rewrite(new URL("/signin", request.url));
   }
-  return NextResponse.next();
+  return NextResponse.rewrite(new URL("/app", request.url));
 }
 
 // See "Matching Paths" below to learn more
