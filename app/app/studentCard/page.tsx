@@ -1,15 +1,16 @@
 import React from "react";
 import Image from "next/image";
+import { Metadata } from "next";
 
 import Barcode from "@/assets/barcode.svg";
-import { Metadata } from "next";
+import { GET } from "@utils/request";
 
 export const metadata: Metadata = {
   title: "NeulBom 학생증",
   description: "당신의 학생증을 확인하세요.",
 };
 
-const StudentCard: React.FC = () => {
+const StudentCard: React.FC = async () => {
   const user: {
     username: string;
     studentId: string;
@@ -20,8 +21,14 @@ const StudentCard: React.FC = () => {
     studentId: "30716",
     profileImg:
       "https://cdn.discordapp.com/avatars/299895531701010442/b245fd3cc8b5c487b5e186d1cd3170d4.png?size=1024",
-    barcodeImg: require("../../../assets/barcode.svg"),
+    barcodeImg: "",
   };
+
+  // const requestUserInformation = await GET("/user/generateBarcode");
+  // if (!requestUserInformation) {
+  //   return <div>바코드를 불러오는 중 오류가 발생했습니다.</div>;
+  // }
+
   return (
     <div className="absolute m-0 top-1/2 -translate-y-1/2 w-full">
       <div className="max-w-64 w-1/3 h-auto rounded-full mx-auto">
@@ -44,6 +51,10 @@ const StudentCard: React.FC = () => {
         {user.studentId}
       </h1>
       <Image src={Barcode} alt="" className="w-full max-w-80 mx-auto mt-8" />
+      {/*<div*/}
+      {/*  dangerouslySetInnerHTML={{ __html: user.barcodeImg }}*/}
+      {/*  className="w-full max-w-80 mx-auto mt-8 svg-size"*/}
+      {/*/>*/}
     </div>
   );
 };

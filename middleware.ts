@@ -65,8 +65,14 @@ export async function middleware(request: NextRequest) {
         return NextResponse.rewrite(new URL("/signin", request.url));
       }
       if (refreshTokenResponse.status === 200) {
-        const updatedTokens = await refreshTokenResponse.json();
-        response.cookies.set("accessToken", updatedTokens["accessToken"], {
+        const updatedTokens: {
+          message: string;
+          data: {
+            accessToken: string;
+            refreshToken: string;
+          };
+        } = await refreshTokenResponse.json();
+        response.cookies.set("accessToken", updatedTokens.data.accessToken, {
           path: "/",
           httpOnly: true,
           maxAge:
@@ -74,7 +80,7 @@ export async function middleware(request: NextRequest) {
               ? 60 * 60 * 24 * 8
               : undefined,
         });
-        response.cookies.set("refreshToken", updatedTokens["refreshToken"], {
+        response.cookies.set("refreshToken", updatedTokens.data.refreshToken, {
           path: "/",
           httpOnly: true,
           maxAge:

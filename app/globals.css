@@ -29,13 +29,6 @@ body {
   min-height: 100vh;
 }
 
-.textStroke {
-  -webkit-text-stroke: 3px #000;
-  text-stroke: 3px #000;
-  -webkit-text-fill-color: transparent;
-  text-fill-color: transparent;
-}
-
 :root {
   --swiper-pagination-color: #9e1915;
 }
