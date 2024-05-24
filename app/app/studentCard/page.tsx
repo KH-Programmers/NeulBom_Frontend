@@ -14,19 +14,6 @@ export const metadata: Metadata = {
 };
 
 const StudentCard: React.FC = async () => {
-  const user: {
-    username: string;
-    studentId: string;
-    profileImg: string | null;
-    barcodeImg: string;
-  } = {
-    username: "송찬우",
-    studentId: "30716",
-    profileImg: null,
-    // "https://cdn.discordapp.com/avatars/299895531701010442/b245fd3cc8b5c487b5e186d1cd3170d4.png?size=1024",
-    barcodeImg: "",
-  };
-
   const requestUserInformation = await GET(
     "/user/",
     cookies().get("accessToken")?.value,
@@ -36,19 +23,17 @@ const StudentCard: React.FC = async () => {
   }
 
   const userData: {
-    message: string;
-    data: {
-      username: string;
-      studentId: string;
-    }
-  } = await requestUserInformation.data;
+    username: string;
+    studentId: string;
+    profileImg?: string;
+  } = await requestUserInformation.data['data'];
 
   return (
     <div className="absolute m-0 top-1/2 -translate-y-1/2 w-full">
       <div className="max-w-64 w-1/3 h-auto rounded-full mx-auto">
-        {user.profileImg ? (
+        {userData.profileImg ? (
           <Image
-            src={user.profileImg}
+            src={userData.profileImg}
             alt=""
             width={1024}
             height={1024}
@@ -61,14 +46,14 @@ const StudentCard: React.FC = async () => {
         )}
       </div>
       <h1 className="w-min whitespace-nowrap mx-auto text-6xl font-black mt-6 drop-shadow-md">
-        {user.username}
+        {userData.username}
       </h1>
       <h1 className="w-min whitespace-nowrap mx-auto text-3xl font-black opacity-50">
-        {user.studentId}
+        {userData.studentId}
       </h1>
       {/* <Image src={Barcode} alt="" className="w-full max-w-80 mx-auto mt-8" /> */}
       <div className="w-full mx-auto mt-8">
-        <Barcode className='w-full' value={userData.data.studentId} />
+        <Barcode className='w-full' value={userData.studentId} />
       </div>
 
       {/*<div*/}
