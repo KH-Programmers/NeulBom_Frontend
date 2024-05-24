@@ -23,7 +23,7 @@ const StudentCard: React.FC = async () => {
   }
 
   const userData: {
-    username: string;
+    name: string;
     studentId: string;
     profileImg?: string;
   } = await requestUserInformation.data['data'];
@@ -46,20 +46,14 @@ const StudentCard: React.FC = async () => {
         )}
       </div>
       <h1 className="w-min whitespace-nowrap mx-auto text-6xl font-black mt-6 drop-shadow-md">
-        {userData.username}
+        {userData.name}
       </h1>
       <h1 className="w-min whitespace-nowrap mx-auto text-3xl font-black opacity-50">
         {userData.studentId}
       </h1>
-      {/* <Image src={Barcode} alt="" className="w-full max-w-80 mx-auto mt-8" /> */}
       <div className="w-full mx-auto mt-8">
         <Barcode className='w-full' value={userData.studentId} />
       </div>
-
-      {/*<div*/}
-      {/*  dangerouslySetInnerHTML={{ __html: user.barcodeImg }}*/}
-      {/*  className="w-full max-w-80 mx-auto mt-8 svg-size"*/}
-      {/*/>*/}
     </div>
   );
 };
