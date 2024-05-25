@@ -2,78 +2,72 @@
 
 import React from "react";
 
-import clsx from "clsx";
-
 import { getAllergy } from "@/utils/types";
+
+const Menu: React.FC<{
+  name: string;
+  allergies: number[];
+}> = ({ name, allergies }) => {
+  return (
+    <div className="w-full h-full bg-gray-300 p-6 rounded-xl drop-shadow">
+      <h1 className="font-bold">{name}</h1>
+      <h2 className="text-sm font-light">{getAllergy(allergies)}</h2>
+    </div>
+  );
+};
+
+const MealPanel: React.FC<{
+  isLunch?: boolean;
+  mealData?: {
+    isLunch: boolean;
+    date: string;
+    menu: Array<{
+      name: string;
+      allergies: Array<number>;
+    }>;
+  };
+}> = ({ isLunch, mealData }) => {
+  return (
+    <div className="h-1/2">
+      <div className="w-full py-1 flex justify-center items-center rounded-md bg-primary text-white">
+        {isLunch ? "중식" : "석식"}
+      </div>
+      <div className="mt-2">
+        <ul className="w-full h-1/2 grid-cols-2 grid gap-2 text-lg p-2">
+          {mealData &&
+            mealData.menu.map((menu, k) => (
+              <Menu key={k} name={menu.name} allergies={menu.allergies} />
+            ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
 
 export const TodayMealPanel: React.FC<{
   meal: {
-    date: number;
-    lunchData: Array<[string, number[]]>;
-    dinnerData: Array<[string, number[]]>;
+    lunchData?: {
+      isLunch: boolean;
+      date: string;
+      menu: Array<{
+        name: string;
+        allergies: Array<number>;
+      }>;
+    };
+    dinnerData?: {
+      isLunch: boolean;
+      date: string;
+      menu: Array<{
+        name: string;
+        allergies: Array<number>;
+      }>;
+    };
   };
 }> = ({ meal }) => {
-  const [isLunch, setIsLunch] = React.useState(true);
-
-  const allergies: number[][] = [[], []];
-
-  meal.lunchData.map(([name, allergy]) => {
-    allergy.map((allergy) => {
-      allergies[0].push(allergy);
-    });
-  });
-  meal.dinnerData.map(([name, allergy]) => {
-    allergy.map((allergy) => {
-      allergies[1].push(allergy);
-    });
-  });
-
   return (
-    <div className="p-4">
-      <div className="flex gap-2">
-        <button
-          className={clsx(
-            "flex-grow w-0 py-1 flex justify-center items-center rounded-md transition-all",
-            {
-              "hover:bg-black/5": !isLunch,
-              "bg-primary text-white": isLunch,
-            },
-          )}
-          onClick={() => setIsLunch(true)}
-        >
-          중식
-        </button>
-        <button
-          className={clsx(
-            "flex-grow w-0 py-1 flex justify-center items-center rounded-md transition-all",
-            {
-              "hover:bg-black/5": isLunch,
-              "bg-primary text-white": !isLunch,
-            },
-          )}
-          onClick={() => setIsLunch(false)}
-        >
-          석식
-        </button>
-      </div>
-      <div className="mt-2">
-        <ul className="list-disc list-inside opacity-60 font-extralight text-lg">
-          {isLunch
-            ? meal.lunchData.map(([name, allergy], k) => (
-                <li key={k}>{name}</li>
-              ))
-            : meal.dinnerData.map(([name, allergy], k) => (
-                <li key={k}>{name}</li>
-              ))}
-        </ul>
-        <div className="opacity-40 mt-2">
-          {meal.lunchData.length === 0
-            ? ""
-            : `알레르기 정보: ${getAllergy([
-                ...new Set(allergies[isLunch ? 0 : 1]),
-              ])}`}
-        </div>
-      </div>
+    <div className="h-full p-4">
+      <MealPanel isLunch mealData={meal.lunchData} />
+      <MealPanel mealData={meal.dinnerData} />
     </div>
   );
 };

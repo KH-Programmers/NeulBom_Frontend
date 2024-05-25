@@ -41,13 +41,16 @@ const SignIn = () => {
               setIsLoading(true);
               if (token === "") return;
               try {
-                await axios.post(`/signin/api/`, {
-                  userId: userId,
-                  password: password,
-                  token: token,
-                  autoLogin: autoLogin,
-                });
-                router.push("/app");
+                axios
+                  .post(`/signin/api/`, {
+                    userId: userId,
+                    password: password,
+                    token: token,
+                    autoLogin: autoLogin,
+                  })
+                  .then((res) => {
+                    router.push("/app");
+                  });
               } catch (e) {
                 const error = e as AxiosError;
                 switch (error.response?.status) {

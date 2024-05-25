@@ -17,9 +17,42 @@ export const metadata: Metadata = {
   description: "늘봄에 오신 것을 환영합니다.",
 };
 
+const getDateString = (date: string) => {
+  const now = new Date();
+  const target = new Date(
+    Date.UTC(
+      parseInt(date.substring(0, 4)),
+      parseInt(date.substring(4, 6)) - 1,
+      parseInt(date.substring(6, 8)),
+      9,
+    ),
+  );
+  const diff = target.getTime() - now.getTime();
+  const diffDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+  if (diffDays === 0) {
+    return "오늘";
+  }
+  if (diffDays === 1) {
+    return "내일";
+  }
+  if (diffDays === 2) {
+    return "모레";
+  }
+  return `${Math.abs(diffDays)}일 ${diffDays > 0 ? "후" : "전"}`;
+};
+
 export default async function AppMain() {
   const cookieStore = cookies();
   const token = cookieStore.get("accessToken");
+  const requestMealData = await GET("/meal/");
+  const mealData: Array<{
+    isLunch: boolean;
+    date: string;
+    menu: Array<{
+      name: string;
+      allergies: Array<number>;
+    }>;
+  }> = await requestMealData?.data;
   return (
     <div className="p-4 flex flex-col w-full h-full gap-4 flex-grow">
       <MainBanner />
@@ -27,8 +60,13 @@ export default async function AppMain() {
         <MainCard title="인기글">
           <PopularPostsPanel posts={[]} />
         </MainCard>
-        <MainCard title="오늘의 급식">
-          {/*<TodayMealPanel meal={data.foodData!} />*/}
+        <MainCard title={`${getDateString(mealData[0].date)}의 급식`}>
+          <TodayMealPanel
+            meal={{
+              lunchData: mealData.find((data) => data.isLunch),
+              dinnerData: mealData.find((data) => !data.isLunch),
+            }}
+          />
         </MainCard>
         <MainCard title="오늘의 일정">
           <TodayTodoPanel />
