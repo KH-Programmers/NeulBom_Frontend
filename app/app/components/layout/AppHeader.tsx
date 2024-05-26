@@ -139,9 +139,9 @@ const AppMobileHeaderContent: React.FC = () => {
       <MobileNavButton onClick={() => setNotificationPopup(true)} icon={TbBell}>
         알림
       </MobileNavButton>
-      {/*<MobileNavButton onClick={() => alert("TODO")} icon={TbUserCircle}>*/}
-      {/*  (username)*/}
-      {/*</MobileNavButton>*/}
+      <MobileNavButton onClick={() => alert("TODO")} icon={TbUserCircle}>
+        (username)
+      </MobileNavButton>
     </div>
   );
 };

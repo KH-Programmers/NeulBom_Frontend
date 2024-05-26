@@ -17,7 +17,10 @@ export const metadata: Metadata = {
   description: "늘봄에 오신 것을 환영합니다.",
 };
 
-const getDateString = (date: string) => {
+const getDateString = (date?: string) => {
+  if (!date) {
+    return "오늘";
+  }
   const now = new Date();
   const target = new Date(
     Date.UTC(
@@ -60,12 +63,16 @@ export default async function AppMain() {
         <MainCard title="인기글">
           <PopularPostsPanel posts={[]} />
         </MainCard>
-        <MainCard title={`${getDateString(mealData[0].date)}의 급식`}>
+        <MainCard title={`${getDateString(mealData[0]?.date)}의 급식`}>
           <TodayMealPanel
-            meal={{
-              lunchData: mealData.find((data) => data.isLunch),
-              dinnerData: mealData.find((data) => !data.isLunch),
-            }}
+            meal={
+              mealData.length
+                ? {
+                    lunchData: mealData.find((data) => data.isLunch),
+                    dinnerData: mealData.find((data) => !data.isLunch),
+                  }
+                : {}
+            }
           />
         </MainCard>
         <MainCard title="오늘의 일정">
