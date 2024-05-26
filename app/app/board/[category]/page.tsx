@@ -21,14 +21,14 @@ export default async function BoardCategoryView({
   let posts: Post[] = [];
   try {
     const response = await GET(`/board/${params.category}`, token.value);
-    posts = response!.data;
+    posts = await response!.data;
   } catch (e) {
     posts = [];
   }
 
   return (
     <div className="flex flex-col gap-4 w-full">
-      {posts.length &&
+      {posts.length ? (
         posts.map((post: Post, k) => (
           <PostListItem
             key={k}
@@ -36,10 +36,13 @@ export default async function BoardCategoryView({
             title={post.title}
             user={post.user}
             commentCount={post.commentCount}
-            viewCount={post.viewCounts}
+            viewCount={post.viewCount}
             createdAt={format(new Date(post.updatedAt), "yyyy-MM-dd")}
           />
-        ))}
+        ))
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

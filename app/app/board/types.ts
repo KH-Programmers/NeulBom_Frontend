@@ -11,7 +11,7 @@ export type Post = {
   title: string;
   user: User;
   commentCount: number;
-  viewCounts: number;
+  viewCount: number;
   updatedAt: string;
   likeCount: number;
 };

@@ -21,7 +21,7 @@ const ContentEditor: React.FC<{
 }> = ({ categories, defaultCategory, token }) => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("study");
+  const [category, setCategory] = useState("schoolLife");
 
   const { push } = useRouter();
 
