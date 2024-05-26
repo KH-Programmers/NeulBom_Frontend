@@ -1,63 +1,29 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 import { AxiosError } from "axios";
 import MDEditor from "@uiw/react-md-editor";
 import Select, { ActionMeta, SingleValue } from "react-select";
 
-import { POST } from "@/utils/request";
-
-const categories = [
-  {
-    label: "공부",
-    value: "study",
-  },
-  {
-    label: "학교생활",
-    value: "school",
-  },
-  {
-    label: "컨텐츠",
-    value: "entertainment",
-  },
-  {
-    label: "스포츠",
-    value: "sports",
-  },
-  /* 카테고리 추가할 것. */
-];
+import { POST } from "@utils/request";
 
 type Option = {
   label: string;
   value: string;
 };
 
-interface edit {
-  defaultCategory: string | null;
-  token: RequestCookie;
-}
-
-const ContentEditor: React.FC<edit> = ({ defaultCategory, token }) => {
-  const [content, setContent] = React.useState("");
-  const [title, setTitle] = React.useState("");
-  const [showEditor, setShowEditor] = React.useState(false);
-  const [category, setCategory] = React.useState("study");
-
-  let defaultValue;
-  for (let i = 0; i < categories.length; i++) {
-    if (categories[i].value == defaultCategory) {
-      defaultValue = categories[i];
-    }
-  }
+const ContentEditor: React.FC<{
+  categories: { label: string; value: string }[];
+  defaultCategory: { label: string; value: string } | null;
+  token: string;
+}> = ({ categories, defaultCategory, token }) => {
+  const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("study");
 
   const { push } = useRouter();
-
-  React.useEffect(() => {
-    setShowEditor(true);
-  }, []);
 
   const articleSubmit = async () => {
     const data = {
@@ -65,12 +31,7 @@ const ContentEditor: React.FC<edit> = ({ defaultCategory, token }) => {
       text: content,
     };
     try {
-      console.log(category);
-      const response = await POST(
-        `/board/${category}/write/`,
-        data,
-        token.value,
-      ); ///url은 후에 category 받아와서 수정.
+      const response = await POST(`/board/${category}/write/`, data, token);
       if (response.status === 201) {
         push(`/app/board/${category}`);
         return alert("업로드 되었습니다.");
@@ -90,25 +51,21 @@ const ContentEditor: React.FC<edit> = ({ defaultCategory, token }) => {
     newValue: SingleValue<Option> | null,
     actionMeta: ActionMeta<Option>,
   ) => {
-    setCategory(newValue ? newValue.value : "study");
+    setCategory(newValue ? newValue.value : "schoolLife");
   };
 
   return (
     <>
-      <div className="w-full flex gap-2 mt-2">
+      <div className="w-full flex items-center gap-2 mt-2">
         <div>
           <Select
             className="w-[180px]"
             options={categories}
             onChange={categorySubmit}
-            defaultValue={defaultValue}
+            defaultValue={defaultCategory}
+            placeholder="카테고리"
           />
         </div>
-        {/* <input
-          type="text"
-          placeholder="카테고리"
-          className="w-1/3 mt-2 p-2 outline-none rounded-lg shadow placeholder:text-black/40 transition-all"
-        /> */}
         <input
           type="text"
           placeholder="제목"
@@ -118,14 +75,13 @@ const ContentEditor: React.FC<edit> = ({ defaultCategory, token }) => {
           }}
         />
       </div>
-      {showEditor && (
-        <MDEditor
-          value={content}
-          onChange={(value) => setContent(value ?? "")}
-          className="mt-2"
-          height={480}
-        />
-      )}
+
+      <MDEditor
+        value={content}
+        onChange={(value) => setContent(value ?? "")}
+        className="mt-2"
+        height={480}
+      />
       <div className="flex mt-2">
         <div className="flex-grow" />
 

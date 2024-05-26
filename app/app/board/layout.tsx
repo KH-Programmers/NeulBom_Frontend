@@ -1,38 +1,37 @@
 import React, { PropsWithChildren } from "react";
-import { BoardListSidebar } from "./components/Sidebar";
+import { cookies } from "next/headers";
+
+import { GET } from "@utils/request";
 import { BoardCategory } from "./types";
+import { BoardListSidebar } from "./components/Sidebar";
 
-const categories: BoardCategory[] = [
-  {
-    id: "popular",
-    name: "인기글",
-  },
-  {
-    id: "all",
-    name: "전체",
-  },
-  {
-    id: "study",
-    name: "공부",
-  },
-  {
-    id: "school",
-    name: "학교생활",
-  },
-  {
-    id: "entertainment",
-    name: "컨텐츠",
-  },
-  {
-    id: "sports",
-    name: "스포츠",
-  },
-];
+const BoardLayout: React.FC<PropsWithChildren> = async ({ children }) => {
+  const cookieStore = cookies();
+  const token = cookieStore.get("accessToken");
 
-const BoardLayout: React.FC<PropsWithChildren> = ({ children }) => {
+  let user: {
+    isSuper: boolean;
+  } = {
+    isSuper: false,
+  };
+  let categories: BoardCategory[] = [];
+  try {
+    const requestBoardData = await GET("/board/");
+    await requestBoardData!.data.map((category: BoardCategory) => {
+      categories.push(category);
+    });
+  } catch (e) {
+    console.error(e);
+  }
+  try {
+    const requestUserData = await GET("/user/isValidation/", token!.value);
+    user = requestUserData!.data;
+  } catch (e) {
+    console.error(e);
+  }
   return (
     <div className="flex flex-col md:flex-row gap-4 p-8">
-      <BoardListSidebar categories={categories} />
+      <BoardListSidebar categories={categories} isSuper={user.isSuper} />
       <div className="flex-grow">{children}</div>
     </div>
   );

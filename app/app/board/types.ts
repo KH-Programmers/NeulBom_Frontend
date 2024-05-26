@@ -1,7 +1,9 @@
 export type BoardCategory = {
-  id?: string;
+  id: string;
   name: string;
-  children?: BoardCategory[];
+  children: BoardCategory[] | null;
+  isWritable: boolean;
+  isRequireSuper: boolean;
 };
 
 export type Post = {

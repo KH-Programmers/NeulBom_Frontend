@@ -28,17 +28,18 @@ export default async function BoardCategoryView({
 
   return (
     <div className="flex flex-col gap-4 w-full">
-      {posts.map((post: Post, k) => (
-        <PostListItem
-          key={k}
-          id={post.id}
-          title={post.title}
-          user={post.user}
-          commentCount={post.commentCount}
-          viewCount={post.viewCounts}
-          createdAt={format(new Date(post.updatedAt), "yyyy-MM-dd")}
-        />
-      ))}
+      {posts.length &&
+        posts.map((post: Post, k) => (
+          <PostListItem
+            key={k}
+            id={post.id}
+            title={post.title}
+            user={post.user}
+            commentCount={post.commentCount}
+            viewCount={post.viewCounts}
+            createdAt={format(new Date(post.updatedAt), "yyyy-MM-dd")}
+          />
+        ))}
     </div>
   );
 }
