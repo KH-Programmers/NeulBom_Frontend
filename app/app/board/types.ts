@@ -19,5 +19,5 @@ export type Post = {
 export type User = {
   id: string;
   authorName: string;
-  IsAdmin: boolean;
+  isAdmin: boolean;
 };

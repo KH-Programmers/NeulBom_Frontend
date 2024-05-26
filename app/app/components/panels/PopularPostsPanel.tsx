@@ -1,26 +1,19 @@
 import React from "react";
+import { Post } from "../../board/types";
 
 export const PopularPostsPanel: React.FC<{
-  posts: Array<{
-    id: number;
-    authorName: string;
-    title: string;
-    commentCount: number;
-    viewCounts: number;
-    updatedAt: string;
-    likeCount: number;
-  }>;
+  posts: Post[];
 }> = ({ posts }) => {
   return (
-    <div className="divide-y">
-      {posts.map((x, k) => {
+    <div className="grid gap-4 p-2">
+      {posts.map((post, k) => {
         return (
-          <div key={k} className="p-4">
-            <a className="text-xl" href={`/app/posts/${x.id}/`}>
-              {x.title}
+          <div key={k} className="p-4 bg-gray-200 rounded-xl">
+            <a className="text-xl" href={`/app/posts/${post.id}/`}>
+              {post.title}
             </a>
             <div className="mt-1 font-light text-sm overflow-hidden text-ellipsis text-black/60">
-              익명
+              {post.user.authorName}
             </div>
           </div>
         );
