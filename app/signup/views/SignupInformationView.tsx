@@ -141,7 +141,6 @@ export const SignupInformationView: React.FC<{ next: () => void }> = ({
         <Captcha
           sitekey={process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY!}
           onVerify={(token: string, ekey: string) => {
-            console.log(token);
             setToken(token);
           }}
         />

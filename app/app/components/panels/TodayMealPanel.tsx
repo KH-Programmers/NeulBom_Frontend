@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { getAllergy } from "@/utils/types";
+import { getAllergy } from "@utils/types";
 
 const Menu: React.FC<{
   name: string;

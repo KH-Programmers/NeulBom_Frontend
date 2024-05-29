@@ -21,7 +21,9 @@ const getDateString = (date?: string) => {
   if (!date) {
     return "오늘";
   }
-  const now = new Date();
+  const now = new Date(
+    Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 9),
+  );
   const target = new Date(
     Date.UTC(
       parseInt(date.substring(0, 4)),
