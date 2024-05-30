@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     const accessToken = LoginResponse.data["data"]["accessToken"];
     const refreshToken = LoginResponse.data["data"]["refreshToken"];
     if (LoginResponse.status === 200) {
-      const response = NextResponse.redirect("/app");
+      const response = NextResponse.json({}, { status: 200 });
       response.cookies.set("accessToken", accessToken, {
         path: "/",
         httpOnly: true,
