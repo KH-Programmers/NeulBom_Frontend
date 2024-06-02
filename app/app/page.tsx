@@ -1,16 +1,13 @@
 import React from "react";
+import { Metadata } from "next";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
-import { AxiosError } from "axios";
-
-import { GET } from "@/utils/request";
+import { GET } from "@utils/request";
 import { MainCard } from "./components/MainCard";
 import { MainBanner } from "./components/MainBanner";
 import { TodayMealPanel } from "./components/panels/TodayMealPanel";
 import { TodayTodoPanel } from "./components/panels/TodayTodoPanel";
 import { PopularPostsPanel } from "./components/panels/PopularPostsPanel";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "NeulBom",
