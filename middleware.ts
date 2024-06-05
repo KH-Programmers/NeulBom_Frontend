@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
-  "use server";
   const cookieStore = cookies();
   const [accessToken, refreshToken, autoLogin] = [
     cookieStore.get("accessToken"),
@@ -21,6 +20,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.rewrite(new URL("/signin", request.url));
   }
   if (requestTokenValidity.status === 201) {
+    ("use server");
     const newToken: {
       accessToken: string;
       refreshToken: string;
