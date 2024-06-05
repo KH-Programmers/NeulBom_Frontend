@@ -21,32 +21,46 @@ export async function middleware(request: NextRequest) {
 
   if (requestTokenValidity.status === 401) {
     return NextResponse.rewrite(new URL("/signin", request.url));
-  }
-  if (requestTokenValidity.status === 201) {
-    ("use server");
+  } else {
+    let response;
     const newToken: {
       accessToken: string;
       refreshToken: string;
       autoLogin: string;
     } = await requestTokenValidity.json();
-    cookies().set("accessToken", newToken.accessToken, {
-      maxAge: newToken.autoLogin === "true" ? 60 * 60 * 24 * 8 : undefined,
+
+    const path = request.nextUrl.pathname;
+    if (path === "/") {
+      response = NextResponse.rewrite(new URL("/app", request.url));
+    } else {
+      response = NextResponse.next();
+    }
+    response.cookies.set("accessToken", newToken.accessToken, {
+      path: "/",
+      secure: true,
       httpOnly: true,
+      expires:
+        autoLogin?.value === "true"
+          ? new Date(Date.now() + 1000 * 60 * 60 * 24 * 8)
+          : undefined,
     });
-    cookies().set("refreshToken", newToken.refreshToken, {
-      maxAge: newToken.autoLogin === "true" ? 60 * 60 * 24 * 30 : undefined,
+    response.cookies.set("refreshToken", newToken.refreshToken, {
+      path: "/",
+      secure: true,
       httpOnly: true,
+      expires:
+        autoLogin?.value === "true"
+          ? new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
+          : undefined,
     });
-    cookies().set("autoLogin", newToken.autoLogin, {
-      maxAge: 60 * 60 * 24 * 30,
+    response.cookies.set("autoLogin", newToken.autoLogin, {
+      path: "/",
+      secure: true,
       httpOnly: true,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
     });
+    return response;
   }
-  const path = request.nextUrl.pathname;
-  if (path === "/") {
-    return NextResponse.rewrite(new URL("/app", request.url));
-  }
-  return NextResponse.next();
 }
 
 export const config = {
