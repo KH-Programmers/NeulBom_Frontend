@@ -21,9 +21,9 @@ export default function RootLayout({
         <meta name="description" content={metadata.description} />
         <meta
           name="naver-site-verification"
-          content="f5a2e7b5e25cef7790bb7e7ab8367a8f492bdda6"
+          content="f6555e8e303eee6b50e1e3e0916f6bb95979a5f4"
         />
-        <GoogleAnalytics gaId="G-BJ0D4GKKQJ" />
+        <GoogleAnalytics gaId="G-6BHVX6H7ME" />
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
