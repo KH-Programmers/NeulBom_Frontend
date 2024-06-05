@@ -9,6 +9,9 @@ export async function middleware(request: NextRequest) {
     cookieStore.get("refreshToken"),
     cookieStore.get("autoLogin"),
   ];
+  if (!accessToken && !refreshToken) {
+    return NextResponse.rewrite(new URL("/signin", request.url));
+  }
   const requestTokenValidity = await fetch(
     `${process.env.NEXT_PUBLIC_URI}/api/token${accessToken ? `?accessToken=${accessToken.value}` : ""}${refreshToken ? `&refreshToken=${refreshToken.value}` : ""}&autoLogin=${autoLogin?.value || "false"}`,
     {

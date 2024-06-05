@@ -24,7 +24,14 @@ const schema = yup
       .string()
       .length(5, "학번은 5자리여야 합니다.")
       .required("학번은 필수 사항입니다."),
-    email: yup.string().email().required("이메일은 필수 사항입니다."),
+    email: yup
+      .string()
+      .email()
+      .matches(
+        /^.*@kyungheeboy\.hs\.kr$/,
+        "이메일은 @kyungheeboy.hs.kr로 끝나야 합니다.",
+      )
+      .required("이메일은 필수 사항입니다."),
     password: yup.string().required("비밀번호는 필수 사항입니다."),
     passwordConfirm: yup
       .string()
