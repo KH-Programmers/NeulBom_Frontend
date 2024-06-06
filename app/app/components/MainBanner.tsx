@@ -22,9 +22,7 @@ export const MainBanner: React.FC = () => {
         </swiper-slide>
         <swiper-slide>
           <div className="h-24 flex justify-center items-center">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfRcU7xgZpA4TsRrxJs3zc2KYzElTyMtNk5LlHKhPhFaFKr-Q/viewform?usp=sf_link">
-              버그 제보하기
-            </a>
+            <a href="https://forms.gle/iRLFpCjiuhUbcXCJ8">버그 제보하기</a>
           </div>
         </swiper-slide>
       </swiper-container>,
