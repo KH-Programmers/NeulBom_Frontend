@@ -8,6 +8,7 @@ import MDEditor from "@uiw/react-md-editor";
 import Select, { ActionMeta, SingleValue } from "react-select";
 
 import { POST } from "@utils/request";
+import { Checkbox } from "@components/Checkbox";
 
 type Option = {
   label: string;
@@ -17,11 +18,13 @@ type Option = {
 const ContentEditor: React.FC<{
   categories: { label: string; value: string }[];
   defaultCategory: { label: string; value: string } | null;
+  isSuper: boolean;
   token: string;
-}> = ({ categories, defaultCategory, token }) => {
+}> = ({ categories, defaultCategory, isSuper, token }) => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("schoolLife");
+  const [visible, setVisible] = useState("");
 
   const { push } = useRouter();
 
@@ -29,6 +32,8 @@ const ContentEditor: React.FC<{
     const data = {
       title: title,
       text: content,
+      isAnonymous: visible === "anonymous",
+      isAdmin: visible === "admin",
     };
     try {
       const response = await POST(`/board/${category}/write/`, data, token);
@@ -82,8 +87,30 @@ const ContentEditor: React.FC<{
         className="mt-2"
         height={480}
       />
-      <div className="flex mt-2">
+      <div className="flex mt-2 gap-2">
         <div className="flex-grow" />
+
+        <label className="flex gap-2 items-center font-bold">
+          <Checkbox
+            onChange={(e) => {
+              setVisible(e.target.checked ? "anonymous" : "");
+            }}
+            checked={visible === "anonymous"}
+          />
+          익명 표시
+        </label>
+
+        {isSuper && (
+          <label className="flex gap-2 items-center font-bold">
+            <Checkbox
+              onChange={(e) => {
+                setVisible(e.target.checked ? "admin" : "");
+              }}
+              checked={visible === "admin"}
+            />
+            관리자 표시
+          </label>
+        )}
 
         <button
           className="px-8 py-2 bg-primary rounded-lg shadow text-white"

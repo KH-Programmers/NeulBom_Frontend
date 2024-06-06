@@ -26,6 +26,13 @@ const PostCreatePage: React.FC<{
     value: string;
   } | null = null;
 
+  let user: {
+    name: string;
+    studentId: string;
+    isSuper: boolean;
+    isTeacher: boolean;
+  } = { name: "", studentId: "", isSuper: false, isTeacher: false };
+
   try {
     const response = await GET("/board/");
     const data = response!.data as BoardCategory[];
@@ -60,6 +67,7 @@ const PostCreatePage: React.FC<{
         }
       }
     });
+    user = (await (await GET("/user/", token.value))!.data)["data"];
   } catch (e) {
     console.error(e);
   }
@@ -71,6 +79,7 @@ const PostCreatePage: React.FC<{
         <ContentEditor
           categories={categories}
           defaultCategory={defaultValue}
+          isSuper={user.isSuper}
           token={token.value}
         />
       </div>

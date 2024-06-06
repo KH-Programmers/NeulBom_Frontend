@@ -9,11 +9,11 @@ import axios, { AxiosError } from "axios";
 import { HashLoader } from "react-spinners";
 import { TbLock, TbUserCircle } from "react-icons/tb";
 
-import Captcha from "@/utils/captcha";
-import logo from "@/assets/NeulBom.svg";
-import { Button } from "@/components/Button";
-import { Checkbox } from "@/components/Checkbox";
-import { LoginInputField } from "@/components/LoginInputField";
+import Captcha from "@utils/captcha";
+import logo from "@assets/NeulBom.svg";
+import { Button } from "@components/Button";
+import { Checkbox } from "@components/Checkbox";
+import { LoginInputField } from "@components/LoginInputField";
 
 const SignIn = () => {
   const router = useRouter();
@@ -39,7 +39,11 @@ const SignIn = () => {
             onSubmit={async (e) => {
               e.preventDefault();
               setIsLoading(true);
-              if (token === "") return;
+              if (token === "") {
+                alert("캡챠 인증을 해주세요.");
+                setIsLoading(false);
+                return;
+              }
               try {
                 axios
                   .post(`/signin/api/`, {
