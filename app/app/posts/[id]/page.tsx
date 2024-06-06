@@ -35,14 +35,16 @@ export default async function PostViewPage({
       </div>
     );
   }
-  const BoardCategory = [1, 2].map((boardName, k: number) => (
-    <div className="flex items-center" key={k}>
-      <Link href={`/app/board/all`} className="text-blue-500">
-        전체
-      </Link>
-      <TbChevronRight className="text-black/40" />
-    </div>
-  ));
+  const BoardCategory = article.categories.map(
+    (category: string, k: number) => (
+      <div className="flex items-center" key={k}>
+        <Link href={`/app/board/all`} className="text-blue-500">
+          {category}
+        </Link>
+        <TbChevronRight className="text-black/40" />
+      </div>
+    ),
+  );
   const matterResult = matter(article.text).content;
   const processedContent = await remark().use(html).process(matterResult);
   const contentHtml = processedContent.toString();
@@ -92,12 +94,15 @@ export default async function PostViewPage({
             <div className="flex-grow w-0" />
             <ShareButton />
             {article.canDelete && (
-              <DeleteButton category={"category"} url={"/"} token={token!} />
+              <DeleteButton
+                category={article.categories[-1]}
+                id={article.id}
+                token={token!}
+              />
             )}
           </div>
         </article>
         {/*<CommentList article={article} requestUrl={"/"} token={token!} />*/}
-        <div className="mt-16" />
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ export type CommentElement = {
 
 export type Article = {
   id: string;
+  categories: string[];
   title: string;
   text: string;
   user: {
