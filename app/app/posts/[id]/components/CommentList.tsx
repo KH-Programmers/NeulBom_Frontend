@@ -33,7 +33,7 @@ export const CommentList: React.FC<CommentList> = ({
   const commentSubmit = (comment: string) => {
     const newComment: CommentElement = {
       id: comments.length + 1,
-      authorName: article.user.authorName,
+      authorName: article.authorName,
       content: comment,
       reply: [],
     };

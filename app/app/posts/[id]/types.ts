@@ -10,11 +10,7 @@ export type Article = {
   categories: string[];
   title: string;
   text: string;
-  user: {
-    authorName: string;
-    isAdmin: boolean;
-    isLiked: boolean;
-  };
+  authorName: string;
   comments: Array<CommentElement>;
   updatedAt: string;
   viewCount: number;
@@ -22,4 +18,5 @@ export type Article = {
   canDelete: boolean;
   isAnonymous: boolean;
   isAdmin: boolean;
+  isLiked: boolean;
 };

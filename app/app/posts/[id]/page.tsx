@@ -62,7 +62,7 @@ export default async function PostViewPage({
                 ? "관리자"
                 : article.isAnonymous
                   ? "익명"
-                  : article.user.authorName}
+                  : article.authorName}
             </div>
             <div className="flex-grow" />
             <div className="flex gap-4 items-center text-black/60">
@@ -89,7 +89,7 @@ export default async function PostViewPage({
               likeCount={article.likeCount}
               id={article.id}
               token={token!}
-              isLiked={article.user.isLiked}
+              isLiked={article.isLiked}
             />
             <div className="flex-grow w-0" />
             <ShareButton />

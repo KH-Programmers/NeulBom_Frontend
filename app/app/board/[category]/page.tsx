@@ -36,7 +36,7 @@ export default async function BoardCategoryView({
                 ? "관리자"
                 : article.isAnonymous
                   ? "익명"
-                  : article.user.authorName
+                  : article.authorName
             }
             commentCount={article.comments.length}
             viewCount={article.viewCount}

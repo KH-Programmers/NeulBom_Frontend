@@ -14,7 +14,7 @@ export const PopularPostsPanel: React.FC<{
               {post.title}
             </a>
             <div className="mt-1 font-light text-sm overflow-hidden text-ellipsis text-black/60">
-              {post.user.authorName}
+              {post.authorName}
             </div>
           </div>
         );
