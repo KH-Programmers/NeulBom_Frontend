@@ -25,11 +25,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.rewrite(new URL("/signin", request.url));
   } else {
     let response;
-    const newToken: {
-      accessToken: string;
-      refreshToken: string;
-      autoLogin: string;
-    } = await requestTokenValidity.json();
 
     const path = request.nextUrl.pathname;
     if (path === "/") {
@@ -37,7 +32,7 @@ export async function middleware(request: NextRequest) {
     } else {
       response = NextResponse.next();
     }
-    response.cookies.set("accessToken", newToken.accessToken, {
+    response.cookies.set("accessToken", accessToken.value, {
       path: "/",
       secure: true,
       httpOnly: true,
@@ -46,7 +41,7 @@ export async function middleware(request: NextRequest) {
           ? new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
           : undefined,
     });
-    response.cookies.set("autoLogin", newToken.autoLogin, {
+    response.cookies.set("autoLogin", autoLogin?.value || "false", {
       path: "/",
       secure: true,
       httpOnly: true,
