@@ -95,7 +95,7 @@ export default async function PostViewPage({
             <ShareButton />
             {article.canDelete && (
               <DeleteButton
-                category={article.categories[-1]}
+                category={article.categories[article.categories.length - 1]}
                 id={article.id}
                 token={token!}
               />
