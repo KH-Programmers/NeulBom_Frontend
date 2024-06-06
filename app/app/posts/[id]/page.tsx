@@ -1,19 +1,17 @@
 import React from "react";
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
-import { Category } from "./types";
-import { GET } from "@/utils/request";
+import { Article } from "./types";
+import { GET } from "@utils/request";
 import { LikeButton } from "./components/LikeButton";
 import { ShareButton } from "./components/shareButton";
 import { CommentList } from "./components/CommentList";
+import { DeleteButton } from "./components/DeleteButton";
 
 import html from "remark-html";
 import { remark } from "remark";
 import matter from "gray-matter";
-import { AxiosError } from "axios";
-import { DeleteButton } from "./components/DeleteButton";
 import { TbCalendar, TbChevronRight, TbEye, TbHeart } from "react-icons/tb";
 
 export default async function PostViewPage({
@@ -23,28 +21,28 @@ export default async function PostViewPage({
 }) {
   const cookieStore = cookies();
   const token = cookieStore.get("accessToken");
-  let article;
+  let article: Article | null;
   try {
-    const response = await GET(`/board/all/${params.id}`, token?.value);
+    const response = await GET(`/board/article/${params.id}`, token?.value);
     article = response!.data;
   } catch (e) {
-    article = [];
+    article = null;
   }
-  const requestUrl = `/board/${article.board_model[0].board_EN}/${article.id}/`;
-  const category = article.board_model[0].board_EN;
-  const BoardCategory = article.board_model.map(
-    (boardName: Category, k: number) => (
-      <div className="flex items-center" key={k}>
-        <Link
-          href={`/app/board/${boardName.board_EN}`}
-          className="text-blue-500"
-        >
-          {boardName.board_name}
-        </Link>
-        <TbChevronRight className="text-black/40" />
+  if (!article) {
+    return (
+      <div className="flex items-center mx-auto">
+        게시글이 존재하지 않습니다.
       </div>
-    ),
-  );
+    );
+  }
+  const BoardCategory = [1, 2].map((boardName, k: number) => (
+    <div className="flex items-center" key={k}>
+      <Link href={`/app/board/all`} className="text-blue-500">
+        전체
+      </Link>
+      <TbChevronRight className="text-black/40" />
+    </div>
+  ));
   const matterResult = matter(article.text).content;
   const processedContent = await remark().use(html).process(matterResult);
   const contentHtml = processedContent.toString();
@@ -58,22 +56,25 @@ export default async function PostViewPage({
           <hr className="border-t border-black/40 mt-2" />
           <div className="flex mt-2">
             <div className="text-gray-500">
-              {article.user.isAdmin ? "관리자" : "익명"}
-              {/*article.authorName 익명기능 추가*/}
+              {article.isAdmin
+                ? "관리자"
+                : article.isAnonymous
+                  ? "익명"
+                  : article.user.authorName}
             </div>
             <div className="flex-grow" />
             <div className="flex gap-4 items-center text-black/60">
               <div className="flex items-center gap-2">
                 <TbEye size={20} />
-                <span>{article.viewcounts}</span>
+                <span>{article.viewCount}</span>
               </div>
               <div className="flex items-center gap-2">
                 <TbHeart size={20} />
-                <span>{article.like_count}</span>
+                <span>{article.likeCount}</span>
               </div>
               <div className="flex items-center gap-2">
                 <TbCalendar size={20} />
-                <span>{article.updated_at}</span>
+                <span>{article.updatedAt}</span>
               </div>
             </div>
           </div>
@@ -83,23 +84,19 @@ export default async function PostViewPage({
           </div>
           <div className="mt-4 flex gap-4">
             <LikeButton
-              likeCount={article.like_count}
-              url={requestUrl}
+              likeCount={article.likeCount}
+              id={article.id}
               token={token!}
-              isLiked={article.IsLiked}
+              isLiked={article.user.isLiked}
             />
             <div className="flex-grow w-0" />
             <ShareButton />
             {article.canDelete && (
-              <DeleteButton
-                category={category}
-                url={requestUrl}
-                token={token!}
-              />
+              <DeleteButton category={"category"} url={"/"} token={token!} />
             )}
           </div>
         </article>
-        <CommentList article={article} requestUrl={requestUrl} token={token!} />
+        {/*<CommentList article={article} requestUrl={"/"} token={token!} />*/}
         <div className="mt-16" />
       </div>
     </div>

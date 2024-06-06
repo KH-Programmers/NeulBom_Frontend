@@ -1,8 +1,9 @@
 import React from "react";
-import { Post } from "../../board/types";
+
+import { Article } from "../../posts/[id]/types";
 
 export const PopularPostsPanel: React.FC<{
-  posts: Post[];
+  posts: Article[];
 }> = ({ posts }) => {
   return (
     <div className="grid gap-4 p-2">

@@ -34,25 +34,19 @@ export async function POST(request: NextRequest) {
       data,
     );
     const accessToken = LoginResponse.data["data"]["accessToken"];
-    const refreshToken = LoginResponse.data["data"]["refreshToken"];
     if (LoginResponse.status === 200) {
       const response = NextResponse.json({}, { status: 200 });
       response.cookies.set("accessToken", accessToken, {
         path: "/",
         httpOnly: true,
-        maxAge: data["autoLogin"] ? 60 * 60 * 24 * 8 : undefined,
-      });
-      response.cookies.set("refreshToken", refreshToken, {
-        path: "/",
-        httpOnly: true,
-        maxAge: data["autoLogin"] ? 60 * 60 * 24 * 8 : undefined,
+        maxAge: data["autoLogin"] ? 60 * 60 * 24 * 30 : undefined,
       });
       response.cookies.set({
         name: "autoLogin",
         value: data["autoLogin"] ? "true" : "false",
         path: "/",
         httpOnly: true,
-        maxAge: 60 * 60 * 24 * 8,
+        maxAge: data["autoLogin"] ? 60 * 60 * 24 * 30 : undefined,
       });
       return response;
     }

@@ -1,47 +1,38 @@
 "use client";
-import { GET } from "@/utils/request";
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
-import { TbHeart, TbHeartFilled } from "react-icons/tb";
 import React from "react";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
-interface likeAction {
+import { PUT, DELETE } from "@utils/request";
+
+import { TbHeart, TbHeartFilled } from "react-icons/tb";
+
+export const LikeButton: React.FC<{
   likeCount: number;
-  url: string;
+  id: string;
   token: RequestCookie;
   isLiked: Boolean;
-}
-
-export const LikeButton: React.FC<likeAction> = ({
-  likeCount,
-  url,
-  token,
-  isLiked,
-}) => {
+}> = ({ likeCount, id, token, isLiked }) => {
   const [count, setCount] = React.useState(likeCount);
   const [isCounted, setIsCounted] = React.useState(isLiked);
 
-  const like = async () => {
-    if (!isCounted) {
-      await GET(`${url}like/`, token.value);
-      setCount((likeCount += 1));
-      setIsCounted(true);
-    }
-  };
-
-  const heart = (isCounted: Boolean) => {
+  const handleLike = async () => {
     if (isCounted) {
-      return <TbHeartFilled size={20} />;
+      setCount(count - 1);
+      setIsCounted(false);
+      await DELETE(`/board/article/${id}/like`, token.value);
     } else {
-      return <TbHeart size={20} />;
+      setCount(count + 1);
+      setIsCounted(true);
+      await PUT(`/board/article/${id}/like`, token.value);
     }
   };
 
   return (
     <button
       className="border-2 p-2 border-red-500 text-red-500 rounded-lg flex gap-2 items-center hover:bg-red-500 hover:text-white transition-all"
-      onClick={like}
+      onClick={handleLike}
     >
-      {heart(isCounted)}
+      {isCounted ? <TbHeartFilled size={20} /> : <TbHeart size={20} />}
       <div className="text-sm">{count}</div>
     </button>
   );

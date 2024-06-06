@@ -4,22 +4,24 @@ import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const cookieStore = cookies();
-  const [accessToken, refreshToken, autoLogin] = [
+  const [accessToken, autoLogin] = [
     cookieStore.get("accessToken"),
-    cookieStore.get("refreshToken"),
     cookieStore.get("autoLogin"),
   ];
-  if (!accessToken && !refreshToken) {
+  if (!accessToken) {
     return NextResponse.rewrite(new URL("/signin", request.url));
   }
   const requestTokenValidity = await fetch(
-    `${process.env.NEXT_PUBLIC_URI}/api/token${accessToken ? `?accessToken=${accessToken.value}` : ""}${refreshToken ? `&refreshToken=${refreshToken.value}` : ""}&autoLogin=${autoLogin?.value || "false"}`,
+    `${process.env.NEXT_PUBLIC_API_URI}/user/authentication`,
     {
       method: "GET",
+      headers: {
+        Authorization: `Token ${accessToken.value}`,
+      },
     },
   );
 
-  if (requestTokenValidity.status === 401) {
+  if (requestTokenValidity?.status === 401) {
     return NextResponse.rewrite(new URL("/signin", request.url));
   } else {
     let response;
@@ -41,15 +43,6 @@ export async function middleware(request: NextRequest) {
       httpOnly: true,
       expires:
         autoLogin?.value === "true"
-          ? new Date(Date.now() + 1000 * 60 * 60 * 24 * 8)
-          : undefined,
-    });
-    response.cookies.set("refreshToken", newToken.refreshToken, {
-      path: "/",
-      secure: true,
-      httpOnly: true,
-      expires:
-        autoLogin?.value === "true"
           ? new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
           : undefined,
     });
@@ -57,7 +50,10 @@ export async function middleware(request: NextRequest) {
       path: "/",
       secure: true,
       httpOnly: true,
-      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30),
+      expires:
+        autoLogin?.value === "true"
+          ? new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)
+          : undefined,
     });
     return response;
   }

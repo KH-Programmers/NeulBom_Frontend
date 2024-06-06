@@ -1,12 +1,17 @@
 "use client";
+
+import React from "react";
+
 import { TbShare } from "react-icons/tb";
 
 export const ShareButton: React.FC = () => {
   const shareLink = () => {
-    navigator.share({
-      title: document.title,
-      url: window.location.href,
-    });
+    navigator
+      .share({
+        title: document.title,
+        url: window.location.href,
+      })
+      .then();
   };
   return (
     <button

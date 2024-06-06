@@ -4,9 +4,9 @@ import { redirect } from "next/navigation";
 
 import { format } from "date-fns";
 
-import { Post } from "../types";
 import { GET } from "@/utils/request";
 import { PostListItem } from "./components/PostListItem";
+import { Article } from "@/app/app/posts/[id]/types";
 
 export default async function BoardCategoryView({
   params,
@@ -14,30 +14,33 @@ export default async function BoardCategoryView({
   params: { category: string };
 }) {
   const cookieStore = cookies();
-  const token = cookieStore.get("accessToken");
-  if (!token) {
-    return redirect("/signin");
-  }
-  let posts: Post[] = [];
+  const token = cookieStore.get("accessToken")!;
+  let articles: Article[] = [];
   try {
     const response = await GET(`/board/${params.category}`, token.value);
-    posts = await response!.data;
+    articles = await response!.data;
   } catch (e) {
-    posts = [];
+    articles = [];
   }
 
   return (
     <div className="flex flex-col gap-4 w-full">
-      {posts.length ? (
-        posts.map((post: Post, k) => (
+      {articles.length ? (
+        articles.map((article: Article, k) => (
           <PostListItem
             key={k}
-            id={post.id}
-            title={post.title}
-            user={post.user}
-            commentCount={post.commentCount}
-            viewCount={post.viewCount}
-            createdAt={format(new Date(post.updatedAt), "yyyy-MM-dd")}
+            id={article.id}
+            title={article.title}
+            authorName={
+              article.isAdmin
+                ? "관리자"
+                : article.isAnonymous
+                  ? "익명"
+                  : article.user.authorName
+            }
+            commentCount={article.comments.length}
+            viewCount={article.viewCount}
+            createdAt={format(new Date(article.updatedAt), "yyyy-MM-dd")}
           />
         ))
       ) : (

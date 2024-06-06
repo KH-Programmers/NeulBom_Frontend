@@ -11,6 +11,7 @@ interface CommentList {
   requestUrl: string;
   token: RequestCookie;
 }
+
 export const CommentList: React.FC<CommentList> = ({
   article,
   requestUrl,
@@ -32,7 +33,7 @@ export const CommentList: React.FC<CommentList> = ({
   const commentSubmit = (comment: string) => {
     const newComment: CommentElement = {
       id: comments.length + 1,
-      author_name: article.author_name,
+      authorName: article.user.authorName,
       content: comment,
       reply: [],
     };

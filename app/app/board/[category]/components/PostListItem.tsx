@@ -8,7 +8,7 @@ import clsx from "clsx";
 interface PostListItem {
   id: string;
   title: string;
-  user: User;
+  authorName: string;
   viewCount: number;
   createdAt: string;
   commentCount: number;
@@ -33,7 +33,7 @@ const StatItem: React.FC<
 export const PostListItem: React.FC<PostListItem> = ({
   id,
   title,
-  user,
+  authorName,
   createdAt,
   viewCount,
   commentCount,
@@ -45,12 +45,12 @@ export const PostListItem: React.FC<PostListItem> = ({
       prefetch={false}
     >
       <div className="lg:hidden opacity-60">
-        <StatItem icon={TbUser}>{user.isAdmin ? "관리자" : "익명"}</StatItem>
+        <StatItem icon={TbUser}>{authorName}</StatItem>
       </div>
       <div className="flex-grow flex-shrink-0">{title}</div>
       <div className="flex items-center gap-2 opacity-60">
         <StatItem className="hidden lg:flex" icon={TbUser}>
-          {user.isAdmin ? "관리자" : "익명"}
+          {authorName}
         </StatItem>
         <StatItem icon={TbEye}>{viewCount}</StatItem>
         <StatItem icon={TbCalendar}>{createdAt}</StatItem>

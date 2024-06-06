@@ -1,14 +1,12 @@
 "use client";
 
+import React from "react";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 import { url } from "inspector";
 import { AxiosError } from "axios";
 
 import { DELETE } from "@/utils/request";
-
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
 
 export const DeleteButton: React.FC<{
   category: string;
@@ -17,7 +15,7 @@ export const DeleteButton: React.FC<{
 }> = ({ category, token, url }) => {
   const deletePost = async () => {
     try {
-      const response = await DELETE(url, token.value); ///url은 후에 category 받아와서 수정.
+      const response = await DELETE(url, token.value);
       if (response.status === 204) {
         window.location.replace(`/app/board/${category}`);
         return alert("정상적으로 삭제되었습니다.");
@@ -29,23 +27,6 @@ export const DeleteButton: React.FC<{
           return alert("타인의 글이거나 글을 삭제할 수 있는 권한이 없습니다.");
       }
     }
-  };
-
-  const submit = () => {
-    confirmAlert({
-      title: "Confirm to submit",
-      message: "Are you sure to do this.",
-      buttons: [
-        {
-          label: "Yes",
-          onClick: () => alert("Click Yes"),
-        },
-        {
-          label: "No",
-          onClick: () => alert("Click No"),
-        },
-      ],
-    });
   };
 
   return (
