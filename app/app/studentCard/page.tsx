@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 
 import { GoPerson } from "react-icons/go";
 
+import { User } from "../types";
 import { GET } from "@utils/request";
 import Barcode from "@components/Barcode";
 
@@ -22,11 +23,7 @@ const StudentCard: React.FC = async () => {
     return <div>바코드를 불러오는 중 오류가 발생했습니다.</div>;
   }
 
-  const userData: {
-    name: string;
-    studentId: string;
-    profileImg?: string;
-  } = await requestUserInformation.data['data'];
+  const userData: User = await requestUserInformation.data["data"];
 
   return (
     <div className="absolute m-0 top-1/2 -translate-y-1/2 w-full">
@@ -52,7 +49,7 @@ const StudentCard: React.FC = async () => {
         {userData.studentId}
       </h1>
       <div className="w-full mx-auto mt-8">
-        <Barcode className='w-full' value={userData.studentId} />
+        <Barcode className="w-full" value={userData.studentId} />
       </div>
     </div>
   );
