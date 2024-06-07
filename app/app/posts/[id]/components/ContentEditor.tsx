@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { AxiosError } from "axios";
@@ -21,12 +21,14 @@ const ContentEditor: React.FC<{
   isSuper: boolean;
   token: string;
 }> = ({ categories, defaultCategory, isSuper, token }) => {
-  const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState(defaultCategory?.value || "schoolLife");
+  const [content, setContent] = useState("");
+  const [category, setCategory] = useState(
+    defaultCategory?.value || "schoolLife",
+  );
   const [visible, setVisible] = useState("");
 
-  const { push } = useRouter();
+  const router = useRouter();
 
   const articleSubmit = async () => {
     const data = {
@@ -41,8 +43,9 @@ const ContentEditor: React.FC<{
     try {
       const response = await POST(`/board/${category}/write/`, data, token);
       if (response.status === 201) {
-        push(`/app/board/${category}`);
-        return alert("업로드 되었습니다.");
+        alert("업로드 되었습니다.");
+        window.location.href = `/app/board/${category}`;
+        return;
       }
     } catch (e) {
       const error = e as AxiosError;

@@ -19,7 +19,12 @@ const getDateString = (date?: string) => {
     return "오늘";
   }
   const now = new Date(
-    Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 9),
+    Date.UTC(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate(),
+      9,
+    ),
   );
   const target = new Date(
     Date.UTC(

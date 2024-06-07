@@ -25,7 +25,7 @@ const BoardLayout: React.FC<PropsWithChildren> = async ({ children }) => {
   }
   try {
     const requestUserData = await GET("/user/authentication/", token!.value);
-    user = requestUserData!.data['data'];
+    user = requestUserData!.data["data"];
   } catch (e) {
     console.error(e);
   }

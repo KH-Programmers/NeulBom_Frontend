@@ -1,17 +1,17 @@
-export type CommentElement = {
-  id: number;
-  authorName: string;
+export type Comment = {
+  id: string;
   content: string;
-  reply: Array<CommentElement>;
+  authorName: string;
+  children: Comment[];
 };
 
 export type Article = {
   id: string;
-  categories: string[];
+  categories: string[][];
   title: string;
   text: string;
   authorName: string;
-  comments: Array<CommentElement>;
+  comments: Array<Comment>;
   updatedAt: string;
   viewCount: number;
   likeCount: number;

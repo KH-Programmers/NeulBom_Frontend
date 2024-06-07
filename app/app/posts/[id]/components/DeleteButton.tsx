@@ -1,11 +1,10 @@
 "use client";
 
 import React, { Fragment } from "react";
+import { useRouter } from "next/navigation";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 import { AxiosError } from "axios";
-
-import { DELETE } from "@/utils/request";
 import {
   Dialog,
   DialogPanel,
@@ -14,17 +13,21 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 
+import { DELETE } from "@utils/request";
+
 export const DeleteButton: React.FC<{
-  category: string;
-  token: RequestCookie;
+  category: string[];
   id: string;
-}> = ({ category, token, id }) => {
+  token: RequestCookie;
+}> = ({ category, id, token }) => {
+  const router = useRouter();
   const deletePost = async () => {
     try {
       const response = await DELETE(`/board/article/${id}`, token.value);
       if (response.status === 204) {
-        window.location.replace(`/app/board/${category}`);
-        return alert("정상적으로 삭제되었습니다.");
+        alert("정상적으로 삭제되었습니다.");
+        window.location.href = `/app/board/${category[0]}`;
+        return;
       }
     } catch (e) {
       const error = e as AxiosError;

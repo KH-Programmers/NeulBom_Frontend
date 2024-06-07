@@ -39,10 +39,10 @@ export default async function PostViewPage({
     );
   }
   const BoardCategory = article.categories.map(
-    (category: string, k: number) => (
+    (category: string[], k: number) => (
       <div className="flex items-center" key={k}>
-        <Link href={`/app/board/all`} className="text-blue-500">
-          {category}
+        <Link href={`/app/board/${category[0]}`} className="text-blue-500">
+          {category[1]}
         </Link>
         <TbChevronRight className="text-black/40" />
       </div>
@@ -105,7 +105,9 @@ export default async function PostViewPage({
             )}
           </div>
         </article>
-        {/*<CommentList article={article} requestUrl={"/"} token={token!} />*/}
+        {/* <CommentList
+          comments={article.comments}
+        /> */}
       </div>
     </div>
   );
