@@ -25,6 +25,9 @@ export default async function PostViewPage({
   try {
     const response = await GET(`/board/article/${params.id}`, token?.value);
     article = response!.data;
+    if (response?.status === 404) {
+      article = null;
+    }
   } catch (e) {
     article = null;
   }

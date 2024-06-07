@@ -23,7 +23,7 @@ const ContentEditor: React.FC<{
 }> = ({ categories, defaultCategory, isSuper, token }) => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("schoolLife");
+  const [category, setCategory] = useState(defaultCategory?.value || "schoolLife");
   const [visible, setVisible] = useState("");
 
   const { push } = useRouter();
@@ -35,6 +35,9 @@ const ContentEditor: React.FC<{
       isAnonymous: visible === "anonymous",
       isAdmin: visible === "admin",
     };
+    if (!category || !title || !content) {
+      return alert("모든 항목을 입력해주세요.");
+    }
     try {
       const response = await POST(`/board/${category}/write/`, data, token);
       if (response.status === 201) {
