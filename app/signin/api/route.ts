@@ -52,7 +52,17 @@ export async function POST(request: NextRequest) {
     }
   } catch (e) {
     const error = e as AxiosError;
-    console.error(error);
+    if (error.response?.status === 400) {
+      return NextResponse.json(
+        {
+          message: "Bad Request",
+          code: 400,
+        },
+        {
+          status: 400,
+        },
+      );
+    }
     return NextResponse.json(error.response?.data, {
       status: error.response?.status,
     });

@@ -44,30 +44,31 @@ const SignIn = () => {
                 setIsLoading(false);
                 return;
               }
-              try {
-                axios
-                  .post(`/signin/api/`, {
-                    userId: userId,
-                    password: password,
-                    token: token,
-                    autoLogin: autoLogin,
-                  })
-                  .then((res) => {
-                    router.push("/app");
-                  });
-              } catch (e) {
-                const error = e as AxiosError;
-                switch (error.response?.status) {
-                  case 400:
-                    return alert(
-                      "유저를 확인하지 못했습니다.\n아이디 또는 비밀번호를 확인해주세요.",
-                    );
-                  case 406:
-                    return alert(
-                      "캡챠 인증에 실패했습니다. 다시 시도해주세요.",
-                    );
-                }
-              }
+              axios
+                .post(`/signin/api/`, {
+                  userId: userId,
+                  password: password,
+                  token: token,
+                  autoLogin: autoLogin,
+                })
+                .then((res) => {
+                  router.push("/app");
+                })
+                .catch((e) => {
+                  const error = e as AxiosError;
+                  switch (error.response?.status) {
+                    case 400:
+                      return alert(
+                        "유저를 확인하지 못했습니다.\n아이디 또는 비밀번호를 확인해주세요.",
+                      );
+                    case 406:
+                      return alert(
+                        "캡챠 인증에 실패했습니다. 다시 시도해주세요.",
+                      );
+                    default:
+                      return alert("알 수 없는 오류가 발생했습니다.");
+                  }
+                });
             }}
           >
             <div className="divide-y-2 border-2 rounded-xl">
