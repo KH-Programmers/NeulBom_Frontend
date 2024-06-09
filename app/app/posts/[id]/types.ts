@@ -2,6 +2,10 @@ export type Comment = {
   id: string;
   content: string;
   authorName: string;
+  createdAt: string;
+  isAnonymous: boolean;
+  isAdmin: boolean;
+  canDelete: boolean;
   children: Comment[];
 };
 

@@ -31,6 +31,13 @@ export default async function PostViewPage({
   } catch (e) {
     article = null;
   }
+  const response = await GET("/user/", token?.value);
+  const user: {
+    name: string;
+    studentId: string;
+    isSuper: boolean;
+    isTeacher: boolean;
+  } = response!.data["data"];
   if (!article) {
     return (
       <div className="flex items-center mx-auto">
@@ -105,9 +112,12 @@ export default async function PostViewPage({
             )}
           </div>
         </article>
-        {/* <CommentList
+        <CommentList
           comments={article.comments}
-        /> */}
+          isSuper={user.isSuper}
+          token={token!.value}
+          articleId={article.id}
+        />
       </div>
     </div>
   );

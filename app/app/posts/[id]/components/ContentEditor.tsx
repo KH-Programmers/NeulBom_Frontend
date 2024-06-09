@@ -28,8 +28,6 @@ const ContentEditor: React.FC<{
   );
   const [visible, setVisible] = useState("");
 
-  const router = useRouter();
-
   const articleSubmit = async () => {
     const data = {
       title: title,
