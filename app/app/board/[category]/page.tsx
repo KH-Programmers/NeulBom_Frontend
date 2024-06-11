@@ -26,23 +26,25 @@ export default async function BoardCategoryView({
   return (
     <div className="flex flex-col gap-4 w-full">
       {articles.length ? (
-        articles.map((article: Article, k) => (
-          <PostListItem
-            key={k}
-            id={article.id}
-            title={article.title}
-            authorName={
-              article.isAdmin
-                ? "관리자"
-                : article.isAnonymous
-                  ? "익명"
-                  : article.authorName
-            }
-            commentCount={article.comments.length}
-            viewCount={article.viewCount}
-            createdAt={format(new Date(article.updatedAt), "yyyy-MM-dd")}
-          />
-        ))
+        articles.map((article: Article, k) => {
+          return (
+            <PostListItem
+              key={k}
+              id={article.id}
+              title={article.title}
+              authorName={
+                article.isAdmin
+                  ? "관리자"
+                  : article.isAnonymous
+                    ? "익명"
+                    : article.authorName
+              }
+              commentCount={article.comments.length}
+              viewCount={article.viewCount}
+              createdAt={format(new Date(article.updatedAt), "yyyy-MM-dd")}
+            />
+          );
+        })
       ) : (
         <></>
       )}
