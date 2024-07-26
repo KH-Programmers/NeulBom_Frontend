@@ -7,7 +7,8 @@ import { MainCard } from "./components/MainCard";
 import { MainBanner } from "./components/MainBanner";
 import { TodayMealPanel } from "./components/panels/TodayMealPanel";
 import { TodayTodoPanel } from "./components/panels/TodayTodoPanel";
-import { PopularPostsPanel } from "./components/panels/PopularPostsPanel";
+import { LatestPostsPanel } from "./components/panels/LatestPostsPanel";
+import { Article } from "@/app/app/posts/[id]/types";
 
 export const metadata: Metadata = {
   title: "NeulBom",
@@ -60,12 +61,23 @@ export default async function AppMain() {
       allergies: Array<number>;
     }>;
   }> = await requestMealData?.data;
+
+  let articles: Article[] = [];
+  try {
+    const response = await GET("/board/all", token?.value);
+    articles = await response!.data;
+    if (articles.length > 7) {
+      articles = articles.slice(0, 7);
+    }
+  } catch (e) {
+    articles = [];
+  }
   return (
     <div className="p-4 flex flex-col w-full h-full gap-4 flex-grow">
       <MainBanner />
       <div className="flex-grow gap-4 lg:flex-row flex-col grid md:grid-cols-2 lg:grid-cols-3">
-        <MainCard title="인기글">
-          <PopularPostsPanel posts={[]} />
+        <MainCard title="최신글">
+          <LatestPostsPanel posts={articles} />
         </MainCard>
         <MainCard title={`${getDateString(mealData[0]?.date)}의 급식`}>
           <TodayMealPanel
