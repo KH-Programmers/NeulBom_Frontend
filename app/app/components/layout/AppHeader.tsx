@@ -35,7 +35,7 @@ const AppHeaderContent: React.FC<{
     <div className="hidden md:flex items-center gap-4 flex-grow">
       <div className="flex gap-2">
         <NavLink
-          href="/app/board/popular"
+          href="/app/board/all"
           match={(path) => path.startsWith("/app/board")}
         >
           게시판
